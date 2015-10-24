@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `notmuch_status_t` enum in crate `notmuch_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, notmuch_status_t">
+
+    <title>notmuch_sys::notmuch_status_t - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>notmuch_sys</a></p><script>window.sidebarCurrent = {name: 'notmuch_status_t', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>notmuch_sys</a>::<wbr><a class='enum' href=''>notmuch_status_t</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-7' class='srclink' href='../src/notmuch_sys/lib.rs.html#14-55' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum notmuch_status_t {
+    SUCCESS,
+    OUT_OF_MEMORY,
+    READ_ONLY_DATABASE,
+    XAPIAN_EXCEPTION,
+    FILE_ERROR,
+    FILE_NOT_EMAIL,
+    DUPLICATE_MESSAGE_ID,
+    NULL_POINTER,
+    TAG_TOO_LONG,
+    UNBALANCED_FREEZE_THAW,
+    UNBALANCED_ATOMIC,
+    UNSUPPORTED_OPERATION,
+    UPGRADE_REQUIRED,
+    PATH_ERROR,
+}</pre><div class='docblock'><p>Status codes used for the return values of most functions.</p>
+
+<p>A zero value (SUCCESS) indicates that the function completed without error. Any other value
+indicates an error.</p>
+</div><h2 class='variants'>Variants</h2>
+<table><tr><td id='variant.SUCCESS'><code>SUCCESS</code></td><td><div class='docblock'><p>No error occurred.</p>
+</div></td></tr><tr><td id='variant.OUT_OF_MEMORY'><code>OUT_OF_MEMORY</code></td><td><div class='docblock'><p>Out of memory.</p>
+</div></td></tr><tr><td id='variant.READ_ONLY_DATABASE'><code>READ_ONLY_DATABASE</code></td><td><div class='docblock'><p>An attempt was made to write to a database opened in read-only
+mode.</p>
+</div></td></tr><tr><td id='variant.XAPIAN_EXCEPTION'><code>XAPIAN_EXCEPTION</code></td><td><div class='docblock'><p>A Xapian exception occurred.</p>
+</div></td></tr><tr><td id='variant.FILE_ERROR'><code>FILE_ERROR</code></td><td><div class='docblock'><p>An error occurred trying to read or write to a file (this could
+be file not found, permission denied, etc.)</p>
+
+<p>@todo We don&#39;t really want to expose this lame XAPIAN_EXCEPTION
+value. Instead we should map to things like DATABASE_LOCKED or
+whatever.</p>
+</div></td></tr><tr><td id='variant.FILE_NOT_EMAIL'><code>FILE_NOT_EMAIL</code></td><td><div class='docblock'><p>A file was presented that doesn&#39;t appear to be an email
+message.</p>
+</div></td></tr><tr><td id='variant.DUPLICATE_MESSAGE_ID'><code>DUPLICATE_MESSAGE_ID</code></td><td><div class='docblock'><p>A file contains a message ID that is identical to a message
+already in the database.</p>
+</div></td></tr><tr><td id='variant.NULL_POINTER'><code>NULL_POINTER</code></td><td><div class='docblock'><p>The user erroneously passed a NULL pointer to a notmuch
+function.</p>
+</div></td></tr><tr><td id='variant.TAG_TOO_LONG'><code>TAG_TOO_LONG</code></td><td><div class='docblock'><p>A tag value is too long (exceeds TAG_MAX).</p>
+</div></td></tr><tr><td id='variant.UNBALANCED_FREEZE_THAW'><code>UNBALANCED_FREEZE_THAW</code></td><td><div class='docblock'><p>The <code>notmuch_message_thaw</code> function has been called more times
+than <code>notmuch_message_freeze</code>.</p>
+</div></td></tr><tr><td id='variant.UNBALANCED_ATOMIC'><code>UNBALANCED_ATOMIC</code></td><td><div class='docblock'><p><code>notmuch_database_end_atomic</code> has been called more times than
+<code>notmuch_database_begin_atomic</code>.</p>
+</div></td></tr><tr><td id='variant.UNSUPPORTED_OPERATION'><code>UNSUPPORTED_OPERATION</code></td><td><div class='docblock'><p>The operation is not supported.</p>
+</div></td></tr><tr><td id='variant.UPGRADE_REQUIRED'><code>UPGRADE_REQUIRED</code></td><td><div class='docblock'><p>The operation requires a database upgrade.</p>
+</div></td></tr><tr><td id='variant.PATH_ERROR'><code>PATH_ERROR</code></td><td><div class='docblock'><p>There is a problem with the proposed path, e.g. a relative path
+passed to a function expecting an absolute path.</p>
+</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a>) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a>) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "notmuch_sys";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
