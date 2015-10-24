@@ -5,3 +5,6 @@ authors = ["Steven Allen <steven@stebalien.com>"]
 
 [dependencies]
 libc = "*"
+
+[dev-dependencies]
+tempdir = "*"
