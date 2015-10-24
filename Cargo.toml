@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["Steven Allen <steven@stebalien.com>"]
 
 [dependencies]
-libc = "*"
+libc = "0.1"
 
 [dev-dependencies]
-tempdir = "*"
+tempdir = "0.3"
