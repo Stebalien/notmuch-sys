@@ -7,7 +7,7 @@ description = "FFI bindings for notmuch"
 documentation = "https://stebalien.github.io/notmuch-sys/notmuch_sys/"
 repository = "https://github.com/Stebalien/notmuch-sys"
 keywords = ["notmuch", "email", "mail", "maildir"]
-license = "GPLv3"
+license = "GPL-3.0"
 
 [dependencies]
 libc = "0.1"
