@@ -1722,7 +1722,7 @@
     <span class='doccomment'>/// &#39;closure&#39; is passed verbatim to any callback invoked.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_compact</span>(<span class='ident'>path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
                                     <span class='ident'>backup_path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
-                                    <span class='ident'>status_cb</span>: <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>, <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>),
+                                    <span class='ident'>status_cb</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>, <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)<span class='op'>&gt;</span>,
                                     <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
     <span class='doccomment'>/// Destroy the notmuch database, closing it if necessary and freeing</span>
     <span class='doccomment'>/// all associated resources.</span>
@@ -1766,7 +1766,7 @@
     <span class='doccomment'>/// the upgrade process.  The argument &#39;closure&#39; is passed verbatim to</span>
     <span class='doccomment'>/// any callback invoked.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_upgrade</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
-                                    <span class='ident'>progress_notify</span>: <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>progress</span>: <span class='ident'>c_double</span>),
+                                    <span class='ident'>progress_notify</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>progress</span>: <span class='ident'>c_double</span>)<span class='op'>&gt;</span>,
                                     <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Begin an atomic database operation.</span>
