@@ -114,9 +114,9 @@ pub enum notmuch_message_flag_t {
 #[derive(Debug, Eq, PartialEq)]
 pub enum notmuch_database_mode_t {
     /// Open database for reading only.
-    NOTMUCH_DATABASE_MODE_READ_ONLY = 0,
+    READ_ONLY = 0,
     /// Open database for reading and writing.
-    NOTMUCH_DATABASE_MODE_READ_WRITE
+    READ_WRITE
 }
 
 #[repr(C)]
@@ -266,7 +266,7 @@ extern "C" {
     /// Compact a notmuch database, backing up the original database to the
     /// given path.
     ///
-    /// The database will be opened with NOTMUCH_DATABASE_MODE_READ_WRITE
+    /// The database will be opened with notmuch_database_mode_t::READ_WRITE
     /// during the compaction process to ensure no writes are made.
     ///
     /// If the optional callback function 'status_cb' is non-NULL, it will
