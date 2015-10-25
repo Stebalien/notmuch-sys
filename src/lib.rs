@@ -183,7 +183,7 @@ extern "C" {
     pub fn notmuch_database_open_verbose(path: *const c_char,
                                          mode: notmuch_database_mode_t,
                                          database: *mut *mut notmuch_database_t,
-                                         error_message: *mut *mut c_char);
+                                         error_message: *mut *mut c_char) -> notmuch_status_t;
 
     /// Get a string representation of a `notmuch_status_t` value.
     ///
