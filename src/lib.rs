@@ -274,7 +274,7 @@ extern "C" {
     /// 'closure' is passed verbatim to any callback invoked.
     pub fn notmuch_database_compact(path: *const c_char,
                                     backup_path: *const c_char,
-                                    status_cb: extern "C" fn(message: *const c_char, closure: *mut c_void),
+                                    status_cb: Option<extern "C" fn(message: *const c_char, closure: *mut c_void)>,
                                     closure: *mut c_void) -> notmuch_status_t;
     /// Destroy the notmuch database, closing it if necessary and freeing
     /// all associated resources.
@@ -318,7 +318,7 @@ extern "C" {
     /// the upgrade process.  The argument 'closure' is passed verbatim to
     /// any callback invoked.
     pub fn notmuch_database_upgrade(database: *mut notmuch_database_t,
-                                    progress_notify: extern "C" fn(closure: *mut c_void, progress: c_double),
+                                    progress_notify: Option<extern "C" fn(closure: *mut c_void, progress: c_double)>,
                                     closure: *mut c_void) -> notmuch_status_t;
 
     /// Begin an atomic database operation.
