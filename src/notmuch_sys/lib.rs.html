@@ -1562,9 +1562,9 @@
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialEq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>notmuch_database_mode_t</span> {
     <span class='doccomment'>/// Open database for reading only.</span>
-    <span class='ident'>NOTMUCH_DATABASE_MODE_READ_ONLY</span> <span class='op'>=</span> <span class='number'>0</span>,
+    <span class='ident'>READ_ONLY</span> <span class='op'>=</span> <span class='number'>0</span>,
     <span class='doccomment'>/// Open database for reading and writing.</span>
-    <span class='ident'>NOTMUCH_DATABASE_MODE_READ_WRITE</span>
+    <span class='ident'>READ_WRITE</span>
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -1714,7 +1714,7 @@
     <span class='doccomment'>/// Compact a notmuch database, backing up the original database to the</span>
     <span class='doccomment'>/// given path.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// The database will be opened with NOTMUCH_DATABASE_MODE_READ_WRITE</span>
+    <span class='doccomment'>/// The database will be opened with notmuch_database_mode_t::READ_WRITE</span>
     <span class='doccomment'>/// during the compaction process to ensure no writes are made.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// If the optional callback function &#39;status_cb&#39; is non-NULL, it will</span>
