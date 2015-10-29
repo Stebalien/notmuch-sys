@@ -2468,7 +2468,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_get_filenames</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_filenames_t</span>;
 
     <span class='doccomment'>/// Get a value of a flag for the email corresponding to &#39;message&#39;.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_get_flag</span>(<span class='ident'>message</span>: <span class='ident'>notmuch_message_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_get_flag</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>,
                                     <span class='ident'>flag</span>: <span class='ident'>notmuch_message_flag_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_bool_t</span>;
 
     <span class='doccomment'>/// Set a value of a flag for the email corresponding to &#39;message&#39;.</span>
