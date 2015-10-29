@@ -1020,7 +1020,7 @@ extern "C" {
     pub fn notmuch_message_get_filenames(message: *mut notmuch_message_t) -> *mut notmuch_filenames_t;
 
     /// Get a value of a flag for the email corresponding to 'message'.
-    pub fn notmuch_message_get_flag(message: notmuch_message_t,
+    pub fn notmuch_message_get_flag(message: *mut notmuch_message_t,
                                     flag: notmuch_message_flag_t) -> notmuch_bool_t;
 
     /// Set a value of a flag for the email corresponding to 'message'.
