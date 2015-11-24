@@ -45,19 +45,19 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-208' class='srclink' href='../src/notmuch_sys/lib.rs.html#395-397' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_database_get_directory(database: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../notmuch_sys/struct.notmuch_database_t.html' title='notmuch_sys::notmuch_database_t'>notmuch_database_t</a></a>, path: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a>, directory: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../notmuch_sys/struct.notmuch_directory_t.html' title='notmuch_sys::notmuch_directory_t'>notmuch_directory_t</a></a></a>) -&gt; <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></pre><div class='docblock'><p>Retrieve a directory object from the database for &#39;path&#39;.</p>
+        </span><a id='src-217' class='srclink' href='../src/notmuch_sys/lib.rs.html#387-389' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn notmuch_database_get_directory(database: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_database_t.html' title='notmuch_sys::notmuch_database_t'>notmuch_database_t</a></a>, path: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a>, directory: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_directory_t.html' title='notmuch_sys::notmuch_directory_t'>notmuch_directory_t</a></a></a>) -&gt; <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></pre><div class='docblock'><p>Retrieve a directory object from the database for &#39;path&#39;.</p>
 
 <p>Here, &#39;path&#39; should be a path relative to the path of &#39;database&#39;
- (see <code>notmuch_database_get_path</code>), or else should be an absolute path
- with initial components that match the path of &#39;database&#39;.</p>
+(see <code>notmuch_database_get_path</code>), or else should be an absolute path
+with initial components that match the path of &#39;database&#39;.</p>
 
 <p>If this directory object does not exist in the database, this
- returns <code>notmuch_status_t::SUCCESS</code> and sets *directory to NULL.</p>
+returns <code>notmuch_status_t::SUCCESS</code> and sets *directory to NULL.</p>
 
 <p>Otherwise the returned directory object is owned by the database
- and as such, will only be valid until <code>notmuch_database_destroy</code> is
- called.</p>
+and as such, will only be valid until <code>notmuch_database_destroy</code> is
+called.</p>
 
 <p>Return value:</p>
 
@@ -65,7 +65,7 @@
 <li><p><code>notmuch_status_t::SUCCESS</code>: Successfully retrieved directory.</p></li>
 <li><p><code>notmuch_status_t::NULL_POINTER</code>: The given &#39;directory&#39; argument is NULL.</p></li>
 <li><p><code>notmuch_status_t::XAPIAN_EXCEPTION</code>: A Xapian exception occurred;
-  directory not retrieved.</p></li>
+directory not retrieved.</p></li>
 <li><p><code>notmuch_status_t::UPGRADE_REQUIRED</code>: The caller must upgrade the
 database to use this function.</p></li>
 </ul>

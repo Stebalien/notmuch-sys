@@ -45,8 +45,8 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-307' class='srclink' href='../src/notmuch_sys/lib.rs.html#1010' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_message_get_filename(message: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../notmuch_sys/struct.notmuch_message_t.html' title='notmuch_sys::notmuch_message_t'>notmuch_message_t</a></a>) -&gt; <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a></pre><div class='docblock'><p>Get a filename for the email corresponding to &#39;message&#39;.</p>
+        </span><a id='src-316' class='srclink' href='../src/notmuch_sys/lib.rs.html#1002' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn notmuch_message_get_filename(message: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_message_t.html' title='notmuch_sys::notmuch_message_t'>notmuch_message_t</a></a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a></pre><div class='docblock'><p>Get a filename for the email corresponding to &#39;message&#39;.</p>
 
 <p>The returned filename is an absolute filename, (the initial
 component will match <code>notmuch_database_get_path</code>() ).</p>

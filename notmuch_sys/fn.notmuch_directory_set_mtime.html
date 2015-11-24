@@ -45,8 +45,8 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-351' class='srclink' href='../src/notmuch_sys/lib.rs.html#1331-1332' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_directory_set_mtime(directory: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../notmuch_sys/struct.notmuch_directory_t.html' title='notmuch_sys::notmuch_directory_t'>notmuch_directory_t</a></a>, mtime: <a class='type' href='../libc/types/os/arch/c95/type.time_t.html' title='libc::types::os::arch::c95::time_t'>time_t</a>) -&gt; <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></pre><div class='docblock'><p>Store an mtime within the database for &#39;directory&#39;.</p>
+        </span><a id='src-360' class='srclink' href='../src/notmuch_sys/lib.rs.html#1323-1324' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn notmuch_directory_set_mtime(directory: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_directory_t.html' title='notmuch_sys::notmuch_directory_t'>notmuch_directory_t</a></a>, mtime: <a class='type' href='../libc/types/os/arch/c95/type.time_t.html' title='libc::types::os::arch::c95::time_t'>time_t</a>) -&gt; <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></pre><div class='docblock'><p>Store an mtime within the database for &#39;directory&#39;.</p>
 
 <p>The &#39;directory&#39; should be an object retrieved from the database
 with <code>notmuch_database_get_directory</code> for a particular path.</p>

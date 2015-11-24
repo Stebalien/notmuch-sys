@@ -45,25 +45,25 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-169' class='srclink' href='../src/notmuch_sys/lib.rs.html#225-226' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_database_create(path: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a>, database: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../notmuch_sys/struct.notmuch_database_t.html' title='notmuch_sys::notmuch_database_t'>notmuch_database_t</a></a></a>) -&gt; <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></pre><div class='docblock'><p>Create a new, empty notmuch database located at &#39;path&#39;.</p>
+        </span><a id='src-178' class='srclink' href='../src/notmuch_sys/lib.rs.html#217-218' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn notmuch_database_create(path: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a>, database: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_database_t.html' title='notmuch_sys::notmuch_database_t'>notmuch_database_t</a></a></a>) -&gt; <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></pre><div class='docblock'><p>Create a new, empty notmuch database located at &#39;path&#39;.</p>
 
 <p>The path should be a top-level directory to a collection of
- plain-text email messages (one message per file). This call will
- create a new &quot;.notmuch&quot; directory within &#39;path&#39; where notmuch will
- store its data.</p>
+plain-text email messages (one message per file). This call will
+create a new &quot;.notmuch&quot; directory within &#39;path&#39; where notmuch will
+store its data.</p>
 
 <p>After a successful call to <code>notmuch_database_create</code>, the returned
- database will be open so the caller should call
- <code>notmuch_database_destroy</code> when finished with it.</p>
+database will be open so the caller should call
+<code>notmuch_database_destroy</code> when finished with it.</p>
 
 <p>The database will not yet have any data in it
- (<code>notmuch_database_create</code> itself is a very cheap function). Messages
- contained within &#39;path&#39; can be added to the database by calling
- <code>notmuch_database_add_message</code>.</p>
+(<code>notmuch_database_create</code> itself is a very cheap function). Messages
+contained within &#39;path&#39; can be added to the database by calling
+<code>notmuch_database_add_message</code>.</p>
 
 <p>In case of any failure, this function returns an error status and
- sets *database to NULL (after printing an error message on stderr).</p>
+sets *database to NULL (after printing an error message on stderr).</p>
 
 <p>Return value:</p>
 
@@ -72,8 +72,8 @@
 <li><p><code>notmuch_status_t::NULL_POINTER</code>: The given &#39;path&#39; argument is NULL.</p></li>
 <li><p><code>notmuch_status_t::OUT_OF_MEMORY</code>: Out of memory.</p></li>
 <li><p><code>notmuch_status_t::FILE_ERROR</code>: An error occurred trying to create the
-  database file (such as permission denied, or file not found,
-  etc.), or the database already exists.</p></li>
+database file (such as permission denied, or file not found,
+etc.), or the database already exists.</p></li>
 <li><p><code>notmuch_status_t::XAPIAN_EXCEPTION</code>: A Xapian exception occurred.</p></li>
 </ul>
 </div></section>

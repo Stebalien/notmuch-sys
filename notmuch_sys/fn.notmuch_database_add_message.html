@@ -45,48 +45,48 @@
             <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                 [<span class='inner'>&#x2212;</span>]
             </a>
-        </span><a id='src-212' class='srclink' href='../src/notmuch_sys/lib.rs.html#447-449' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_database_add_message(database: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../notmuch_sys/struct.notmuch_database_t.html' title='notmuch_sys::notmuch_database_t'>notmuch_database_t</a></a>, filename: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a>, message: <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='struct' href='../notmuch_sys/struct.notmuch_message_t.html' title='notmuch_sys::notmuch_message_t'>notmuch_message_t</a></a></a>) -&gt; <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></pre><div class='docblock'><p>Add a new message to the given notmuch database or associate an
- additional filename with an existing message.</p>
+        </span><a id='src-221' class='srclink' href='../src/notmuch_sys/lib.rs.html#439-441' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe extern fn notmuch_database_add_message(database: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_database_t.html' title='notmuch_sys::notmuch_database_t'>notmuch_database_t</a></a>, filename: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a>, message: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_message_t.html' title='notmuch_sys::notmuch_message_t'>notmuch_message_t</a></a></a>) -&gt; <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></pre><div class='docblock'><p>Add a new message to the given notmuch database or associate an
+additional filename with an existing message.</p>
 
 <p>Here, &#39;filename&#39; should be a path relative to the path of
- &#39;database&#39; (see <code>notmuch_database_get_path</code>), or else should be an
- absolute filename with initial components that match the path of
- &#39;database&#39;.</p>
+&#39;database&#39; (see <code>notmuch_database_get_path</code>), or else should be an
+absolute filename with initial components that match the path of
+&#39;database&#39;.</p>
 
 <p>The file should be a single mail message (not a multi-message mbox)
- that is expected to remain at its current location, (since the
- notmuch database will reference the filename, and will not copy the
- entire contents of the file.</p>
+that is expected to remain at its current location, (since the
+notmuch database will reference the filename, and will not copy the
+entire contents of the file.</p>
 
 <p>If another message with the same message ID already exists in the
- database, rather than creating a new message, this adds &#39;filename&#39;
- to the list of the filenames for the existing message.</p>
+database, rather than creating a new message, this adds &#39;filename&#39;
+to the list of the filenames for the existing message.</p>
 
 <p>If &#39;message&#39; is not NULL, then, on successful return
- (notmuch_status_t::SUCCESS or <code>notmuch_status_t::DUPLICATE_MESSAGE_ID</code>) &#39;*message&#39;
- will be initialized to a message object that can be used for things
- such as adding tags to the just-added message. The user should call
- <code>notmuch_message_destroy</code> when done with the message. On any failure
- &#39;*message&#39; will be set to NULL.</p>
+(notmuch_status_t::SUCCESS or <code>notmuch_status_t::DUPLICATE_MESSAGE_ID</code>) &#39;*message&#39;
+will be initialized to a message object that can be used for things
+such as adding tags to the just-added message. The user should call
+<code>notmuch_message_destroy</code> when done with the message. On any failure
+&#39;*message&#39; will be set to NULL.</p>
 
 <p>Return value:</p>
 
 <ul>
 <li><p><code>notmuch_status_t::SUCCESS</code>: Message successfully added to database.</p></li>
 <li><p><code>notmuch_status_t::XAPIAN_EXCEPTION</code>: A Xapian exception occurred,
-  message not added.</p></li>
+message not added.</p></li>
 <li><p><code>notmuch_status_t::DUPLICATE_MESSAGE_ID</code>: Message has the same message
-  ID as another message already in the database. The new
-  filename was successfully added to the message in the database
-  (if not already present) and the existing message is returned.</p></li>
+ID as another message already in the database. The new
+filename was successfully added to the message in the database
+(if not already present) and the existing message is returned.</p></li>
 <li><p><code>notmuch_status_t::FILE_ERROR</code>: an error occurred trying to open the
-  file, (such as permission denied, or file not found,
-  etc.). Nothing added to the database.</p></li>
+file, (such as permission denied, or file not found,
+etc.). Nothing added to the database.</p></li>
 <li><p><code>notmuch_status_t::FILE_NOT_EMAIL</code>: the contents of filename don&#39;t look
-  like an email message. Nothing added to the database.</p></li>
+like an email message. Nothing added to the database.</p></li>
 <li><p><code>notmuch_status_t::READ_ONLY_DATABASE</code>: Database was opened in read-only
-  mode so no message can be added.</p></li>
+mode so no message can be added.</p></li>
 <li><p><code>notmuch_status_t::UPGRADE_REQUIRED</code>: The caller must upgrade the
 database to use this function.</p></li>
 </ul>
