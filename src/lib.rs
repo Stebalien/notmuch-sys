@@ -15,6 +15,8 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/ .
  */
 
+#![allow(non_camel_case_types)]
+
 //! Not much of an email library, just index and search.
 
 extern crate libc;
@@ -119,25 +121,15 @@ pub enum notmuch_database_mode_t {
     READ_WRITE
 }
 
-#[repr(C)]
-pub struct notmuch_database_t(libc::c_void);
-#[repr(C)]
-pub struct notmuch_query_t(libc::c_void);
-#[repr(C)]
-pub struct notmuch_threads_t(libc::c_void);
-#[repr(C)]
-pub struct notmuch_thread_t(libc::c_void);
-#[repr(C)]
-pub struct notmuch_messages_t(libc::c_void);
-#[repr(C)]
-pub struct notmuch_message_t(libc::c_void);
-#[repr(C)]
-pub struct notmuch_tags_t(libc::c_void);
-#[repr(C)]
-pub struct notmuch_directory_t(libc::c_void);
-#[repr(C)]
-pub struct notmuch_filenames_t(libc::c_void);
-#[allow(non_camel_case_types)]
+pub enum notmuch_database_t {}
+pub enum notmuch_query_t {}
+pub enum notmuch_threads_t {}
+pub enum notmuch_thread_t {}
+pub enum notmuch_messages_t {}
+pub enum notmuch_message_t {}
+pub enum notmuch_tags_t {}
+pub enum notmuch_directory_t {}
+pub enum notmuch_filenames_t {}
 pub type notmuch_bool_t = bool;
 
 
