@@ -1,12 +1,12 @@
-#![feature(convert)]
 extern crate tempdir;
 extern crate notmuch_sys;
 
 use std::fs::{self, File};
 use std::io::Write;
 use std::ptr;
-use std::ffi::CStr;
+use std::ffi::{CStr, CString};
 use notmuch_sys::*;
+use std::os::unix::ffi::OsStrExt;
 
 static MESSAGE: &'static [u8] = b"\
 To: bob@example.com
@@ -34,7 +34,9 @@ fn it_works() {
     unsafe {
         let mut db = ptr::null_mut();
         {
-            let dir_c_str = dir.path().as_os_str().to_cstring().unwrap();
+            let dir_c_str = CString::new(dir.path()
+                                         .as_os_str()
+                                         .as_bytes()).unwrap();
             assert_eq!(
                 notmuch_database_create(dir_c_str.as_ptr(), &mut db),
                 notmuch_status_t::SUCCESS
@@ -42,7 +44,8 @@ fn it_works() {
         }
         let mut msg = ptr::null_mut();
         {
-            let msg_c_str = msg_path.as_os_str().to_cstring().unwrap();
+            let msg_c_str = CString::new(msg_path.as_os_str()
+                                         .as_bytes()).unwrap();
             assert_eq!(
                 notmuch_database_add_message(db, msg_c_str.as_ptr(), &mut msg),
                 notmuch_status_t::SUCCESS
