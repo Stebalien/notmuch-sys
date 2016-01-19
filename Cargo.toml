@@ -10,7 +10,7 @@ keywords = ["notmuch", "email", "mail", "maildir"]
 license = "GPL-3.0"
 
 [dependencies]
-libc = "0.1"
+libc = "0.2"
 
 [dev-dependencies]
 tempdir = "0.3"
