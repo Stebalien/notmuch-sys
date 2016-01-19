@@ -1,19 +1,18 @@
-/*
- * Copyright © 2009 Carl Worth, 2015 Steven Allen
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/ .
- */
+// Copyright © 2009 Carl Worth, 2015 Steven Allen
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/ .
+//
 
 #![allow(non_camel_case_types)]
 
@@ -85,7 +84,7 @@ pub enum notmuch_sort_t {
     /// Sort by message-id.
     MESSAGE_ID,
     /// Do not sort.
-    UNSORTED
+    UNSORTED,
 }
 
 /// Exclude values for `notmuch_query_set_omit_excluded`
@@ -95,7 +94,7 @@ pub enum notmuch_exclude_t {
     FLAG = 0,
     TRUE,
     FALSE,
-    ALL
+    ALL,
 }
 
 /// Message flags.
@@ -118,7 +117,7 @@ pub enum notmuch_database_mode_t {
     /// Open database for reading only.
     READ_ONLY = 0,
     /// Open database for reading and writing.
-    READ_WRITE
+    READ_WRITE,
 }
 
 pub enum notmuch_database_t {}
@@ -161,13 +160,14 @@ extern "C" {
     /// * `notmuch_status_t::OUT_OF_MEMORY`: Out of memory.
     ///
     /// * `notmuch_status_t::FILE_ERROR`: An error occurred trying to open the
-    ///	  database file (such as permission denied, or file not found,
-    ///	  etc.), or the database version is unknown.
+    /// 	  database file (such as permission denied, or file not found,
+    /// 	  etc.), or the database version is unknown.
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred.
     pub fn notmuch_database_open(path: *const c_char,
                                  mode: notmuch_database_mode_t,
-                                 database: *mut *mut notmuch_database_t) -> notmuch_status_t;
+                                 database: *mut *mut notmuch_database_t)
+                                 -> notmuch_status_t;
 
     /// Like notmuch_database_open, except optionally return an error
     /// message. This message is allocated by malloc and should be freed by
@@ -175,7 +175,8 @@ extern "C" {
     pub fn notmuch_database_open_verbose(path: *const c_char,
                                          mode: notmuch_database_mode_t,
                                          database: *mut *mut notmuch_database_t,
-                                         error_message: *mut *mut c_char) -> notmuch_status_t;
+                                         error_message: *mut *mut c_char)
+                                         -> notmuch_status_t;
 
     /// Get a string representation of a `notmuch_status_t` value.
     ///
@@ -210,23 +211,25 @@ extern "C" {
     /// * `notmuch_status_t::OUT_OF_MEMORY`: Out of memory.
     ///
     /// * `notmuch_status_t::FILE_ERROR`: An error occurred trying to create the
-    ///	  database file (such as permission denied, or file not found,
-    ///	  etc.), or the database already exists.
+    /// 	  database file (such as permission denied, or file not found,
+    /// 	  etc.), or the database already exists.
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred.
     pub fn notmuch_database_create(path: *const c_char,
-                                   database: *mut *mut notmuch_database_t) -> notmuch_status_t;
+                                   database: *mut *mut notmuch_database_t)
+                                   -> notmuch_status_t;
 
     /// Like `notmuch_database_create`, except optionally return an error
     /// message. This message is allocated by malloc and should be freed by
     /// the caller.
     pub fn notmuch_database_create_verbose(path: *const c_char,
                                            database: *mut *mut notmuch_database_t,
-                                           error_message: *mut *const c_char) -> notmuch_status_t;
+                                           error_message: *mut *const c_char)
+                                           -> notmuch_status_t;
 
 
     /// Retrieve last status string for given database.
-    pub fn notmuch_database_status_string (notmuch: *mut notmuch_database_t) -> *const c_char;
+    pub fn notmuch_database_status_string(notmuch: *mut notmuch_database_t) -> *const c_char;
 
     /// Commit changes and close the given notmuch database.
     ///
@@ -251,8 +254,8 @@ extern "C" {
     /// * `notmuch_status_t::SUCCESS`: Successfully closed the database.
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred; the
-    ///	  database has been closed but there are no guarantees the
-    ///	  changes to the database, if any, have been flushed to disk.
+    /// 	  database has been closed but there are no guarantees the
+    /// 	  changes to the database, if any, have been flushed to disk.
     pub fn notmuch_database_close(database: *mut notmuch_database_t) -> notmuch_status_t;
 
     /// Compact a notmuch database, backing up the original database to the
@@ -266,8 +269,11 @@ extern "C" {
     /// 'closure' is passed verbatim to any callback invoked.
     pub fn notmuch_database_compact(path: *const c_char,
                                     backup_path: *const c_char,
-                                    status_cb: Option<extern "C" fn(message: *const c_char, closure: *mut c_void)>,
-                                    closure: *mut c_void) -> notmuch_status_t;
+                                    status_cb: Option<extern "C" fn(message: *const c_char,
+                                                                    closure: *mut c_void)
+                                                                   >,
+                                    closure: *mut c_void)
+                                    -> notmuch_status_t;
     /// Destroy the notmuch database, closing it if necessary and freeing
     /// all associated resources.
     ///
@@ -292,7 +298,7 @@ extern "C" {
     /// fail with `notmuch_status_t::UPGRADE_REQUIRED`.  This always returns
     /// FALSE for a read-only database because there's no way to upgrade a
     /// read-only database.
-    pub fn notmuch_database_needs_upgrade(database: *mut notmuch_database_t)  -> notmuch_bool_t;
+    pub fn notmuch_database_needs_upgrade(database: *mut notmuch_database_t) -> notmuch_bool_t;
 
     /// Upgrade the current database to the latest supported version.
     ///
@@ -310,8 +316,11 @@ extern "C" {
     /// the upgrade process.  The argument 'closure' is passed verbatim to
     /// any callback invoked.
     pub fn notmuch_database_upgrade(database: *mut notmuch_database_t,
-                                    progress_notify: Option<extern "C" fn(closure: *mut c_void, progress: c_double)>,
-                                    closure: *mut c_void) -> notmuch_status_t;
+                                    progress_notify: Option<extern "C" fn(closure: *mut c_void,
+                                                                          progress: c_double)
+                                                                         >,
+                                    closure: *mut c_void)
+                                    -> notmuch_status_t;
 
     /// Begin an atomic database operation.
     ///
@@ -329,7 +338,7 @@ extern "C" {
     /// * `notmuch_status_t::SUCCESS`: Successfully entered atomic section.
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred;
-    ///	  atomic section not entered.
+    /// 	  atomic section not entered.
     pub fn notmuch_database_begin_atomic(notmuch: *mut notmuch_database_t) -> notmuch_status_t;
 
     /// Indicate the end of an atomic database operation.
@@ -339,10 +348,10 @@ extern "C" {
     /// * `notmuch_status_t::SUCCESS`: Successfully completed atomic section.
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred;
-    ///	  atomic section not ended.
+    /// 	  atomic section not ended.
     ///
     /// * `notmuch_status_t::UNBALANCED_ATOMIC`: The database is not currently in
-    ///	  an atomic section.
+    /// 	  an atomic section.
     pub fn notmuch_database_end_atomic(notmuch: *mut notmuch_database_t) -> notmuch_status_t;
 
     /// Return the committed database revision and UUID.
@@ -358,7 +367,8 @@ extern "C" {
     /// this database.  Two revision numbers are only comparable if they
     /// have the same database UUID.
     pub fn notmuch_database_get_revision(notmuch: *mut notmuch_database_t,
-                                         uuid: *mut *const c_char) -> c_ulong;
+                                         uuid: *mut *const c_char)
+                                         -> c_ulong;
 
     /// Retrieve a directory object from the database for 'path'.
     ///
@@ -380,13 +390,14 @@ extern "C" {
     /// * `notmuch_status_t::NULL_POINTER`: The given 'directory' argument is NULL.
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred;
-    ///	  directory not retrieved.
+    /// 	  directory not retrieved.
     ///
     /// * `notmuch_status_t::UPGRADE_REQUIRED`: The caller must upgrade the
     ///   database to use this function.
     pub fn notmuch_database_get_directory(database: *mut notmuch_database_t,
                                           path: *const c_char,
-                                          directory: *mut *mut notmuch_directory_t) -> notmuch_status_t;
+                                          directory: *mut *mut notmuch_directory_t)
+                                          -> notmuch_status_t;
 
     /// Add a new message to the given notmuch database or associate an
     /// additional filename with an existing message.
@@ -417,28 +428,29 @@ extern "C" {
     /// * `notmuch_status_t::SUCCESS`: Message successfully added to database.
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred,
-    ///	  message not added.
+    /// 	  message not added.
     ///
     /// * `notmuch_status_t::DUPLICATE_MESSAGE_ID`: Message has the same message
-    ///	  ID as another message already in the database. The new
-    ///	  filename was successfully added to the message in the database
-    ///	  (if not already present) and the existing message is returned.
+    /// 	  ID as another message already in the database. The new
+    /// 	  filename was successfully added to the message in the database
+    /// 	  (if not already present) and the existing message is returned.
     ///
     /// * `notmuch_status_t::FILE_ERROR`: an error occurred trying to open the
-    ///	  file, (such as permission denied, or file not found,
-    ///	  etc.). Nothing added to the database.
+    /// 	  file, (such as permission denied, or file not found,
+    /// 	  etc.). Nothing added to the database.
     ///
     /// * `notmuch_status_t::FILE_NOT_EMAIL`: the contents of filename don't look
-    ///	  like an email message. Nothing added to the database.
+    /// 	  like an email message. Nothing added to the database.
     ///
     /// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only
-    ///	  mode so no message can be added.
+    /// 	  mode so no message can be added.
     ///
     /// * `notmuch_status_t::UPGRADE_REQUIRED`: The caller must upgrade the
     ///   database to use this function.
     pub fn notmuch_database_add_message(database: *mut notmuch_database_t,
                                         filename: *const c_char,
-                                        message: *mut *mut notmuch_message_t) -> notmuch_status_t;
+                                        message: *mut *mut notmuch_message_t)
+                                        -> notmuch_status_t;
 
     /// Remove a message filename from the given notmuch database. If the
     /// message has no more filenames, remove the message.
@@ -452,22 +464,23 @@ extern "C" {
     /// Return value:
     ///
     /// * `notmuch_status_t::SUCCESS`: The last filename was removed and the
-    ///	  message was removed from the database.
+    /// 	  message was removed from the database.
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred,
-    ///	  message not removed.
+    /// 	  message not removed.
     ///
     /// * `notmuch_status_t::DUPLICATE_MESSAGE_ID`: This filename was removed but
-    ///	  the message persists in the database with at least one other
-    ///	  filename.
+    /// 	  the message persists in the database with at least one other
+    /// 	  filename.
     ///
     /// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only
-    ///	  mode so no message can be removed.
+    /// 	  mode so no message can be removed.
     ///
     /// * `notmuch_status_t::UPGRADE_REQUIRED`: The caller must upgrade the
     ///   database to use this function.
     pub fn notmuch_database_remove_message(database: *mut notmuch_database_t,
-                                           filename: *const c_char) -> notmuch_status_t;
+                                           filename: *const c_char)
+                                           -> notmuch_status_t;
 
     /// Find a message with the given message_id.
     ///
@@ -491,8 +504,9 @@ extern "C" {
     ///
     /// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred
     pub fn notmuch_database_find_message(database: *mut notmuch_database_t,
-                       message_id: *const c_char,
-                       message: *mut *mut notmuch_message_t) -> notmuch_status_t;
+                                         message_id: *const c_char,
+                                         message: *mut *mut notmuch_message_t)
+                                         -> notmuch_status_t;
 
     /// Find a message with the given filename.
     ///
@@ -520,7 +534,8 @@ extern "C" {
     ///   database to use this function.
     pub fn notmuch_database_find_message_by_filename(notmuch: *mut notmuch_database_t,
                                                      filename: *const c_char,
-                                                     message: *mut *mut notmuch_message_t) -> notmuch_status_t;
+                                                     message: *mut *mut notmuch_message_t)
+                                                     -> notmuch_status_t;
 
     /// Return a list of all tags found in the database.
     ///
@@ -553,7 +568,9 @@ extern "C" {
     /// query.
     ///
     /// Will return NULL if insufficient memory is available.
-    pub fn notmuch_query_create(database: *mut notmuch_database_t, query_string: *const c_char) -> *mut notmuch_query_t;
+    pub fn notmuch_query_create(database: *mut notmuch_database_t,
+                                query_string: *const c_char)
+                                -> *mut notmuch_query_t;
 
     /// Return the query_string of this query. See `notmuch_query_create`.
     pub fn notmuch_query_get_query_string(query: *const notmuch_query_t) -> *const c_char;
@@ -641,7 +658,8 @@ extern "C" {
     ///
     /// @since libnotmuch 4.2 (notmuch 0.20)
     pub fn notmuch_query_search_threads_st(query: *mut notmuch_query_t,
-                                           out: *mut *mut notmuch_threads_t) -> notmuch_status_t;
+                                           out: *mut *mut notmuch_threads_t)
+                                           -> notmuch_status_t;
 
     /// Execute a query for messages, returning a `notmuch_messages_t` object
     /// which can be used to iterate over the results. The returned
@@ -685,7 +703,8 @@ extern "C" {
     ///
     /// @since libnotmuch 4.2 (notmuch 0.20)
     pub fn notmuch_query_search_messages_st(query: *mut notmuch_query_t,
-                                     out: *mut *mut notmuch_messages_t) -> notmuch_status_t;
+                                            out: *mut *mut notmuch_messages_t)
+                                            -> notmuch_status_t;
 
     /// Destroy a `notmuch_query_t` along with any associated resources.
     ///
@@ -751,7 +770,9 @@ extern "C" {
     ///      value of *count is not defined.
     ///
     /// @since libnotmuch 4.3 (notmuch 0.21)
-    pub fn notmuch_query_count_messages_st(query: *mut notmuch_query_t, count: *mut c_uint) -> notmuch_status_t;
+    pub fn notmuch_query_count_messages_st(query: *mut notmuch_query_t,
+                                           count: *mut c_uint)
+                                           -> notmuch_status_t;
 
     /// Return the number of threads matching a search.
     ///
@@ -773,7 +794,9 @@ extern "C" {
     ///      value of *count is not defined.
     ///
     /// @since libnotmuch 4.3 (notmuch 0.21)
-    pub fn notmuch_query_count_threads_st(query: *mut notmuch_query_t, count: *mut c_uint) -> notmuch_status_t;
+    pub fn notmuch_query_count_threads_st(query: *mut notmuch_query_t,
+                                          count: *mut c_uint)
+                                          -> notmuch_status_t;
 
     /// Get the thread ID of 'thread'.
     ///
@@ -797,7 +820,8 @@ extern "C" {
     /// which are not replies to other messages in the thread.
     ///
     /// The returned list will be destroyed when the thread is destroyed.
-    pub fn notmuch_thread_get_toplevel_messages(thread: *mut notmuch_thread_t) -> *mut notmuch_messages_t;
+    pub fn notmuch_thread_get_toplevel_messages(thread: *mut notmuch_thread_t)
+                                                -> *mut notmuch_messages_t;
 
     /// Get a `notmuch_thread_t` iterator for all messages in 'thread' in
     /// oldest-first order.
@@ -1013,7 +1037,8 @@ extern "C" {
 
     /// Get a value of a flag for the email corresponding to 'message'.
     pub fn notmuch_message_get_flag(message: *mut notmuch_message_t,
-                                    flag: notmuch_message_flag_t) -> notmuch_bool_t;
+                                    flag: notmuch_message_flag_t)
+                                    -> notmuch_bool_t;
 
     /// Set a value of a flag for the email corresponding to 'message'.
     pub fn notmuch_message_set_flag(message: *mut notmuch_message_t,
@@ -1041,7 +1066,9 @@ extern "C" {
     ///
     /// Returns an empty string ("") if the message does not contain a
     /// header line matching 'header'. Returns NULL if any error occurs.
-    pub fn notmuch_message_get_header(message: *mut notmuch_message_t, header: *const c_char) -> *const c_char;
+    pub fn notmuch_message_get_header(message: *mut notmuch_message_t,
+                                      header: *const c_char)
+                                      -> *const c_char;
 
     /// Get the tags for 'message', returning a `notmuch_tags_t` object which
     /// can be used to iterate over all tags.
@@ -1085,11 +1112,13 @@ extern "C" {
     /// * `notmuch_status_t::NULL_POINTER`: The 'tag' argument is NULL
     ///
     /// * `notmuch_status_t::TAG_TOO_LONG`: The length of 'tag' is too long
-    ///	  (exceeds TAG_MAX)
+    /// 	  (exceeds TAG_MAX)
     ///
     /// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only
-    ///	  mode so message cannot be modified.
-    pub fn notmuch_message_add_tag(message: *mut notmuch_message_t, tag: *const c_char) -> notmuch_status_t;
+    /// 	  mode so message cannot be modified.
+    pub fn notmuch_message_add_tag(message: *mut notmuch_message_t,
+                                   tag: *const c_char)
+                                   -> notmuch_status_t;
 
     /// Remove a tag from the given message.
     ///
@@ -1098,8 +1127,11 @@ extern "C" {
     /// * `notmuch_status_t::SUCCESS`: Tag successfully removed from message
     /// * `notmuch_status_t::NULL_POINTER`: The 'tag' argument is NULL
     /// * `notmuch_status_t::TAG_TOO_LONG`: The length of 'tag' is too long (exceeds `TAG_MAX`)
-    /// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only mode so message cannot be modified.
-    pub fn notmuch_message_remove_tag(message: *mut notmuch_message_t, tag: *const c_char) -> notmuch_status_t;
+    /// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only mode so message
+    ///   cannot be modified.
+    pub fn notmuch_message_remove_tag(message: *mut notmuch_message_t,
+                                      tag: *const c_char)
+                                      -> notmuch_status_t;
 
     /// Remove all tags from the given message.
     ///
@@ -1107,7 +1139,7 @@ extern "C" {
     /// replace tag values.
     ///
     /// `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only
-    ///	mode so message cannot be modified.
+    /// 	mode so message cannot be modified.
     pub fn notmuch_message_remove_all_tags(message: *mut notmuch_message_t) -> notmuch_status_t;
 
     /// Add/remove tags according to maildir flags in the message filename(s).
@@ -1217,7 +1249,7 @@ extern "C" {
     /// `notmuch_status_t::SUCCESS`: Message successfully frozen.
     ///
     /// `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only
-    ///	mode so message cannot be modified.
+    /// 	mode so message cannot be modified.
     pub fn notmuch_message_freeze(message: *mut notmuch_message_t) -> notmuch_status_t;
 
     /// Thaw the current 'message', synchronizing any changes that may have
@@ -1233,12 +1265,12 @@ extern "C" {
     /// Return value:
     ///
     /// `notmuch_status_t::SUCCESS`: Message successfully thawed, (or at least
-    ///	its frozen count has successfully been reduced by 1).
+    /// 	its frozen count has successfully been reduced by 1).
     ///
     /// `notmuch_status_t::UNBALANCED_FREEZE_THAW`: An attempt was made to thaw
-    ///	an unfrozen message. That is, there have been an unbalanced
-    ///	number of calls to `notmuch_message_freeze` and
-    ///	`notmuch_message_thaw`.
+    /// 	an unfrozen message. That is, there have been an unbalanced
+    /// 	number of calls to `notmuch_message_freeze` and
+    /// 	`notmuch_message_thaw`.
     pub fn notmuch_message_thaw(message: *mut notmuch_message_t) -> notmuch_status_t;
 
     /// Destroy a `notmuch_message_t` object.
@@ -1321,7 +1353,8 @@ extern "C" {
     /// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only mode so
     ///    directory mtime cannot be modified.
     pub fn notmuch_directory_set_mtime(directory: *mut notmuch_directory_t,
-                                       mtime: time_t) -> notmuch_status_t;
+                                       mtime: time_t)
+                                       -> notmuch_status_t;
 
     /// Get the mtime of a directory, (as previously stored with
     /// `notmuch_directory_set_mtime`).
@@ -1335,14 +1368,16 @@ extern "C" {
     ///
     /// The returned filenames will be the basename-entries only (not
     /// complete paths).
-    pub fn notmuch_directory_get_child_files(directory: *mut notmuch_directory_t) -> *mut notmuch_filenames_t;
+    pub fn notmuch_directory_get_child_files(directory: *mut notmuch_directory_t)
+                                             -> *mut notmuch_filenames_t;
 
     /// Get a `notmuch_filenames_t` iterator listing all the filenames of
     /// sub-directories in the database within the given directory.
     ///
     /// The returned filenames will be the basename-entries only (not
     /// complete paths).
-    pub fn notmuch_directory_get_child_directories(directory: *mut notmuch_directory_t) -> *mut notmuch_filenames_t;
+    pub fn notmuch_directory_get_child_directories(directory: *mut notmuch_directory_t)
+                                                   -> *mut notmuch_filenames_t;
 
     /// Delete directory document from the database, and destroy the
     /// `notmuch_directory_t` object. Assumes any child directories and files
