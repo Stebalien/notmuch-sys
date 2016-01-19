@@ -1438,23 +1438,57 @@
 <span id="1395">1395</span>
 <span id="1396">1396</span>
 <span id="1397">1397</span>
+<span id="1398">1398</span>
+<span id="1399">1399</span>
+<span id="1400">1400</span>
+<span id="1401">1401</span>
+<span id="1402">1402</span>
+<span id="1403">1403</span>
+<span id="1404">1404</span>
+<span id="1405">1405</span>
+<span id="1406">1406</span>
+<span id="1407">1407</span>
+<span id="1408">1408</span>
+<span id="1409">1409</span>
+<span id="1410">1410</span>
+<span id="1411">1411</span>
+<span id="1412">1412</span>
+<span id="1413">1413</span>
+<span id="1414">1414</span>
+<span id="1415">1415</span>
+<span id="1416">1416</span>
+<span id="1417">1417</span>
+<span id="1418">1418</span>
+<span id="1419">1419</span>
+<span id="1420">1420</span>
+<span id="1421">1421</span>
+<span id="1422">1422</span>
+<span id="1423">1423</span>
+<span id="1424">1424</span>
+<span id="1425">1425</span>
+<span id="1426">1426</span>
+<span id="1427">1427</span>
+<span id="1428">1428</span>
+<span id="1429">1429</span>
+<span id="1430">1430</span>
+<span id="1431">1431</span>
+<span id="1432">1432</span>
 </pre><pre class='rust '>
-<span class='comment'>/*
- * Copyright © 2009 Carl Worth, 2015 Steven Allen
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see http://www.gnu.org/licenses/ .
- */</span>
+<span class='comment'>// Copyright © 2009 Carl Worth, 2015 Steven Allen</span>
+<span class='comment'>//</span>
+<span class='comment'>// This program is free software: you can redistribute it and/or modify</span>
+<span class='comment'>// it under the terms of the GNU General Public License as published by</span>
+<span class='comment'>// the Free Software Foundation, either version 3 of the License, or</span>
+<span class='comment'>// (at your option) any later version.</span>
+<span class='comment'>//</span>
+<span class='comment'>// This program is distributed in the hope that it will be useful,</span>
+<span class='comment'>// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class='comment'>// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class='comment'>// GNU General Public License for more details.</span>
+<span class='comment'>//</span>
+<span class='comment'>// You should have received a copy of the GNU General Public License</span>
+<span class='comment'>// along with this program.  If not, see http://www.gnu.org/licenses/ .</span>
+<span class='comment'>//</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>non_camel_case_types</span>)]</span>
 
@@ -1526,7 +1560,7 @@
     <span class='doccomment'>/// Sort by message-id.</span>
     <span class='ident'>MESSAGE_ID</span>,
     <span class='doccomment'>/// Do not sort.</span>
-    <span class='ident'>UNSORTED</span>
+    <span class='ident'>UNSORTED</span>,
 }
 
 <span class='doccomment'>/// Exclude values for `notmuch_query_set_omit_excluded`</span>
@@ -1536,7 +1570,7 @@
     <span class='ident'>FLAG</span> <span class='op'>=</span> <span class='number'>0</span>,
     <span class='ident'>TRUE</span>,
     <span class='ident'>FALSE</span>,
-    <span class='ident'>ALL</span>
+    <span class='ident'>ALL</span>,
 }
 
 <span class='doccomment'>/// Message flags.</span>
@@ -1559,7 +1593,7 @@
     <span class='doccomment'>/// Open database for reading only.</span>
     <span class='ident'>READ_ONLY</span> <span class='op'>=</span> <span class='number'>0</span>,
     <span class='doccomment'>/// Open database for reading and writing.</span>
-    <span class='ident'>READ_WRITE</span>
+    <span class='ident'>READ_WRITE</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>notmuch_database_t</span> {}
@@ -1602,13 +1636,14 @@
     <span class='doccomment'>/// * `notmuch_status_t::OUT_OF_MEMORY`: Out of memory.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::FILE_ERROR`: An error occurred trying to open the</span>
-    <span class='doccomment'>///	  database file (such as permission denied, or file not found,</span>
-    <span class='doccomment'>///	  etc.), or the database version is unknown.</span>
+    <span class='doccomment'>/// 	  database file (such as permission denied, or file not found,</span>
+    <span class='doccomment'>/// 	  etc.), or the database version is unknown.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_open</span>(<span class='ident'>path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
                                  <span class='ident'>mode</span>: <span class='ident'>notmuch_database_mode_t</span>,
-                                 <span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                 <span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>)
+                                 <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Like notmuch_database_open, except optionally return an error</span>
     <span class='doccomment'>/// message. This message is allocated by malloc and should be freed by</span>
@@ -1616,7 +1651,8 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_open_verbose</span>(<span class='ident'>path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
                                          <span class='ident'>mode</span>: <span class='ident'>notmuch_database_mode_t</span>,
                                          <span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
-                                         <span class='ident'>error_message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                         <span class='ident'>error_message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_char</span>)
+                                         <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Get a string representation of a `notmuch_status_t` value.</span>
     <span class='doccomment'>///</span>
@@ -1651,23 +1687,25 @@
     <span class='doccomment'>/// * `notmuch_status_t::OUT_OF_MEMORY`: Out of memory.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::FILE_ERROR`: An error occurred trying to create the</span>
-    <span class='doccomment'>///	  database file (such as permission denied, or file not found,</span>
-    <span class='doccomment'>///	  etc.), or the database already exists.</span>
+    <span class='doccomment'>/// 	  database file (such as permission denied, or file not found,</span>
+    <span class='doccomment'>/// 	  etc.), or the database already exists.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_create</span>(<span class='ident'>path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
-                                   <span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                   <span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>)
+                                   <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Like `notmuch_database_create`, except optionally return an error</span>
     <span class='doccomment'>/// message. This message is allocated by malloc and should be freed by</span>
     <span class='doccomment'>/// the caller.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_create_verbose</span>(<span class='ident'>path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
                                            <span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
-                                           <span class='ident'>error_message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                           <span class='ident'>error_message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>)
+                                           <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
 
     <span class='doccomment'>/// Retrieve last status string for given database.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_status_string</span> (<span class='ident'>notmuch</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_status_string</span>(<span class='ident'>notmuch</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
 
     <span class='doccomment'>/// Commit changes and close the given notmuch database.</span>
     <span class='doccomment'>///</span>
@@ -1692,8 +1730,8 @@
     <span class='doccomment'>/// * `notmuch_status_t::SUCCESS`: Successfully closed the database.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred; the</span>
-    <span class='doccomment'>///	  database has been closed but there are no guarantees the</span>
-    <span class='doccomment'>///	  changes to the database, if any, have been flushed to disk.</span>
+    <span class='doccomment'>/// 	  database has been closed but there are no guarantees the</span>
+    <span class='doccomment'>/// 	  changes to the database, if any, have been flushed to disk.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_close</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Compact a notmuch database, backing up the original database to the</span>
@@ -1707,8 +1745,11 @@
     <span class='doccomment'>/// &#39;closure&#39; is passed verbatim to any callback invoked.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_compact</span>(<span class='ident'>path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
                                     <span class='ident'>backup_path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
-                                    <span class='ident'>status_cb</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>, <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)<span class='op'>&gt;</span>,
-                                    <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                    <span class='ident'>status_cb</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
+                                                                    <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
+                                                                   <span class='op'>&gt;</span>,
+                                    <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
+                                    <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
     <span class='doccomment'>/// Destroy the notmuch database, closing it if necessary and freeing</span>
     <span class='doccomment'>/// all associated resources.</span>
     <span class='doccomment'>///</span>
@@ -1733,7 +1774,7 @@
     <span class='doccomment'>/// fail with `notmuch_status_t::UPGRADE_REQUIRED`.  This always returns</span>
     <span class='doccomment'>/// FALSE for a read-only database because there&#39;s no way to upgrade a</span>
     <span class='doccomment'>/// read-only database.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_needs_upgrade</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>)  <span class='op'>-&gt;</span> <span class='ident'>notmuch_bool_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_needs_upgrade</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_bool_t</span>;
 
     <span class='doccomment'>/// Upgrade the current database to the latest supported version.</span>
     <span class='doccomment'>///</span>
@@ -1751,8 +1792,11 @@
     <span class='doccomment'>/// the upgrade process.  The argument &#39;closure&#39; is passed verbatim to</span>
     <span class='doccomment'>/// any callback invoked.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_upgrade</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
-                                    <span class='ident'>progress_notify</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='ident'>progress</span>: <span class='ident'>c_double</span>)<span class='op'>&gt;</span>,
-                                    <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                    <span class='ident'>progress_notify</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+                                                                          <span class='ident'>progress</span>: <span class='ident'>c_double</span>)
+                                                                         <span class='op'>&gt;</span>,
+                                    <span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
+                                    <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Begin an atomic database operation.</span>
     <span class='doccomment'>///</span>
@@ -1770,7 +1814,7 @@
     <span class='doccomment'>/// * `notmuch_status_t::SUCCESS`: Successfully entered atomic section.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred;</span>
-    <span class='doccomment'>///	  atomic section not entered.</span>
+    <span class='doccomment'>/// 	  atomic section not entered.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_begin_atomic</span>(<span class='ident'>notmuch</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Indicate the end of an atomic database operation.</span>
@@ -1780,10 +1824,10 @@
     <span class='doccomment'>/// * `notmuch_status_t::SUCCESS`: Successfully completed atomic section.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred;</span>
-    <span class='doccomment'>///	  atomic section not ended.</span>
+    <span class='doccomment'>/// 	  atomic section not ended.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::UNBALANCED_ATOMIC`: The database is not currently in</span>
-    <span class='doccomment'>///	  an atomic section.</span>
+    <span class='doccomment'>/// 	  an atomic section.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_end_atomic</span>(<span class='ident'>notmuch</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Return the committed database revision and UUID.</span>
@@ -1799,7 +1843,8 @@
     <span class='doccomment'>/// this database.  Two revision numbers are only comparable if they</span>
     <span class='doccomment'>/// have the same database UUID.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_get_revision</span>(<span class='ident'>notmuch</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
-                                         <span class='ident'>uuid</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>c_ulong</span>;
+                                         <span class='ident'>uuid</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>)
+                                         <span class='op'>-&gt;</span> <span class='ident'>c_ulong</span>;
 
     <span class='doccomment'>/// Retrieve a directory object from the database for &#39;path&#39;.</span>
     <span class='doccomment'>///</span>
@@ -1821,13 +1866,14 @@
     <span class='doccomment'>/// * `notmuch_status_t::NULL_POINTER`: The given &#39;directory&#39; argument is NULL.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred;</span>
-    <span class='doccomment'>///	  directory not retrieved.</span>
+    <span class='doccomment'>/// 	  directory not retrieved.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::UPGRADE_REQUIRED`: The caller must upgrade the</span>
     <span class='doccomment'>///   database to use this function.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_get_directory</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
                                           <span class='ident'>path</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
-                                          <span class='ident'>directory</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_directory_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                          <span class='ident'>directory</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_directory_t</span>)
+                                          <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Add a new message to the given notmuch database or associate an</span>
     <span class='doccomment'>/// additional filename with an existing message.</span>
@@ -1858,28 +1904,29 @@
     <span class='doccomment'>/// * `notmuch_status_t::SUCCESS`: Message successfully added to database.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred,</span>
-    <span class='doccomment'>///	  message not added.</span>
+    <span class='doccomment'>/// 	  message not added.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::DUPLICATE_MESSAGE_ID`: Message has the same message</span>
-    <span class='doccomment'>///	  ID as another message already in the database. The new</span>
-    <span class='doccomment'>///	  filename was successfully added to the message in the database</span>
-    <span class='doccomment'>///	  (if not already present) and the existing message is returned.</span>
+    <span class='doccomment'>/// 	  ID as another message already in the database. The new</span>
+    <span class='doccomment'>/// 	  filename was successfully added to the message in the database</span>
+    <span class='doccomment'>/// 	  (if not already present) and the existing message is returned.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::FILE_ERROR`: an error occurred trying to open the</span>
-    <span class='doccomment'>///	  file, (such as permission denied, or file not found,</span>
-    <span class='doccomment'>///	  etc.). Nothing added to the database.</span>
+    <span class='doccomment'>/// 	  file, (such as permission denied, or file not found,</span>
+    <span class='doccomment'>/// 	  etc.). Nothing added to the database.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::FILE_NOT_EMAIL`: the contents of filename don&#39;t look</span>
-    <span class='doccomment'>///	  like an email message. Nothing added to the database.</span>
+    <span class='doccomment'>/// 	  like an email message. Nothing added to the database.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only</span>
-    <span class='doccomment'>///	  mode so no message can be added.</span>
+    <span class='doccomment'>/// 	  mode so no message can be added.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::UPGRADE_REQUIRED`: The caller must upgrade the</span>
     <span class='doccomment'>///   database to use this function.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_add_message</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
                                         <span class='ident'>filename</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
-                                        <span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                        <span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>)
+                                        <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Remove a message filename from the given notmuch database. If the</span>
     <span class='doccomment'>/// message has no more filenames, remove the message.</span>
@@ -1893,22 +1940,23 @@
     <span class='doccomment'>/// Return value:</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::SUCCESS`: The last filename was removed and the</span>
-    <span class='doccomment'>///	  message was removed from the database.</span>
+    <span class='doccomment'>/// 	  message was removed from the database.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred,</span>
-    <span class='doccomment'>///	  message not removed.</span>
+    <span class='doccomment'>/// 	  message not removed.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::DUPLICATE_MESSAGE_ID`: This filename was removed but</span>
-    <span class='doccomment'>///	  the message persists in the database with at least one other</span>
-    <span class='doccomment'>///	  filename.</span>
+    <span class='doccomment'>/// 	  the message persists in the database with at least one other</span>
+    <span class='doccomment'>/// 	  filename.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only</span>
-    <span class='doccomment'>///	  mode so no message can be removed.</span>
+    <span class='doccomment'>/// 	  mode so no message can be removed.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::UPGRADE_REQUIRED`: The caller must upgrade the</span>
     <span class='doccomment'>///   database to use this function.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_remove_message</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
-                                           <span class='ident'>filename</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                           <span class='ident'>filename</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>)
+                                           <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Find a message with the given message_id.</span>
     <span class='doccomment'>///</span>
@@ -1932,8 +1980,9 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::XAPIAN_EXCEPTION`: A Xapian exception occurred</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_find_message</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
-                       <span class='ident'>message_id</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
-                       <span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                         <span class='ident'>message_id</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
+                                         <span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>)
+                                         <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Find a message with the given filename.</span>
     <span class='doccomment'>///</span>
@@ -1961,7 +2010,8 @@
     <span class='doccomment'>///   database to use this function.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_database_find_message_by_filename</span>(<span class='ident'>notmuch</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
                                                      <span class='ident'>filename</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
-                                                     <span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                                     <span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>)
+                                                     <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Return a list of all tags found in the database.</span>
     <span class='doccomment'>///</span>
@@ -1994,7 +2044,9 @@
     <span class='doccomment'>/// query.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Will return NULL if insufficient memory is available.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_create</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>, <span class='ident'>query_string</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_query_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_create</span>(<span class='ident'>database</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_database_t</span>,
+                                <span class='ident'>query_string</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>)
+                                <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_query_t</span>;
 
     <span class='doccomment'>/// Return the query_string of this query. See `notmuch_query_create`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_get_query_string</span>(<span class='ident'>query</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>notmuch_query_t</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
@@ -2082,7 +2134,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// @since libnotmuch 4.2 (notmuch 0.20)</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_search_threads_st</span>(<span class='ident'>query</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_query_t</span>,
-                                           <span class='ident'>out</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_threads_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                           <span class='ident'>out</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_threads_t</span>)
+                                           <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Execute a query for messages, returning a `notmuch_messages_t` object</span>
     <span class='doccomment'>/// which can be used to iterate over the results. The returned</span>
@@ -2126,7 +2179,8 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// @since libnotmuch 4.2 (notmuch 0.20)</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_search_messages_st</span>(<span class='ident'>query</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_query_t</span>,
-                                     <span class='ident'>out</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_messages_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                            <span class='ident'>out</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_messages_t</span>)
+                                            <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Destroy a `notmuch_query_t` along with any associated resources.</span>
     <span class='doccomment'>///</span>
@@ -2192,7 +2246,9 @@
     <span class='doccomment'>///      value of *count is not defined.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// @since libnotmuch 4.3 (notmuch 0.21)</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_count_messages_st</span>(<span class='ident'>query</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_query_t</span>, <span class='ident'>count</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_uint</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_count_messages_st</span>(<span class='ident'>query</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_query_t</span>,
+                                           <span class='ident'>count</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_uint</span>)
+                                           <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Return the number of threads matching a search.</span>
     <span class='doccomment'>///</span>
@@ -2214,7 +2270,9 @@
     <span class='doccomment'>///      value of *count is not defined.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// @since libnotmuch 4.3 (notmuch 0.21)</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_count_threads_st</span>(<span class='ident'>query</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_query_t</span>, <span class='ident'>count</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_uint</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_query_count_threads_st</span>(<span class='ident'>query</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_query_t</span>,
+                                          <span class='ident'>count</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_uint</span>)
+                                          <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Get the thread ID of &#39;thread&#39;.</span>
     <span class='doccomment'>///</span>
@@ -2238,7 +2296,8 @@
     <span class='doccomment'>/// which are not replies to other messages in the thread.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The returned list will be destroyed when the thread is destroyed.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_thread_get_toplevel_messages</span>(<span class='ident'>thread</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_thread_t</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_messages_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_thread_get_toplevel_messages</span>(<span class='ident'>thread</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_thread_t</span>)
+                                                <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_messages_t</span>;
 
     <span class='doccomment'>/// Get a `notmuch_thread_t` iterator for all messages in &#39;thread&#39; in</span>
     <span class='doccomment'>/// oldest-first order.</span>
@@ -2454,7 +2513,8 @@
 
     <span class='doccomment'>/// Get a value of a flag for the email corresponding to &#39;message&#39;.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_get_flag</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>,
-                                    <span class='ident'>flag</span>: <span class='ident'>notmuch_message_flag_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_bool_t</span>;
+                                    <span class='ident'>flag</span>: <span class='ident'>notmuch_message_flag_t</span>)
+                                    <span class='op'>-&gt;</span> <span class='ident'>notmuch_bool_t</span>;
 
     <span class='doccomment'>/// Set a value of a flag for the email corresponding to &#39;message&#39;.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_set_flag</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>,
@@ -2482,7 +2542,9 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Returns an empty string (&quot;&quot;) if the message does not contain a</span>
     <span class='doccomment'>/// header line matching &#39;header&#39;. Returns NULL if any error occurs.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_get_header</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>, <span class='ident'>header</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_get_header</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>,
+                                      <span class='ident'>header</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>)
+                                      <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>;
 
     <span class='doccomment'>/// Get the tags for &#39;message&#39;, returning a `notmuch_tags_t` object which</span>
     <span class='doccomment'>/// can be used to iterate over all tags.</span>
@@ -2526,11 +2588,13 @@
     <span class='doccomment'>/// * `notmuch_status_t::NULL_POINTER`: The &#39;tag&#39; argument is NULL</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::TAG_TOO_LONG`: The length of &#39;tag&#39; is too long</span>
-    <span class='doccomment'>///	  (exceeds TAG_MAX)</span>
+    <span class='doccomment'>/// 	  (exceeds TAG_MAX)</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only</span>
-    <span class='doccomment'>///	  mode so message cannot be modified.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_add_tag</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>, <span class='ident'>tag</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+    <span class='doccomment'>/// 	  mode so message cannot be modified.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_add_tag</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>,
+                                   <span class='ident'>tag</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>)
+                                   <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Remove a tag from the given message.</span>
     <span class='doccomment'>///</span>
@@ -2539,8 +2603,11 @@
     <span class='doccomment'>/// * `notmuch_status_t::SUCCESS`: Tag successfully removed from message</span>
     <span class='doccomment'>/// * `notmuch_status_t::NULL_POINTER`: The &#39;tag&#39; argument is NULL</span>
     <span class='doccomment'>/// * `notmuch_status_t::TAG_TOO_LONG`: The length of &#39;tag&#39; is too long (exceeds `TAG_MAX`)</span>
-    <span class='doccomment'>/// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only mode so message cannot be modified.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_remove_tag</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>, <span class='ident'>tag</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+    <span class='doccomment'>/// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only mode so message</span>
+    <span class='doccomment'>///   cannot be modified.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_remove_tag</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>,
+                                      <span class='ident'>tag</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>)
+                                      <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Remove all tags from the given message.</span>
     <span class='doccomment'>///</span>
@@ -2548,7 +2615,7 @@
     <span class='doccomment'>/// replace tag values.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only</span>
-    <span class='doccomment'>///	mode so message cannot be modified.</span>
+    <span class='doccomment'>/// 	mode so message cannot be modified.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_remove_all_tags</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Add/remove tags according to maildir flags in the message filename(s).</span>
@@ -2658,7 +2725,7 @@
     <span class='doccomment'>/// `notmuch_status_t::SUCCESS`: Message successfully frozen.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only</span>
-    <span class='doccomment'>///	mode so message cannot be modified.</span>
+    <span class='doccomment'>/// 	mode so message cannot be modified.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_freeze</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Thaw the current &#39;message&#39;, synchronizing any changes that may have</span>
@@ -2674,12 +2741,12 @@
     <span class='doccomment'>/// Return value:</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `notmuch_status_t::SUCCESS`: Message successfully thawed, (or at least</span>
-    <span class='doccomment'>///	its frozen count has successfully been reduced by 1).</span>
+    <span class='doccomment'>/// 	its frozen count has successfully been reduced by 1).</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// `notmuch_status_t::UNBALANCED_FREEZE_THAW`: An attempt was made to thaw</span>
-    <span class='doccomment'>///	an unfrozen message. That is, there have been an unbalanced</span>
-    <span class='doccomment'>///	number of calls to `notmuch_message_freeze` and</span>
-    <span class='doccomment'>///	`notmuch_message_thaw`.</span>
+    <span class='doccomment'>/// 	an unfrozen message. That is, there have been an unbalanced</span>
+    <span class='doccomment'>/// 	number of calls to `notmuch_message_freeze` and</span>
+    <span class='doccomment'>/// 	`notmuch_message_thaw`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_message_thaw</span>(<span class='ident'>message</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_message_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Destroy a `notmuch_message_t` object.</span>
@@ -2762,7 +2829,8 @@
     <span class='doccomment'>/// * `notmuch_status_t::READ_ONLY_DATABASE`: Database was opened in read-only mode so</span>
     <span class='doccomment'>///    directory mtime cannot be modified.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_directory_set_mtime</span>(<span class='ident'>directory</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_directory_t</span>,
-                                       <span class='ident'>mtime</span>: <span class='ident'>time_t</span>) <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
+                                       <span class='ident'>mtime</span>: <span class='ident'>time_t</span>)
+                                       <span class='op'>-&gt;</span> <span class='ident'>notmuch_status_t</span>;
 
     <span class='doccomment'>/// Get the mtime of a directory, (as previously stored with</span>
     <span class='doccomment'>/// `notmuch_directory_set_mtime`).</span>
@@ -2776,14 +2844,16 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The returned filenames will be the basename-entries only (not</span>
     <span class='doccomment'>/// complete paths).</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_directory_get_child_files</span>(<span class='ident'>directory</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_directory_t</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_filenames_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_directory_get_child_files</span>(<span class='ident'>directory</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_directory_t</span>)
+                                             <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_filenames_t</span>;
 
     <span class='doccomment'>/// Get a `notmuch_filenames_t` iterator listing all the filenames of</span>
     <span class='doccomment'>/// sub-directories in the database within the given directory.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The returned filenames will be the basename-entries only (not</span>
     <span class='doccomment'>/// complete paths).</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_directory_get_child_directories</span>(<span class='ident'>directory</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_directory_t</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_filenames_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>notmuch_directory_get_child_directories</span>(<span class='ident'>directory</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_directory_t</span>)
+                                                   <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>notmuch_filenames_t</span>;
 
     <span class='doccomment'>/// Delete directory document from the database, and destroy the</span>
     <span class='doccomment'>/// `notmuch_directory_t` object. Assumes any child directories and files</span>
