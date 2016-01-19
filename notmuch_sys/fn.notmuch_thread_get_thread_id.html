@@ -9,6 +9,7 @@
 
     <title>notmuch_sys::notmuch_thread_get_thread_id - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -46,7 +47,7 @@
                 [<span class='inner'>&#x2212;</span>]
             </a>
         </span><a id='src-278' class='srclink' href='../src/notmuch_sys/lib.rs.html#784' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_thread_get_thread_id(thread: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_thread_t.html' title='notmuch_sys::notmuch_thread_t'>notmuch_thread_t</a></a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a></pre><div class='docblock'><p>Get the thread ID of &#39;thread&#39;.</p>
+<pre class='rust fn'>pub unsafe extern fn notmuch_thread_get_thread_id(thread: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_thread_t.html' title='notmuch_sys::notmuch_thread_t'>notmuch_thread_t</a></a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a></a></pre><div class='docblock'><p>Get the thread ID of &#39;thread&#39;.</p>
 
 <p>The returned string belongs to &#39;thread&#39; and as such, should not be
 modified by the caller and will only be valid for as long as the
@@ -111,6 +112,6 @@ the query from which it derived is destroyed).</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

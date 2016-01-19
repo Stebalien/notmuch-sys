@@ -9,6 +9,7 @@
 
     <title>notmuch_sys::notmuch_message_get_date - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -46,7 +47,7 @@
                 [<span class='inner'>&#x2212;</span>]
             </a>
         </span><a id='src-327' class='srclink' href='../src/notmuch_sys/lib.rs.html#1028' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_message_get_date(message: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_message_t.html' title='notmuch_sys::notmuch_message_t'>notmuch_message_t</a></a>) -&gt; <a class='type' href='../libc/types/os/arch/c95/type.time_t.html' title='libc::types::os::arch::c95::time_t'>time_t</a></pre><div class='docblock'><p>Get the date of &#39;message&#39; as a time_t value.</p>
+<pre class='rust fn'>pub unsafe extern fn notmuch_message_get_date(message: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_message_t.html' title='notmuch_sys::notmuch_message_t'>notmuch_message_t</a></a>) -&gt; <a class='type' href='../libc/unix/notbsd/linux/other/b64/type.time_t.html' title='libc::unix::notbsd::linux::other::b64::time_t'>time_t</a></pre><div class='docblock'><p>Get the date of &#39;message&#39; as a time_t value.</p>
 
 <p>For the original textual representation of the Date header from the
 message call <code>notmuch_message_get_header</code>() with a header value of
@@ -110,6 +111,6 @@ message call <code>notmuch_message_get_header</code>() with a header value of
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

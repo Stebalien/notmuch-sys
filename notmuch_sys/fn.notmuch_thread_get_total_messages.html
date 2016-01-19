@@ -9,6 +9,7 @@
 
     <title>notmuch_sys::notmuch_thread_get_total_messages - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -46,7 +47,7 @@
                 [<span class='inner'>&#x2212;</span>]
             </a>
         </span><a id='src-280' class='srclink' href='../src/notmuch_sys/lib.rs.html#790' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_thread_get_total_messages(thread: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_thread_t.html' title='notmuch_sys::notmuch_thread_t'>notmuch_thread_t</a></a>) -&gt; <a class='type' href='../libc/types/os/arch/c95/type.c_int.html' title='libc::types::os::arch::c95::c_int'>c_int</a></pre><div class='docblock'><p>Get the total number of messages in &#39;thread&#39;.</p>
+<pre class='rust fn'>pub unsafe extern fn notmuch_thread_get_total_messages(thread: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_thread_t.html' title='notmuch_sys::notmuch_thread_t'>notmuch_thread_t</a></a>) -&gt; <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></pre><div class='docblock'><p>Get the total number of messages in &#39;thread&#39;.</p>
 
 <p>This count consists of all messages in the database belonging to
 this thread. Contrast with <code>notmuch_thread_get_matched_messages</code>().</p>
@@ -109,6 +110,6 @@ this thread. Contrast with <code>notmuch_thread_get_matched_messages</code>().</
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

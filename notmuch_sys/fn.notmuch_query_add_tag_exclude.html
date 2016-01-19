@@ -9,6 +9,7 @@
 
     <title>notmuch_sys::notmuch_query_add_tag_exclude - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
 
     
@@ -46,7 +47,7 @@
                 [<span class='inner'>&#x2212;</span>]
             </a>
         </span><a id='src-253' class='srclink' href='../src/notmuch_sys/lib.rs.html#602' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_query_add_tag_exclude(query: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_query_t.html' title='notmuch_sys::notmuch_query_t'>notmuch_query_t</a></a>, tag: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/types/os/arch/c95/type.c_char.html' title='libc::types::os::arch::c95::c_char'>c_char</a></a>)</pre><div class='docblock'><p>Add a tag that will be excluded from the query results by default.
+<pre class='rust fn'>pub unsafe extern fn notmuch_query_add_tag_exclude(query: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut <a class='enum' href='../notmuch_sys/enum.notmuch_query_t.html' title='notmuch_sys::notmuch_query_t'>notmuch_query_t</a></a>, tag: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const <a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a></a>)</pre><div class='docblock'><p>Add a tag that will be excluded from the query results by default.
 This exclusion will be overridden if this tag appears explicitly in
 the query.</p>
 </div></section>
@@ -108,6 +109,6 @@ the query.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>
