@@ -11,7 +11,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/ .
+// along with this program.  If not, see https://www.gnu.org/licenses/ .
 //
 
 #![allow(non_camel_case_types)]
@@ -39,13 +39,13 @@ pub enum notmuch_status_t {
     /// mode.
     READ_ONLY_DATABASE,
     /// A Xapian exception occurred.
-    XAPIAN_EXCEPTION,
-    /// An error occurred trying to read or write to a file (this could
-    /// be file not found, permission denied, etc.)
     ///
     /// @todo We don't really want to expose this lame XAPIAN_EXCEPTION
     /// value. Instead we should map to things like DATABASE_LOCKED or
     /// whatever.
+    XAPIAN_EXCEPTION,
+    /// An error occurred trying to read or write to a file (this could
+    /// be file not found, permission denied, etc.)
     FILE_ERROR,
     /// A file was presented that doesn't appear to be an email
     /// message.
@@ -71,6 +71,9 @@ pub enum notmuch_status_t {
     /// There is a problem with the proposed path, e.g. a relative path
     /// passed to a function expecting an absolute path.
     PATH_ERROR,
+    /// One of the arguments violates the preconditions for the
+    /// function, in a way not covered by a more specific argument.
+    NOTMUCH_STATUS_ILLEGAL_ARGUMENT,
 }
 
 /// Sort values for `notmuch_query_set_sort`.
@@ -127,9 +130,11 @@ pub enum notmuch_thread_t {}
 pub enum notmuch_messages_t {}
 pub enum notmuch_message_t {}
 pub enum notmuch_tags_t {}
+pub enum notmuch_message_properties_t {}
 pub enum notmuch_directory_t {}
 pub enum notmuch_filenames_t {}
-pub type notmuch_bool_t = bool;
+pub enum notmuch_config_list_t {}
+pub type notmuch_bool_t = c_int;
 
 
 #[link(name = "notmuch")]
@@ -237,10 +242,11 @@ extern "C" {
     /// functions on objects derived from this database may either behave
     /// as if the database had not been closed (e.g., if the required data
     /// has been cached) or may fail with a
-    /// * `notmuch_status_t::XAPIAN_EXCEPTION`.
+    /// `notmuch_status_t::XAPIAN_EXCEPTION`. The only further operation
+    /// permitted on the database itself is to call `notmuch_database_destroy`.
     ///
-    /// * `notmuch_database_close` can be called multiple times.  Later calls
-    ///   have no effect.
+    /// `notmuch_database_close` can be called multiple times. Later calls have
+    /// no effect.
     ///
     /// For writable databases, `notmuch_database_close` commits all changes
     /// to disk before closing the database.  If the caller is currently in
@@ -554,7 +560,7 @@ extern "C" {
     /// completely in the future, but it's likely to be a specialized
     /// version of the general Xapian query syntax:
     ///
-    /// http://xapian.org/docs/queryparser.html
+    /// https://xapian.org/docs/queryparser.html
     ///
     /// As a special case, passing either a length-zero string, (that is ""),
     /// or a string consisting of a single asterisk (that is "*"), will
@@ -1282,6 +1288,151 @@ extern "C" {
     /// the messages get reclaimed when the containing query is destroyed.)
     pub fn notmuch_message_destroy(message: *mut notmuch_message_t);
 
+    /// Retrieve the value for a single property key
+    ///
+    /// *value* is set to a string owned by the message or NULL if there is
+    /// no such key. In the case of multiple values for the given key, the
+    /// first one is retrieved.
+    ///
+    /// @returns
+    /// - `notmuch_status_t::NULL_POINTER`: *value* may not be NULL.
+    /// - `notmuch_status_t::SUCCESS`: No error occured.
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_message_get_property(message: *mut notmuch_message_t,
+                                        key: *const c_char,
+                                        value: *mut *const c_char)
+                                        -> notmuch_status_t;
+
+    /// Add a (key,value) pair to a message
+    ///
+    /// @returns
+    /// - `notmuch_status_t::ILLEGAL_ARGUMENT`: *key* may not contain an '=' character.
+    /// - `notmuch_status_t::NULL_POINTER`: Neither *key* nor *value* may be NULL.
+    /// - `notmuch_status_t::SUCCESS`: No error occured.
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_message_add_property(message: *mut notmuch_message_t,
+                                        key: *const c_char,
+                                        value: *const c_char)
+                                        -> notmuch_status_t;
+
+    ///
+    /// Remove a `(key,value)` pair from a message.
+    ///
+    /// It is not an error to remove a non-existant `(key,value)` pair
+    ///
+    /// @returns
+    /// - `notmuch_status_t::ILLEGAL_ARGUMENT`: `key` may not contain an '=' character.
+    /// - `notmuch_status_t::NULL_POINTER`: Neither `key` nor *value* may be NULL.
+    /// - `notmuch_status_t::SUCCESS`: No error occured.
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_message_remove_property(message: *mut notmuch_message_t,
+                                           key: *const c_char,
+                                           value: *const c_char)
+                                           -> notmuch_status_t;
+
+    /// Remove all `(key,value)` pairs from the given message.
+    ///
+    /// @param[in,out] message  message to operate on.
+    /// @param[in]     key      key to delete properties for. If NULL, delete
+    ///			   properties for all keys
+    /// @returns
+    /// - `notmuch_status_::READ_ONLY_DATABASE`: Database was opened in
+    ///   read-only mode so message cannot be modified.
+    /// - `notmuch_status_t::SUCCESS`: No error occured.
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_message_remove_all_properties(message: *mut notmuch_message_t,
+                                                 key: *const c_char)
+                                                 -> notmuch_status_t;
+
+    /// Get the properties for *message*, returning a
+    /// `notmuch_message_properties_t` object which can be used to iterate over
+    /// all properties.
+    ///
+    /// The `notmuch_message_properties_t` object is owned by the message and as
+    /// such, will only be valid for as long as the message is valid, (which is
+    /// until the query from which it derived is destroyed).
+    ///
+    /// @param[in] message  The message to examine
+    /// @param[in] key      key or key prefix
+    /// @param[in] exact    if TRUE, require exact match with key. Otherwise
+    ///		       treat as prefix.
+    ///
+    /// Typical usage might be:
+    ///
+    /// ```norun
+    /// notmuch_message_properties_t *list;
+    ///
+    /// for (list = notmuch_message_get_properties (message, "testkey1", TRUE);
+    ///      notmuch_message_properties_valid (list); notmuch_message_properties_move_to_next (list)) {
+    ///    printf("%s\n", notmuch_message_properties_value(list));
+    /// }
+    ///
+    /// notmuch_message_properties_destroy (list);
+    /// ```
+    ///
+    /// Note that there's no explicit destructor needed for the
+    /// `notmuch_message_properties_t` object. (For consistency, we do provide a
+    /// `notmuch_message_properities_destroy` function, but there's no good
+    /// reason to call it if the message is about to be destroyed).
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    ///
+    pub fn notmuch_message_get_properties(message: *mut notmuch_message_t,
+                                          key: *const c_char,
+                                          exact: notmuch_bool_t)
+                                          -> *mut notmuch_message_properties_t;
+
+    ///  Is the given *properties* iterator pointing at a valid `(key,value)` pair.
+    ///
+    ///  When this function returns TRUE, `notmuch_message_properties_{key,value}`
+    ///  will return a valid string, and `notmuch_message_properties_move_to_next`
+    ///  will do what it says. Whereas when this function returns FALSE, calling any
+    ///  of these functions results in undefined behaviour.
+    ///
+    ///  See the documentation of `notmuch_message_properties_get` for example code
+    ///  showing how to iterate over a `notmuch_message_properties_t` object.
+    ///
+    ///  @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_message_properties_valid(properties: *const notmuch_message_properties_t) -> notmuch_bool_t;
+
+    /// Move the *properties* iterator to the next `(key,value)` pair
+    ///
+    /// If *properties* is already pointing at the last pair then the iterator
+    /// will be moved to a point just beyond that last pair, (where
+    /// `notmuch_message_properties_valid` will return FALSE).
+    ///
+    /// See the documentation of `notmuch_message_get_properties` for example
+    /// code showing how to iterate over a `notmuch_message_properties_t` object.
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_message_properties_move_to_next(properties: *mut notmuch_message_properties_t);
+
+    /// Return the `key` from the current `(key,value)` pair.
+    ///
+    /// this could be useful if iterating for a prefix
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    ///
+    pub fn notmuch_message_properties_key(properties: *mut notmuch_message_properties_t) -> *const c_char;
+
+    /// Return the `value` from the current `(key,value)` pair.
+    ///
+    /// This could be useful if iterating for a prefix.
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_message_properties_value(properties: *const notmuch_message_properties_t) -> *const c_char;
+
+
+    /// Destroy a `notmuch_message_properties_t` object.
+    ///
+    /// It's not strictly necessary to call this function. All memory from
+    /// the `notmuch_message_properties_t` object will be reclaimed when the
+    /// containing message object is destroyed.
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_message_properties_destroy(properties: *mut notmuch_message_properties_t);
+
     /// Is the given 'tags' iterator pointing at a valid tag.
     ///
     /// When this function returns TRUE, `notmuch_tags_get` will return a
@@ -1429,4 +1580,72 @@ extern "C" {
     /// function will do nothing.
     pub fn notmuch_filenames_destroy(filenames: *mut notmuch_filenames_t);
 
+
+    /// set config 'key' to 'value'
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_database_set_config(db: *mut notmuch_database_t,
+                                       key: *const c_char,
+                                       value: *const c_char)
+                                       -> notmuch_status_t;
+
+    /// retrieve config item 'key', assign to  'value'
+    ///
+    /// keys which have not been previously set with n_d_set_config will
+    /// return an empty string.
+    ///
+    /// return value is allocated by malloc and should be freed by the
+    /// caller.
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_database_get_config(db: *mut notmuch_database_t,
+                                       key: *const c_char,
+                                       value: *mut *mut c_char)
+                                       -> notmuch_status_t;
+
+    /// Create an iterator for all config items with keys matching a given prefix
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_database_get_config_list(db: *mut notmuch_database_t,
+                                            prefix: *const c_char,
+                                            out: *mut *mut notmuch_config_list_t)
+                                            -> notmuch_status_t;
+
+    /// Is 'config_list' iterator valid (i.e. _key, _value, _move_to_next can be called).
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_config_list_valid(config_list: *mut notmuch_config_list_t)
+                                     -> notmuch_bool_t;
+
+    /// return key for current config pair
+    ///
+    /// return value is owned by the iterator, and will be destroyed by the
+    /// next call to `notmuch_config_list_key` or `notmuch_config_list_destroy`.
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_config_list_key (config_list: *mut notmuch_config_list_t)
+                                    -> *const c_char;
+
+    /// return 'value' for current config pair
+    ///
+    /// return value is owned by the iterator, and will be destroyed by the
+    /// next call to `notmuch_config_list_value` or notmuch `config_list_destroy`
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_config_list_value(config_list: *mut notmuch_config_list_t) -> *const c_char;
+
+    /// move 'config_list' iterator to the next pair
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_config_list_move_to_next(config_list: *mut notmuch_config_list_t);
+
+    /// free any resources held by 'config_list'
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_config_list_destroy(config_list: *mut notmuch_config_list_t);
+
+    /// interrogate the library for compile time features
+    ///
+    /// @since libnotmuch 4.4 (notmuch 0.23)
+    pub fn notmuch_built_with(name: *const c_char) -> notmuch_bool_t;
 }
