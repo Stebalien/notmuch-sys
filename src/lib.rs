@@ -136,6 +136,9 @@ pub enum notmuch_filenames_t {}
 pub enum notmuch_config_list_t {}
 pub type notmuch_bool_t = c_int;
 
+pub const TRUE: notmuch_bool_t = 1;
+pub const FALSE: notmuch_bool_t = 0;
+
 
 #[link(name = "notmuch")]
 extern "C" {
