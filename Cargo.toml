@@ -1,6 +1,6 @@
 [package]
 name = "notmuch-sys"
-version = "4.4.0"
+version = "4.4.1"
 authors = ["Steven Allen <steven@stebalien.com>"]
 description = "FFI bindings for notmuch"
 
