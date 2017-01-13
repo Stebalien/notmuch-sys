@@ -1694,6 +1694,9 @@
 <span id="1649">1649</span>
 <span id="1650">1650</span>
 <span id="1651">1651</span>
+<span id="1652">1652</span>
+<span id="1653">1653</span>
+<span id="1654">1654</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright © 2009 Carl Worth, 2015 Steven Allen</span>
 <span class='comment'>//</span>
@@ -1832,6 +1835,9 @@
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>notmuch_filenames_t</span> {}
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>notmuch_config_list_t</span> {}
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>notmuch_bool_t</span> <span class='op'>=</span> <span class='ident'>c_int</span>;
+
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>TRUE</span>: <span class='ident'>notmuch_bool_t</span> <span class='op'>=</span> <span class='number'>1</span>;
+<span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>FALSE</span>: <span class='ident'>notmuch_bool_t</span> <span class='op'>=</span> <span class='number'>0</span>;
 
 
 <span class='attribute'>#[<span class='ident'>link</span>(<span class='ident'>name</span> <span class='op'>=</span> <span class='string'>&quot;notmuch&quot;</span>)]</span>
