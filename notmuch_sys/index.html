@@ -9,8 +9,10 @@
 
     <title>notmuch_sys - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,953 +45,908 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>notmuch_sys</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-0' class='srclink' href='../src/notmuch_sys/lib.rs.html#17-1432' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/notmuch_sys/lib.rs.html#17-1651' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Not much of an email library, just index and search.</p>
 </div><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_database_mode_t.html'
-                               title='notmuch_sys::notmuch_database_mode_t'>notmuch_database_mode_t</a></td>
-                        <td class='docblock short'>
-                             <p>Database open mode for <code>notmuch_database_open</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_database_t.html'
-                               title='notmuch_sys::notmuch_database_t'>notmuch_database_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_directory_t.html'
-                               title='notmuch_sys::notmuch_directory_t'>notmuch_directory_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_exclude_t.html'
-                               title='notmuch_sys::notmuch_exclude_t'>notmuch_exclude_t</a></td>
-                        <td class='docblock short'>
-                             <p>Exclude values for <code>notmuch_query_set_omit_excluded</code></p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_filenames_t.html'
-                               title='notmuch_sys::notmuch_filenames_t'>notmuch_filenames_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_message_flag_t.html'
-                               title='notmuch_sys::notmuch_message_flag_t'>notmuch_message_flag_t</a></td>
-                        <td class='docblock short'>
-                             <p>Message flags.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_message_t.html'
-                               title='notmuch_sys::notmuch_message_t'>notmuch_message_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_messages_t.html'
-                               title='notmuch_sys::notmuch_messages_t'>notmuch_messages_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_query_t.html'
-                               title='notmuch_sys::notmuch_query_t'>notmuch_query_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_sort_t.html'
-                               title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a></td>
-                        <td class='docblock short'>
-                             <p>Sort values for <code>notmuch_query_set_sort</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_status_t.html'
-                               title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></td>
-                        <td class='docblock short'>
-                             <p>Status codes used for the return values of most functions.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_tags_t.html'
-                               title='notmuch_sys::notmuch_tags_t'>notmuch_tags_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_thread_t.html'
-                               title='notmuch_sys::notmuch_thread_t'>notmuch_thread_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.notmuch_threads_t.html'
-                               title='notmuch_sys::notmuch_threads_t'>notmuch_threads_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_config_list_t.html'
+                                  title='notmuch_sys::notmuch_config_list_t'>notmuch_config_list_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_database_mode_t.html'
+                                  title='notmuch_sys::notmuch_database_mode_t'>notmuch_database_mode_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Database open mode for <code>notmuch_database_open</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_database_t.html'
+                                  title='notmuch_sys::notmuch_database_t'>notmuch_database_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_directory_t.html'
+                                  title='notmuch_sys::notmuch_directory_t'>notmuch_directory_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_exclude_t.html'
+                                  title='notmuch_sys::notmuch_exclude_t'>notmuch_exclude_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Exclude values for <code>notmuch_query_set_omit_excluded</code></p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_filenames_t.html'
+                                  title='notmuch_sys::notmuch_filenames_t'>notmuch_filenames_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_message_flag_t.html'
+                                  title='notmuch_sys::notmuch_message_flag_t'>notmuch_message_flag_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Message flags.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_message_properties_t.html'
+                                  title='notmuch_sys::notmuch_message_properties_t'>notmuch_message_properties_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_message_t.html'
+                                  title='notmuch_sys::notmuch_message_t'>notmuch_message_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_messages_t.html'
+                                  title='notmuch_sys::notmuch_messages_t'>notmuch_messages_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_query_t.html'
+                                  title='notmuch_sys::notmuch_query_t'>notmuch_query_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_sort_t.html'
+                                  title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Sort values for <code>notmuch_query_set_sort</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_status_t.html'
+                                  title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></td>
+                           <td class='docblock-short'>
+                                <p>Status codes used for the return values of most functions.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_tags_t.html'
+                                  title='notmuch_sys::notmuch_tags_t'>notmuch_tags_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_thread_t.html'
+                                  title='notmuch_sys::notmuch_thread_t'>notmuch_thread_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.notmuch_threads_t.html'
+                                  title='notmuch_sys::notmuch_threads_t'>notmuch_threads_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='constant' href='constant.TAG_MAX.html'
-                               title='notmuch_sys::TAG_MAX'>TAG_MAX</a></td>
-                        <td class='docblock short'>
-                             <p>The longest possible tag value.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.TAG_MAX.html'
+                                  title='notmuch_sys::TAG_MAX'>TAG_MAX</a></td>
+                           <td class='docblock-short'>
+                                <p>The longest possible tag value.</p>
+                           </td>
+                       </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_add_message.html'
-                               title='notmuch_sys::notmuch_database_add_message'>notmuch_database_add_message</a></td>
-                        <td class='docblock short'>
-                             <p>Add a new message to the given notmuch database or associate an
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_built_with.html'
+                                  title='notmuch_sys::notmuch_built_with'>notmuch_built_with</a></td>
+                           <td class='docblock-short'>
+                                <p>interrogate the library for compile time features</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_config_list_destroy.html'
+                                  title='notmuch_sys::notmuch_config_list_destroy'>notmuch_config_list_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>free any resources held by &#39;config_list&#39;</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_config_list_key.html'
+                                  title='notmuch_sys::notmuch_config_list_key'>notmuch_config_list_key</a></td>
+                           <td class='docblock-short'>
+                                <p>return key for current config pair</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_config_list_move_to_next.html'
+                                  title='notmuch_sys::notmuch_config_list_move_to_next'>notmuch_config_list_move_to_next</a></td>
+                           <td class='docblock-short'>
+                                <p>move &#39;config_list&#39; iterator to the next pair</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_config_list_valid.html'
+                                  title='notmuch_sys::notmuch_config_list_valid'>notmuch_config_list_valid</a></td>
+                           <td class='docblock-short'>
+                                <p>Is &#39;config_list&#39; iterator valid (i.e. _key, _value, _move_to_next can be called).</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_config_list_value.html'
+                                  title='notmuch_sys::notmuch_config_list_value'>notmuch_config_list_value</a></td>
+                           <td class='docblock-short'>
+                                <p>return &#39;value&#39; for current config pair</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_add_message.html'
+                                  title='notmuch_sys::notmuch_database_add_message'>notmuch_database_add_message</a></td>
+                           <td class='docblock-short'>
+                                <p>Add a new message to the given notmuch database or associate an
 additional filename with an existing message.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_begin_atomic.html'
-                               title='notmuch_sys::notmuch_database_begin_atomic'>notmuch_database_begin_atomic</a></td>
-                        <td class='docblock short'>
-                             <p>Begin an atomic database operation.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_close.html'
-                               title='notmuch_sys::notmuch_database_close'>notmuch_database_close</a></td>
-                        <td class='docblock short'>
-                             <p>Commit changes and close the given notmuch database.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_compact.html'
-                               title='notmuch_sys::notmuch_database_compact'>notmuch_database_compact</a></td>
-                        <td class='docblock short'>
-                             <p>Compact a notmuch database, backing up the original database to the
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_begin_atomic.html'
+                                  title='notmuch_sys::notmuch_database_begin_atomic'>notmuch_database_begin_atomic</a></td>
+                           <td class='docblock-short'>
+                                <p>Begin an atomic database operation.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_close.html'
+                                  title='notmuch_sys::notmuch_database_close'>notmuch_database_close</a></td>
+                           <td class='docblock-short'>
+                                <p>Commit changes and close the given notmuch database.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_compact.html'
+                                  title='notmuch_sys::notmuch_database_compact'>notmuch_database_compact</a></td>
+                           <td class='docblock-short'>
+                                <p>Compact a notmuch database, backing up the original database to the
 given path.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_create.html'
-                               title='notmuch_sys::notmuch_database_create'>notmuch_database_create</a></td>
-                        <td class='docblock short'>
-                             <p>Create a new, empty notmuch database located at &#39;path&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_create_verbose.html'
-                               title='notmuch_sys::notmuch_database_create_verbose'>notmuch_database_create_verbose</a></td>
-                        <td class='docblock short'>
-                             <p>Like <code>notmuch_database_create</code>, except optionally return an error
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_create.html'
+                                  title='notmuch_sys::notmuch_database_create'>notmuch_database_create</a></td>
+                           <td class='docblock-short'>
+                                <p>Create a new, empty notmuch database located at &#39;path&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_create_verbose.html'
+                                  title='notmuch_sys::notmuch_database_create_verbose'>notmuch_database_create_verbose</a></td>
+                           <td class='docblock-short'>
+                                <p>Like <code>notmuch_database_create</code>, except optionally return an error
 message. This message is allocated by malloc and should be freed by
 the caller.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_destroy.html'
-                               title='notmuch_sys::notmuch_database_destroy'>notmuch_database_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy the notmuch database, closing it if necessary and freeing
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_destroy.html'
+                                  title='notmuch_sys::notmuch_database_destroy'>notmuch_database_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy the notmuch database, closing it if necessary and freeing
 all associated resources.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_end_atomic.html'
-                               title='notmuch_sys::notmuch_database_end_atomic'>notmuch_database_end_atomic</a></td>
-                        <td class='docblock short'>
-                             <p>Indicate the end of an atomic database operation.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_find_message.html'
-                               title='notmuch_sys::notmuch_database_find_message'>notmuch_database_find_message</a></td>
-                        <td class='docblock short'>
-                             <p>Find a message with the given message_id.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_find_message_by_filename.html'
-                               title='notmuch_sys::notmuch_database_find_message_by_filename'>notmuch_database_find_message_by_filename</a></td>
-                        <td class='docblock short'>
-                             <p>Find a message with the given filename.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_get_all_tags.html'
-                               title='notmuch_sys::notmuch_database_get_all_tags'>notmuch_database_get_all_tags</a></td>
-                        <td class='docblock short'>
-                             <p>Return a list of all tags found in the database.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_get_directory.html'
-                               title='notmuch_sys::notmuch_database_get_directory'>notmuch_database_get_directory</a></td>
-                        <td class='docblock short'>
-                             <p>Retrieve a directory object from the database for &#39;path&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_get_path.html'
-                               title='notmuch_sys::notmuch_database_get_path'>notmuch_database_get_path</a></td>
-                        <td class='docblock short'>
-                             <p>Return the database path of the given database.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_get_revision.html'
-                               title='notmuch_sys::notmuch_database_get_revision'>notmuch_database_get_revision</a></td>
-                        <td class='docblock short'>
-                             <p>Return the committed database revision and UUID.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_get_version.html'
-                               title='notmuch_sys::notmuch_database_get_version'>notmuch_database_get_version</a></td>
-                        <td class='docblock short'>
-                             <p>Return the database format version of the given database.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_needs_upgrade.html'
-                               title='notmuch_sys::notmuch_database_needs_upgrade'>notmuch_database_needs_upgrade</a></td>
-                        <td class='docblock short'>
-                             <p>Can the database be upgraded to a newer database version?</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_open.html'
-                               title='notmuch_sys::notmuch_database_open'>notmuch_database_open</a></td>
-                        <td class='docblock short'>
-                             <p>Open an existing notmuch database located at &#39;path&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_open_verbose.html'
-                               title='notmuch_sys::notmuch_database_open_verbose'>notmuch_database_open_verbose</a></td>
-                        <td class='docblock short'>
-                             <p>Like notmuch_database_open, except optionally return an error
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_end_atomic.html'
+                                  title='notmuch_sys::notmuch_database_end_atomic'>notmuch_database_end_atomic</a></td>
+                           <td class='docblock-short'>
+                                <p>Indicate the end of an atomic database operation.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_find_message.html'
+                                  title='notmuch_sys::notmuch_database_find_message'>notmuch_database_find_message</a></td>
+                           <td class='docblock-short'>
+                                <p>Find a message with the given message_id.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_find_message_by_filename.html'
+                                  title='notmuch_sys::notmuch_database_find_message_by_filename'>notmuch_database_find_message_by_filename</a></td>
+                           <td class='docblock-short'>
+                                <p>Find a message with the given filename.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_get_all_tags.html'
+                                  title='notmuch_sys::notmuch_database_get_all_tags'>notmuch_database_get_all_tags</a></td>
+                           <td class='docblock-short'>
+                                <p>Return a list of all tags found in the database.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_get_config.html'
+                                  title='notmuch_sys::notmuch_database_get_config'>notmuch_database_get_config</a></td>
+                           <td class='docblock-short'>
+                                <p>retrieve config item &#39;key&#39;, assign to  &#39;value&#39;</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_get_config_list.html'
+                                  title='notmuch_sys::notmuch_database_get_config_list'>notmuch_database_get_config_list</a></td>
+                           <td class='docblock-short'>
+                                <p>Create an iterator for all config items with keys matching a given prefix</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_get_directory.html'
+                                  title='notmuch_sys::notmuch_database_get_directory'>notmuch_database_get_directory</a></td>
+                           <td class='docblock-short'>
+                                <p>Retrieve a directory object from the database for &#39;path&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_get_path.html'
+                                  title='notmuch_sys::notmuch_database_get_path'>notmuch_database_get_path</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the database path of the given database.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_get_revision.html'
+                                  title='notmuch_sys::notmuch_database_get_revision'>notmuch_database_get_revision</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the committed database revision and UUID.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_get_version.html'
+                                  title='notmuch_sys::notmuch_database_get_version'>notmuch_database_get_version</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the database format version of the given database.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_needs_upgrade.html'
+                                  title='notmuch_sys::notmuch_database_needs_upgrade'>notmuch_database_needs_upgrade</a></td>
+                           <td class='docblock-short'>
+                                <p>Can the database be upgraded to a newer database version?</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_open.html'
+                                  title='notmuch_sys::notmuch_database_open'>notmuch_database_open</a></td>
+                           <td class='docblock-short'>
+                                <p>Open an existing notmuch database located at &#39;path&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_open_verbose.html'
+                                  title='notmuch_sys::notmuch_database_open_verbose'>notmuch_database_open_verbose</a></td>
+                           <td class='docblock-short'>
+                                <p>Like notmuch_database_open, except optionally return an error
 message. This message is allocated by malloc and should be freed by
 the caller.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_remove_message.html'
-                               title='notmuch_sys::notmuch_database_remove_message'>notmuch_database_remove_message</a></td>
-                        <td class='docblock short'>
-                             <p>Remove a message filename from the given notmuch database. If the
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_remove_message.html'
+                                  title='notmuch_sys::notmuch_database_remove_message'>notmuch_database_remove_message</a></td>
+                           <td class='docblock-short'>
+                                <p>Remove a message filename from the given notmuch database. If the
 message has no more filenames, remove the message.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_status_string.html'
-                               title='notmuch_sys::notmuch_database_status_string'>notmuch_database_status_string</a></td>
-                        <td class='docblock short'>
-                             <p>Retrieve last status string for given database.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_database_upgrade.html'
-                               title='notmuch_sys::notmuch_database_upgrade'>notmuch_database_upgrade</a></td>
-                        <td class='docblock short'>
-                             <p>Upgrade the current database to the latest supported version.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_directory_delete.html'
-                               title='notmuch_sys::notmuch_directory_delete'>notmuch_directory_delete</a></td>
-                        <td class='docblock short'>
-                             <p>Delete directory document from the database, and destroy the
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_set_config.html'
+                                  title='notmuch_sys::notmuch_database_set_config'>notmuch_database_set_config</a></td>
+                           <td class='docblock-short'>
+                                <p>set config &#39;key&#39; to &#39;value&#39;</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_status_string.html'
+                                  title='notmuch_sys::notmuch_database_status_string'>notmuch_database_status_string</a></td>
+                           <td class='docblock-short'>
+                                <p>Retrieve last status string for given database.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_database_upgrade.html'
+                                  title='notmuch_sys::notmuch_database_upgrade'>notmuch_database_upgrade</a></td>
+                           <td class='docblock-short'>
+                                <p>Upgrade the current database to the latest supported version.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_directory_delete.html'
+                                  title='notmuch_sys::notmuch_directory_delete'>notmuch_directory_delete</a></td>
+                           <td class='docblock-short'>
+                                <p>Delete directory document from the database, and destroy the
 <code>notmuch_directory_t</code> object. Assumes any child directories and files
 have been deleted by the caller.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_directory_destroy.html'
-                               title='notmuch_sys::notmuch_directory_destroy'>notmuch_directory_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy a <code>notmuch_directory_t</code> object.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_directory_get_child_directories.html'
-                               title='notmuch_sys::notmuch_directory_get_child_directories'>notmuch_directory_get_child_directories</a></td>
-                        <td class='docblock short'>
-                             <p>Get a <code>notmuch_filenames_t</code> iterator listing all the filenames of
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_directory_destroy.html'
+                                  title='notmuch_sys::notmuch_directory_destroy'>notmuch_directory_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_directory_t</code> object.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_directory_get_child_directories.html'
+                                  title='notmuch_sys::notmuch_directory_get_child_directories'>notmuch_directory_get_child_directories</a></td>
+                           <td class='docblock-short'>
+                                <p>Get a <code>notmuch_filenames_t</code> iterator listing all the filenames of
 sub-directories in the database within the given directory.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_directory_get_child_files.html'
-                               title='notmuch_sys::notmuch_directory_get_child_files'>notmuch_directory_get_child_files</a></td>
-                        <td class='docblock short'>
-                             <p>Get a <code>notmuch_filenames_t</code> iterator listing all the filenames of
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_directory_get_child_files.html'
+                                  title='notmuch_sys::notmuch_directory_get_child_files'>notmuch_directory_get_child_files</a></td>
+                           <td class='docblock-short'>
+                                <p>Get a <code>notmuch_filenames_t</code> iterator listing all the filenames of
 messages in the database within the given directory.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_directory_get_mtime.html'
-                               title='notmuch_sys::notmuch_directory_get_mtime'>notmuch_directory_get_mtime</a></td>
-                        <td class='docblock short'>
-                             <p>Get the mtime of a directory, (as previously stored with
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_directory_get_mtime.html'
+                                  title='notmuch_sys::notmuch_directory_get_mtime'>notmuch_directory_get_mtime</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the mtime of a directory, (as previously stored with
 <code>notmuch_directory_set_mtime</code>).</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_directory_set_mtime.html'
-                               title='notmuch_sys::notmuch_directory_set_mtime'>notmuch_directory_set_mtime</a></td>
-                        <td class='docblock short'>
-                             <p>Store an mtime within the database for &#39;directory&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_filenames_destroy.html'
-                               title='notmuch_sys::notmuch_filenames_destroy'>notmuch_filenames_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy a <code>notmuch_filenames_t</code> object.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_filenames_get.html'
-                               title='notmuch_sys::notmuch_filenames_get'>notmuch_filenames_get</a></td>
-                        <td class='docblock short'>
-                             <p>Get the current filename from &#39;filenames&#39; as a string.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_filenames_move_to_next.html'
-                               title='notmuch_sys::notmuch_filenames_move_to_next'>notmuch_filenames_move_to_next</a></td>
-                        <td class='docblock short'>
-                             <p>Move the &#39;filenames&#39; iterator to the next filename.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_filenames_valid.html'
-                               title='notmuch_sys::notmuch_filenames_valid'>notmuch_filenames_valid</a></td>
-                        <td class='docblock short'>
-                             <p>Is the given &#39;filenames&#39; iterator pointing at a valid filename.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_add_tag.html'
-                               title='notmuch_sys::notmuch_message_add_tag'>notmuch_message_add_tag</a></td>
-                        <td class='docblock short'>
-                             <p>Add a tag to the given message.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_destroy.html'
-                               title='notmuch_sys::notmuch_message_destroy'>notmuch_message_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy a <code>notmuch_message_t</code> object.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_freeze.html'
-                               title='notmuch_sys::notmuch_message_freeze'>notmuch_message_freeze</a></td>
-                        <td class='docblock short'>
-                             <p>Freeze the current state of &#39;message&#39; within the database.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_date.html'
-                               title='notmuch_sys::notmuch_message_get_date'>notmuch_message_get_date</a></td>
-                        <td class='docblock short'>
-                             <p>Get the date of &#39;message&#39; as a time_t value.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_filename.html'
-                               title='notmuch_sys::notmuch_message_get_filename'>notmuch_message_get_filename</a></td>
-                        <td class='docblock short'>
-                             <p>Get a filename for the email corresponding to &#39;message&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_filenames.html'
-                               title='notmuch_sys::notmuch_message_get_filenames'>notmuch_message_get_filenames</a></td>
-                        <td class='docblock short'>
-                             <p>Get all filenames for the email corresponding to &#39;message&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_flag.html'
-                               title='notmuch_sys::notmuch_message_get_flag'>notmuch_message_get_flag</a></td>
-                        <td class='docblock short'>
-                             <p>Get a value of a flag for the email corresponding to &#39;message&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_header.html'
-                               title='notmuch_sys::notmuch_message_get_header'>notmuch_message_get_header</a></td>
-                        <td class='docblock short'>
-                             <p>Get the value of the specified header from &#39;message&#39; as a UTF-8 string.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_message_id.html'
-                               title='notmuch_sys::notmuch_message_get_message_id'>notmuch_message_get_message_id</a></td>
-                        <td class='docblock short'>
-                             <p>Get the message ID of &#39;message&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_replies.html'
-                               title='notmuch_sys::notmuch_message_get_replies'>notmuch_message_get_replies</a></td>
-                        <td class='docblock short'>
-                             <p>Get a <code>notmuch_messages_t</code> iterator for all of the replies to
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_directory_set_mtime.html'
+                                  title='notmuch_sys::notmuch_directory_set_mtime'>notmuch_directory_set_mtime</a></td>
+                           <td class='docblock-short'>
+                                <p>Store an mtime within the database for &#39;directory&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_filenames_destroy.html'
+                                  title='notmuch_sys::notmuch_filenames_destroy'>notmuch_filenames_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_filenames_t</code> object.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_filenames_get.html'
+                                  title='notmuch_sys::notmuch_filenames_get'>notmuch_filenames_get</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the current filename from &#39;filenames&#39; as a string.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_filenames_move_to_next.html'
+                                  title='notmuch_sys::notmuch_filenames_move_to_next'>notmuch_filenames_move_to_next</a></td>
+                           <td class='docblock-short'>
+                                <p>Move the &#39;filenames&#39; iterator to the next filename.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_filenames_valid.html'
+                                  title='notmuch_sys::notmuch_filenames_valid'>notmuch_filenames_valid</a></td>
+                           <td class='docblock-short'>
+                                <p>Is the given &#39;filenames&#39; iterator pointing at a valid filename.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_add_property.html'
+                                  title='notmuch_sys::notmuch_message_add_property'>notmuch_message_add_property</a></td>
+                           <td class='docblock-short'>
+                                <p>Add a (key,value) pair to a message</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_add_tag.html'
+                                  title='notmuch_sys::notmuch_message_add_tag'>notmuch_message_add_tag</a></td>
+                           <td class='docblock-short'>
+                                <p>Add a tag to the given message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_destroy.html'
+                                  title='notmuch_sys::notmuch_message_destroy'>notmuch_message_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_message_t</code> object.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_freeze.html'
+                                  title='notmuch_sys::notmuch_message_freeze'>notmuch_message_freeze</a></td>
+                           <td class='docblock-short'>
+                                <p>Freeze the current state of &#39;message&#39; within the database.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_date.html'
+                                  title='notmuch_sys::notmuch_message_get_date'>notmuch_message_get_date</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the date of &#39;message&#39; as a time_t value.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_filename.html'
+                                  title='notmuch_sys::notmuch_message_get_filename'>notmuch_message_get_filename</a></td>
+                           <td class='docblock-short'>
+                                <p>Get a filename for the email corresponding to &#39;message&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_filenames.html'
+                                  title='notmuch_sys::notmuch_message_get_filenames'>notmuch_message_get_filenames</a></td>
+                           <td class='docblock-short'>
+                                <p>Get all filenames for the email corresponding to &#39;message&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_flag.html'
+                                  title='notmuch_sys::notmuch_message_get_flag'>notmuch_message_get_flag</a></td>
+                           <td class='docblock-short'>
+                                <p>Get a value of a flag for the email corresponding to &#39;message&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_header.html'
+                                  title='notmuch_sys::notmuch_message_get_header'>notmuch_message_get_header</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the value of the specified header from &#39;message&#39; as a UTF-8 string.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_message_id.html'
+                                  title='notmuch_sys::notmuch_message_get_message_id'>notmuch_message_get_message_id</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the message ID of &#39;message&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_properties.html'
+                                  title='notmuch_sys::notmuch_message_get_properties'>notmuch_message_get_properties</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the properties for <em>message</em>, returning a
+<code>notmuch_message_properties_t</code> object which can be used to iterate over
+all properties.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_property.html'
+                                  title='notmuch_sys::notmuch_message_get_property'>notmuch_message_get_property</a></td>
+                           <td class='docblock-short'>
+                                <p>Retrieve the value for a single property key</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_replies.html'
+                                  title='notmuch_sys::notmuch_message_get_replies'>notmuch_message_get_replies</a></td>
+                           <td class='docblock-short'>
+                                <p>Get a <code>notmuch_messages_t</code> iterator for all of the replies to
 &#39;message&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_tags.html'
-                               title='notmuch_sys::notmuch_message_get_tags'>notmuch_message_get_tags</a></td>
-                        <td class='docblock short'>
-                             <p>Get the tags for &#39;message&#39;, returning a <code>notmuch_tags_t</code> object which
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_tags.html'
+                                  title='notmuch_sys::notmuch_message_get_tags'>notmuch_message_get_tags</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the tags for &#39;message&#39;, returning a <code>notmuch_tags_t</code> object which
 can be used to iterate over all tags.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_get_thread_id.html'
-                               title='notmuch_sys::notmuch_message_get_thread_id'>notmuch_message_get_thread_id</a></td>
-                        <td class='docblock short'>
-                             <p>Get the thread ID of &#39;message&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_maildir_flags_to_tags.html'
-                               title='notmuch_sys::notmuch_message_maildir_flags_to_tags'>notmuch_message_maildir_flags_to_tags</a></td>
-                        <td class='docblock short'>
-                             <p>Add/remove tags according to maildir flags in the message filename(s).</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_remove_all_tags.html'
-                               title='notmuch_sys::notmuch_message_remove_all_tags'>notmuch_message_remove_all_tags</a></td>
-                        <td class='docblock short'>
-                             <p>Remove all tags from the given message.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_remove_tag.html'
-                               title='notmuch_sys::notmuch_message_remove_tag'>notmuch_message_remove_tag</a></td>
-                        <td class='docblock short'>
-                             <p>Remove a tag from the given message.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_set_flag.html'
-                               title='notmuch_sys::notmuch_message_set_flag'>notmuch_message_set_flag</a></td>
-                        <td class='docblock short'>
-                             <p>Set a value of a flag for the email corresponding to &#39;message&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_tags_to_maildir_flags.html'
-                               title='notmuch_sys::notmuch_message_tags_to_maildir_flags'>notmuch_message_tags_to_maildir_flags</a></td>
-                        <td class='docblock short'>
-                             <p>Rename message filename(s) to encode tags as maildir flags.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_message_thaw.html'
-                               title='notmuch_sys::notmuch_message_thaw'>notmuch_message_thaw</a></td>
-                        <td class='docblock short'>
-                             <p>Thaw the current &#39;message&#39;, synchronizing any changes that may have
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_get_thread_id.html'
+                                  title='notmuch_sys::notmuch_message_get_thread_id'>notmuch_message_get_thread_id</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the thread ID of &#39;message&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_maildir_flags_to_tags.html'
+                                  title='notmuch_sys::notmuch_message_maildir_flags_to_tags'>notmuch_message_maildir_flags_to_tags</a></td>
+                           <td class='docblock-short'>
+                                <p>Add/remove tags according to maildir flags in the message filename(s).</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_properties_destroy.html'
+                                  title='notmuch_sys::notmuch_message_properties_destroy'>notmuch_message_properties_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_message_properties_t</code> object.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_properties_key.html'
+                                  title='notmuch_sys::notmuch_message_properties_key'>notmuch_message_properties_key</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the <code>key</code> from the current <code>(key,value)</code> pair.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_properties_move_to_next.html'
+                                  title='notmuch_sys::notmuch_message_properties_move_to_next'>notmuch_message_properties_move_to_next</a></td>
+                           <td class='docblock-short'>
+                                <p>Move the <em>properties</em> iterator to the next <code>(key,value)</code> pair</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_properties_valid.html'
+                                  title='notmuch_sys::notmuch_message_properties_valid'>notmuch_message_properties_valid</a></td>
+                           <td class='docblock-short'>
+                                <p>Is the given <em>properties</em> iterator pointing at a valid <code>(key,value)</code> pair.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_properties_value.html'
+                                  title='notmuch_sys::notmuch_message_properties_value'>notmuch_message_properties_value</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the <code>value</code> from the current <code>(key,value)</code> pair.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_remove_all_properties.html'
+                                  title='notmuch_sys::notmuch_message_remove_all_properties'>notmuch_message_remove_all_properties</a></td>
+                           <td class='docblock-short'>
+                                <p>Remove all <code>(key,value)</code> pairs from the given message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_remove_all_tags.html'
+                                  title='notmuch_sys::notmuch_message_remove_all_tags'>notmuch_message_remove_all_tags</a></td>
+                           <td class='docblock-short'>
+                                <p>Remove all tags from the given message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_remove_property.html'
+                                  title='notmuch_sys::notmuch_message_remove_property'>notmuch_message_remove_property</a></td>
+                           <td class='docblock-short'>
+                                <p>Remove a <code>(key,value)</code> pair from a message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_remove_tag.html'
+                                  title='notmuch_sys::notmuch_message_remove_tag'>notmuch_message_remove_tag</a></td>
+                           <td class='docblock-short'>
+                                <p>Remove a tag from the given message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_set_flag.html'
+                                  title='notmuch_sys::notmuch_message_set_flag'>notmuch_message_set_flag</a></td>
+                           <td class='docblock-short'>
+                                <p>Set a value of a flag for the email corresponding to &#39;message&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_tags_to_maildir_flags.html'
+                                  title='notmuch_sys::notmuch_message_tags_to_maildir_flags'>notmuch_message_tags_to_maildir_flags</a></td>
+                           <td class='docblock-short'>
+                                <p>Rename message filename(s) to encode tags as maildir flags.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_message_thaw.html'
+                                  title='notmuch_sys::notmuch_message_thaw'>notmuch_message_thaw</a></td>
+                           <td class='docblock-short'>
+                                <p>Thaw the current &#39;message&#39;, synchronizing any changes that may have
 occurred while &#39;message&#39; was frozen into the notmuch database.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_messages_collect_tags.html'
-                               title='notmuch_sys::notmuch_messages_collect_tags'>notmuch_messages_collect_tags</a></td>
-                        <td class='docblock short'>
-                             <p>Return a list of tags from all messages.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_messages_destroy.html'
-                               title='notmuch_sys::notmuch_messages_destroy'>notmuch_messages_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy a <code>notmuch_messages_t</code> object.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_messages_get.html'
-                               title='notmuch_sys::notmuch_messages_get'>notmuch_messages_get</a></td>
-                        <td class='docblock short'>
-                             <p>Get the current message from &#39;messages&#39; as a <code>notmuch_message_t</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_messages_move_to_next.html'
-                               title='notmuch_sys::notmuch_messages_move_to_next'>notmuch_messages_move_to_next</a></td>
-                        <td class='docblock short'>
-                             <p>Move the &#39;messages&#39; iterator to the next message.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_messages_valid.html'
-                               title='notmuch_sys::notmuch_messages_valid'>notmuch_messages_valid</a></td>
-                        <td class='docblock short'>
-                             <p>Is the given &#39;messages&#39; iterator pointing at a valid message.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_add_tag_exclude.html'
-                               title='notmuch_sys::notmuch_query_add_tag_exclude'>notmuch_query_add_tag_exclude</a></td>
-                        <td class='docblock short'>
-                             <p>Add a tag that will be excluded from the query results by default.
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_messages_collect_tags.html'
+                                  title='notmuch_sys::notmuch_messages_collect_tags'>notmuch_messages_collect_tags</a></td>
+                           <td class='docblock-short'>
+                                <p>Return a list of tags from all messages.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_messages_destroy.html'
+                                  title='notmuch_sys::notmuch_messages_destroy'>notmuch_messages_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_messages_t</code> object.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_messages_get.html'
+                                  title='notmuch_sys::notmuch_messages_get'>notmuch_messages_get</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the current message from &#39;messages&#39; as a <code>notmuch_message_t</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_messages_move_to_next.html'
+                                  title='notmuch_sys::notmuch_messages_move_to_next'>notmuch_messages_move_to_next</a></td>
+                           <td class='docblock-short'>
+                                <p>Move the &#39;messages&#39; iterator to the next message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_messages_valid.html'
+                                  title='notmuch_sys::notmuch_messages_valid'>notmuch_messages_valid</a></td>
+                           <td class='docblock-short'>
+                                <p>Is the given &#39;messages&#39; iterator pointing at a valid message.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_add_tag_exclude.html'
+                                  title='notmuch_sys::notmuch_query_add_tag_exclude'>notmuch_query_add_tag_exclude</a></td>
+                           <td class='docblock-short'>
+                                <p>Add a tag that will be excluded from the query results by default.
 This exclusion will be overridden if this tag appears explicitly in
 the query.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_count_messages_st.html'
-                               title='notmuch_sys::notmuch_query_count_messages_st'>notmuch_query_count_messages_st</a></td>
-                        <td class='docblock short'>
-                             <p>Return the number of messages matching a search.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_count_threads_st.html'
-                               title='notmuch_sys::notmuch_query_count_threads_st'>notmuch_query_count_threads_st</a></td>
-                        <td class='docblock short'>
-                             <p>Return the number of threads matching a search.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_create.html'
-                               title='notmuch_sys::notmuch_query_create'>notmuch_query_create</a></td>
-                        <td class='docblock short'>
-                             <p>Create a new query for &#39;database&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_destroy.html'
-                               title='notmuch_sys::notmuch_query_destroy'>notmuch_query_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy a <code>notmuch_query_t</code> along with any associated resources.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_get_database.html'
-                               title='notmuch_sys::notmuch_query_get_database'>notmuch_query_get_database</a></td>
-                        <td class='docblock short'>
-                             <p>Return the notmuch database of this query. See <code>notmuch_query_create</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_get_query_string.html'
-                               title='notmuch_sys::notmuch_query_get_query_string'>notmuch_query_get_query_string</a></td>
-                        <td class='docblock short'>
-                             <p>Return the query_string of this query. See <code>notmuch_query_create</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_get_sort.html'
-                               title='notmuch_sys::notmuch_query_get_sort'>notmuch_query_get_sort</a></td>
-                        <td class='docblock short'>
-                             <p>Return the sort specified for this query. See
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_count_messages_st.html'
+                                  title='notmuch_sys::notmuch_query_count_messages_st'>notmuch_query_count_messages_st</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the number of messages matching a search.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_count_threads_st.html'
+                                  title='notmuch_sys::notmuch_query_count_threads_st'>notmuch_query_count_threads_st</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the number of threads matching a search.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_create.html'
+                                  title='notmuch_sys::notmuch_query_create'>notmuch_query_create</a></td>
+                           <td class='docblock-short'>
+                                <p>Create a new query for &#39;database&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_destroy.html'
+                                  title='notmuch_sys::notmuch_query_destroy'>notmuch_query_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_query_t</code> along with any associated resources.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_get_database.html'
+                                  title='notmuch_sys::notmuch_query_get_database'>notmuch_query_get_database</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the notmuch database of this query. See <code>notmuch_query_create</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_get_query_string.html'
+                                  title='notmuch_sys::notmuch_query_get_query_string'>notmuch_query_get_query_string</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the query_string of this query. See <code>notmuch_query_create</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_get_sort.html'
+                                  title='notmuch_sys::notmuch_query_get_sort'>notmuch_query_get_sort</a></td>
+                           <td class='docblock-short'>
+                                <p>Return the sort specified for this query. See
 <code>notmuch_query_set_sort</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_search_messages_st.html'
-                               title='notmuch_sys::notmuch_query_search_messages_st'>notmuch_query_search_messages_st</a></td>
-                        <td class='docblock short'>
-                             <p>Execute a query for messages, returning a <code>notmuch_messages_t</code> object
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_search_messages_st.html'
+                                  title='notmuch_sys::notmuch_query_search_messages_st'>notmuch_query_search_messages_st</a></td>
+                           <td class='docblock-short'>
+                                <p>Execute a query for messages, returning a <code>notmuch_messages_t</code> object
 which can be used to iterate over the results. The returned
 messages object is owned by the query and as such, will only be
 valid until <code>notmuch_query_destroy</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_search_threads_st.html'
-                               title='notmuch_sys::notmuch_query_search_threads_st'>notmuch_query_search_threads_st</a></td>
-                        <td class='docblock short'>
-                             <p>Execute a query for threads, returning a <code>notmuch_threads_t</code> object
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_search_threads_st.html'
+                                  title='notmuch_sys::notmuch_query_search_threads_st'>notmuch_query_search_threads_st</a></td>
+                           <td class='docblock-short'>
+                                <p>Execute a query for threads, returning a <code>notmuch_threads_t</code> object
 which can be used to iterate over the results. The returned threads
 object is owned by the query and as such, will only be valid until
 <code>notmuch_query_destroy</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_set_omit_excluded.html'
-                               title='notmuch_sys::notmuch_query_set_omit_excluded'>notmuch_query_set_omit_excluded</a></td>
-                        <td class='docblock short'>
-                             <p>Specify whether to omit excluded results or simply flag them.  By
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_set_omit_excluded.html'
+                                  title='notmuch_sys::notmuch_query_set_omit_excluded'>notmuch_query_set_omit_excluded</a></td>
+                           <td class='docblock-short'>
+                                <p>Specify whether to omit excluded results or simply flag them.  By
 default, this is set to TRUE.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_query_set_sort.html'
-                               title='notmuch_sys::notmuch_query_set_sort'>notmuch_query_set_sort</a></td>
-                        <td class='docblock short'>
-                             <p>Specify the sorting desired for this query.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_status_to_string.html'
-                               title='notmuch_sys::notmuch_status_to_string'>notmuch_status_to_string</a></td>
-                        <td class='docblock short'>
-                             <p>Get a string representation of a <code>notmuch_status_t</code> value.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_tags_destroy.html'
-                               title='notmuch_sys::notmuch_tags_destroy'>notmuch_tags_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy a <code>notmuch_tags_t</code> object.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_tags_get.html'
-                               title='notmuch_sys::notmuch_tags_get'>notmuch_tags_get</a></td>
-                        <td class='docblock short'>
-                             <p>Get the current tag from &#39;tags&#39; as a string.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_tags_move_to_next.html'
-                               title='notmuch_sys::notmuch_tags_move_to_next'>notmuch_tags_move_to_next</a></td>
-                        <td class='docblock short'>
-                             <p>Move the &#39;tags&#39; iterator to the next tag.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_tags_valid.html'
-                               title='notmuch_sys::notmuch_tags_valid'>notmuch_tags_valid</a></td>
-                        <td class='docblock short'>
-                             <p>Is the given &#39;tags&#39; iterator pointing at a valid tag.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_destroy.html'
-                               title='notmuch_sys::notmuch_thread_destroy'>notmuch_thread_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy a <code>notmuch_thread_t</code> object.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_authors.html'
-                               title='notmuch_sys::notmuch_thread_get_authors'>notmuch_thread_get_authors</a></td>
-                        <td class='docblock short'>
-                             <p>Get the authors of &#39;thread&#39; as a UTF-8 string.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_matched_messages.html'
-                               title='notmuch_sys::notmuch_thread_get_matched_messages'>notmuch_thread_get_matched_messages</a></td>
-                        <td class='docblock short'>
-                             <p>Get the number of messages in &#39;thread&#39; that matched the search.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_messages.html'
-                               title='notmuch_sys::notmuch_thread_get_messages'>notmuch_thread_get_messages</a></td>
-                        <td class='docblock short'>
-                             <p>Get a <code>notmuch_thread_t</code> iterator for all messages in &#39;thread&#39; in
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_query_set_sort.html'
+                                  title='notmuch_sys::notmuch_query_set_sort'>notmuch_query_set_sort</a></td>
+                           <td class='docblock-short'>
+                                <p>Specify the sorting desired for this query.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_status_to_string.html'
+                                  title='notmuch_sys::notmuch_status_to_string'>notmuch_status_to_string</a></td>
+                           <td class='docblock-short'>
+                                <p>Get a string representation of a <code>notmuch_status_t</code> value.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_tags_destroy.html'
+                                  title='notmuch_sys::notmuch_tags_destroy'>notmuch_tags_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_tags_t</code> object.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_tags_get.html'
+                                  title='notmuch_sys::notmuch_tags_get'>notmuch_tags_get</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the current tag from &#39;tags&#39; as a string.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_tags_move_to_next.html'
+                                  title='notmuch_sys::notmuch_tags_move_to_next'>notmuch_tags_move_to_next</a></td>
+                           <td class='docblock-short'>
+                                <p>Move the &#39;tags&#39; iterator to the next tag.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_tags_valid.html'
+                                  title='notmuch_sys::notmuch_tags_valid'>notmuch_tags_valid</a></td>
+                           <td class='docblock-short'>
+                                <p>Is the given &#39;tags&#39; iterator pointing at a valid tag.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_destroy.html'
+                                  title='notmuch_sys::notmuch_thread_destroy'>notmuch_thread_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_thread_t</code> object.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_authors.html'
+                                  title='notmuch_sys::notmuch_thread_get_authors'>notmuch_thread_get_authors</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the authors of &#39;thread&#39; as a UTF-8 string.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_matched_messages.html'
+                                  title='notmuch_sys::notmuch_thread_get_matched_messages'>notmuch_thread_get_matched_messages</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the number of messages in &#39;thread&#39; that matched the search.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_messages.html'
+                                  title='notmuch_sys::notmuch_thread_get_messages'>notmuch_thread_get_messages</a></td>
+                           <td class='docblock-short'>
+                                <p>Get a <code>notmuch_thread_t</code> iterator for all messages in &#39;thread&#39; in
 oldest-first order.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_newest_date.html'
-                               title='notmuch_sys::notmuch_thread_get_newest_date'>notmuch_thread_get_newest_date</a></td>
-                        <td class='docblock short'>
-                             <p>Get the date of the newest message in &#39;thread&#39; as a time_t value.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_oldest_date.html'
-                               title='notmuch_sys::notmuch_thread_get_oldest_date'>notmuch_thread_get_oldest_date</a></td>
-                        <td class='docblock short'>
-                             <p>Get the date of the oldest message in &#39;thread&#39; as a time_t value.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_subject.html'
-                               title='notmuch_sys::notmuch_thread_get_subject'>notmuch_thread_get_subject</a></td>
-                        <td class='docblock short'>
-                             <p>Get the subject of &#39;thread&#39; as a UTF-8 string.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_tags.html'
-                               title='notmuch_sys::notmuch_thread_get_tags'>notmuch_thread_get_tags</a></td>
-                        <td class='docblock short'>
-                             <p>Get the tags for &#39;thread&#39;, returning a <code>notmuch_tags_t</code> object which
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_newest_date.html'
+                                  title='notmuch_sys::notmuch_thread_get_newest_date'>notmuch_thread_get_newest_date</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the date of the newest message in &#39;thread&#39; as a time_t value.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_oldest_date.html'
+                                  title='notmuch_sys::notmuch_thread_get_oldest_date'>notmuch_thread_get_oldest_date</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the date of the oldest message in &#39;thread&#39; as a time_t value.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_subject.html'
+                                  title='notmuch_sys::notmuch_thread_get_subject'>notmuch_thread_get_subject</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the subject of &#39;thread&#39; as a UTF-8 string.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_tags.html'
+                                  title='notmuch_sys::notmuch_thread_get_tags'>notmuch_thread_get_tags</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the tags for &#39;thread&#39;, returning a <code>notmuch_tags_t</code> object which
 can be used to iterate over all tags.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_thread_id.html'
-                               title='notmuch_sys::notmuch_thread_get_thread_id'>notmuch_thread_get_thread_id</a></td>
-                        <td class='docblock short'>
-                             <p>Get the thread ID of &#39;thread&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_toplevel_messages.html'
-                               title='notmuch_sys::notmuch_thread_get_toplevel_messages'>notmuch_thread_get_toplevel_messages</a></td>
-                        <td class='docblock short'>
-                             <p>Get a <code>notmuch_messages_t</code> iterator for the top-level messages in
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_thread_id.html'
+                                  title='notmuch_sys::notmuch_thread_get_thread_id'>notmuch_thread_get_thread_id</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the thread ID of &#39;thread&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_toplevel_messages.html'
+                                  title='notmuch_sys::notmuch_thread_get_toplevel_messages'>notmuch_thread_get_toplevel_messages</a></td>
+                           <td class='docblock-short'>
+                                <p>Get a <code>notmuch_messages_t</code> iterator for the top-level messages in
 &#39;thread&#39; in oldest-first order.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_thread_get_total_messages.html'
-                               title='notmuch_sys::notmuch_thread_get_total_messages'>notmuch_thread_get_total_messages</a></td>
-                        <td class='docblock short'>
-                             <p>Get the total number of messages in &#39;thread&#39;.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_threads_destroy.html'
-                               title='notmuch_sys::notmuch_threads_destroy'>notmuch_threads_destroy</a></td>
-                        <td class='docblock short'>
-                             <p>Destroy a <code>notmuch_threads_t</code> object.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_threads_get.html'
-                               title='notmuch_sys::notmuch_threads_get'>notmuch_threads_get</a></td>
-                        <td class='docblock short'>
-                             <p>Get the current thread from &#39;threads&#39; as a <code>notmuch_thread_t</code>.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_threads_move_to_next.html'
-                               title='notmuch_sys::notmuch_threads_move_to_next'>notmuch_threads_move_to_next</a></td>
-                        <td class='docblock short'>
-                             <p>Move the &#39;threads&#39; iterator to the next thread.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.notmuch_threads_valid.html'
-                               title='notmuch_sys::notmuch_threads_valid'>notmuch_threads_valid</a></td>
-                        <td class='docblock short'>
-                             <p>Is the given &#39;threads&#39; iterator pointing at a valid thread.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_thread_get_total_messages.html'
+                                  title='notmuch_sys::notmuch_thread_get_total_messages'>notmuch_thread_get_total_messages</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the total number of messages in &#39;thread&#39;.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_threads_destroy.html'
+                                  title='notmuch_sys::notmuch_threads_destroy'>notmuch_threads_destroy</a></td>
+                           <td class='docblock-short'>
+                                <p>Destroy a <code>notmuch_threads_t</code> object.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_threads_get.html'
+                                  title='notmuch_sys::notmuch_threads_get'>notmuch_threads_get</a></td>
+                           <td class='docblock-short'>
+                                <p>Get the current thread from &#39;threads&#39; as a <code>notmuch_thread_t</code>.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_threads_move_to_next.html'
+                                  title='notmuch_sys::notmuch_threads_move_to_next'>notmuch_threads_move_to_next</a></td>
+                           <td class='docblock-short'>
+                                <p>Move the &#39;threads&#39; iterator to the next thread.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.notmuch_threads_valid.html'
+                                  title='notmuch_sys::notmuch_threads_valid'>notmuch_threads_valid</a></td>
+                           <td class='docblock-short'>
+                                <p>Is the given &#39;threads&#39; iterator pointing at a valid thread.</p>
+                           </td>
+                       </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='type' href='type.notmuch_bool_t.html'
-                               title='notmuch_sys::notmuch_bool_t'>notmuch_bool_t</a></td>
-                        <td class='docblock short'>
-                             
-                        </td>
-                    </tr>
-                </table></section>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.notmuch_bool_t.html'
+                                  title='notmuch_sys::notmuch_bool_t'>notmuch_bool_t</a></td>
+                           <td class='docblock-short'>
+                                
+                           </td>
+                       </tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -1012,6 +969,8 @@ can be used to iterate over all tags.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -1032,7 +991,7 @@ can be used to iterate over all tags.</p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
@@ -1043,11 +1002,9 @@ can be used to iterate over all tags.</p>
     <script>
         window.rootPath = "../";
         window.currentCrate = "notmuch_sys";
-        window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>

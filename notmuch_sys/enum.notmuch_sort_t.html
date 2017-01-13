@@ -9,8 +9,10 @@
 
     <title>notmuch_sys::notmuch_sort_t - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
     <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -43,25 +45,32 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>notmuch_sys</a>::<wbr><a class='enum' href=''>notmuch_sort_t</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-54' class='srclink' href='../src/notmuch_sys/lib.rs.html#79-88' title='goto source code'>[src]</a></span></h1>
-<pre class='rust enum'>pub enum notmuch_sort_t {
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../src/notmuch_sys/lib.rs.html#82-91' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'><div class="docblock attributes">#[repr(C)]
+</div>pub enum notmuch_sort_t {
     OLDEST_FIRST,
     NEWEST_FIRST,
     MESSAGE_ID,
     UNSORTED,
 }</pre><div class='docblock'><p>Sort values for <code>notmuch_query_set_sort</code>.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.OLDEST_FIRST'><code>OLDEST_FIRST</code></td><td><div class='docblock'><p>Oldest first.</p>
-</div></td></tr><tr><td id='variant.NEWEST_FIRST'><code>NEWEST_FIRST</code></td><td><div class='docblock'><p>Newest first.</p>
-</div></td></tr><tr><td id='variant.MESSAGE_ID'><code>MESSAGE_ID</code></td><td><div class='docblock'><p>Sort by message-id.</p>
-</div></td></tr><tr><td id='variant.UNSORTED'><code>UNSORTED</code></td><td><div class='docblock'><p>Do not sort.</p>
-</div></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div></section>
+<span id='variant.OLDEST_FIRST' class='variant'><span id='OLDEST_FIRST.v' class='invisible'><code>OLDEST_FIRST</code></span></span><div class='docblock'><p>Oldest first.</p>
+</div><span id='variant.NEWEST_FIRST' class='variant'><span id='NEWEST_FIRST.v' class='invisible'><code>NEWEST_FIRST</code></span></span><div class='docblock'><p>Newest first.</p>
+</div><span id='variant.MESSAGE_ID' class='variant'><span id='MESSAGE_ID.v' class='invisible'><code>MESSAGE_ID</code></span></span><div class='docblock'><p>Sort by message-id.</p>
+</div><span id='variant.UNSORTED' class='variant'><span id='UNSORTED.v' class='invisible'><code>UNSORTED</code></span></span><div class='docblock'><p>Do not sort.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#81' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#81' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#81' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class='method'><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../notmuch_sys/enum.notmuch_sort_t.html' title='notmuch_sys::notmuch_sort_t'>notmuch_sort_t</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></span></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class='method'><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Rhs) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -84,6 +93,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -104,7 +115,7 @@
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
@@ -115,11 +126,9 @@
     <script>
         window.rootPath = "../";
         window.currentCrate = "notmuch_sys";
-        window.playgroundUrl = "";
     </script>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
-    
     <script defer src="../search-index.js"></script>
 </body>
 </html>
