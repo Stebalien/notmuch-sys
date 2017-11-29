@@ -29,7 +29,7 @@ pub const TAG_MAX: u32 = 200;
 /// A zero value (SUCCESS) indicates that the function completed without error. Any other value
 /// indicates an error.
 #[repr(C)]
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub enum notmuch_status_t {
     /// No error occurred.
     SUCCESS = 0,
@@ -78,7 +78,7 @@ pub enum notmuch_status_t {
 
 /// Sort values for `notmuch_query_set_sort`.
 #[repr(C)]
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub enum notmuch_sort_t {
     /// Oldest first.
     OLDEST_FIRST = 0,
@@ -92,7 +92,7 @@ pub enum notmuch_sort_t {
 
 /// Exclude values for `notmuch_query_set_omit_excluded`
 #[repr(C)]
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub enum notmuch_exclude_t {
     FLAG = 0,
     TRUE,
@@ -102,7 +102,7 @@ pub enum notmuch_exclude_t {
 
 /// Message flags.
 #[repr(C)]
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub enum notmuch_message_flag_t {
     MATCH = 0,
     EXCLUDED,
@@ -115,7 +115,7 @@ pub enum notmuch_message_flag_t {
 
 /// Database open mode for `notmuch_database_open`.
 #[repr(C)]
-#[derive(Debug, Eq, PartialEq)]
+#[derive(Debug, Eq, PartialEq, Clone, Copy)]
 pub enum notmuch_database_mode_t {
     /// Open database for reading only.
     READ_ONLY = 0,
