@@ -1,12 +1,14 @@
-// Copyright 2014 The Rust Project Developers. See the COPYRIGHT
-// file at the top-level directory of this distribution and at
-// http://rust-lang.org/COPYRIGHT.
-//
-// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
-// http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
-// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
-// option. This file may not be copied, modified, or distributed
-// except according to those terms.
+/*!
+ * Copyright 2014 The Rust Project Developers. See the COPYRIGHT
+ * file at the top-level directory of this distribution and at
+ * http://rust-lang.org/COPYRIGHT.
+ *
+ * Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
+ * http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+ * <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
+ * option. This file may not be copied, modified, or distributed
+ * except according to those terms.
+ */
 
 /*jslint browser: true, es5: true */
 /*globals $: true, rootPath: true */
@@ -35,12 +37,81 @@
                      "associatedtype",
                      "constant",
                      "associatedconstant",
-                     "union"];
+                     "union",
+                     "foreigntype"];
+
+    // On the search screen, so you remain on the last tab you opened.
+    //
+    // 0 for "Types/modules"
+    // 1 for "As parameters"
+    // 2 for "As return value"
+    var currentTab = 0;
+
+    function hasClass(elem, className) {
+        if (elem && className && elem.className) {
+            var elemClass = elem.className;
+            var start = elemClass.indexOf(className);
+            if (start === -1) {
+                return false;
+            } else if (elemClass.length === className.length) {
+                return true;
+            } else {
+                if (start > 0 && elemClass[start - 1] !== ' ') {
+                    return false;
+                }
+                var end = start + className.length;
+                if (end < elemClass.length && elemClass[end] !== ' ') {
+                    return false;
+                }
+                return true;
+            }
+            if (start > 0 && elemClass[start - 1] !== ' ') {
+                return false;
+            }
+            var end = start + className.length;
+            if (end < elemClass.length && elemClass[end] !== ' ') {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    function addClass(elem, className) {
+        if (elem && className && !hasClass(elem, className)) {
+            if (elem.className && elem.className.length > 0) {
+                elem.className += ' ' + className;
+            } else {
+                elem.className = className;
+            }
+        }
+    }
+
+    function removeClass(elem, className) {
+        if (elem && className && elem.className) {
+            elem.className = (" " + elem.className + " ").replace(" " + className + " ", " ")
+                                                         .trim();
+        }
+    }
+
+    function onEach(arr, func) {
+        if (arr && arr.length > 0 && func) {
+            for (var i = 0; i < arr.length; i++) {
+                func(arr[i]);
+            }
+        }
+    }
+
+    function isHidden(elem) {
+        return (elem.offsetParent === null)
+    }
 
     // used for special search precedence
     var TY_PRIMITIVE = itemTypes.indexOf("primitive");
 
-    $('.js-only').removeClass('js-only');
+    onEach(document.getElementsByClassName('js-only'), function(e) {
+        removeClass(e, 'js-only');
+    });
 
     function getQueryStringParams() {
         var params = {};
@@ -60,23 +131,45 @@
     }
 
     function highlightSourceLines(ev) {
+        var search = document.getElementById("search");
         var i, from, to, match = window.location.hash.match(/^#?(\d+)(?:-(\d+))?$/);
         if (match) {
             from = parseInt(match[1], 10);
             to = Math.min(50000, parseInt(match[2] || match[1], 10));
             from = Math.min(from, to);
-            if ($('#' + from).length === 0) {
+            var elem = document.getElementById(from);
+            if (!elem) {
                 return;
             }
-            if (ev === null) { $('#' + from)[0].scrollIntoView(); };
-            $('.line-numbers span').removeClass('line-highlighted');
+            if (ev === null) {
+                var x = document.getElementById(from);
+                if (x) {
+                    x.scrollIntoView();
+                }
+            }
+            onEach(document.getElementsByClassName('line-numbers'), function(e) {
+                onEach(e.getElementsByTagName('span'), function(i_e) {
+                    removeClass(i_e, 'line-highlighted');
+                });
+            })
             for (i = from; i <= to; ++i) {
-                $('#' + i).addClass('line-highlighted');
+                addClass(document.getElementById(i), 'line-highlighted');
+            }
+        } else if (ev !== null && search && !hasClass(search, "hidden") && ev.newURL) {
+            addClass(search, "hidden");
+            removeClass(document.getElementById("main"), "hidden");
+            var hash = ev.newURL.slice(ev.newURL.indexOf('#') + 1);
+            if (browserSupportsHistoryApi()) {
+                history.replaceState(hash, "", "?search=#" + hash);
+            }
+            var elem = document.getElementById(hash);
+            if (elem) {
+                elem.scrollIntoView();
             }
         }
     }
     highlightSourceLines(null);
-    $(window).on('hashchange', highlightSourceLines);
+    window.onhashchange = highlightSourceLines;
 
     // Gets the human-readable string for the virtual-key code of the
     // given KeyboardEvent, ev.
@@ -98,75 +191,126 @@
         return String.fromCharCode(c);
     }
 
+    function displayHelp(display, ev) {
+        if (display === true) {
+            if (hasClass(help, "hidden")) {
+                ev.preventDefault();
+                removeClass(help, "hidden");
+                addClass(document.body, "blur");
+            }
+        } else if (!hasClass(help, "hidden")) {
+            ev.preventDefault();
+            addClass(help, "hidden");
+            removeClass(document.body, "blur");
+        }
+    }
+
     function handleShortcut(ev) {
-        if (document.activeElement.tagName == "INPUT")
+        if (document.activeElement.tagName === "INPUT")
             return;
 
         // Don't interfere with browser shortcuts
         if (ev.ctrlKey || ev.altKey || ev.metaKey)
             return;
 
+        var help = document.getElementById("help");
         switch (getVirtualKey(ev)) {
         case "Escape":
-            if (!$("#help").hasClass("hidden")) {
+            hideModal();
+            var search = document.getElementById("search");
+            if (!hasClass(help, "hidden")) {
+                displayHelp(false, ev);
+            } else if (!hasClass(search, "hidden")) {
                 ev.preventDefault();
-                $("#help").addClass("hidden");
-                $("body").removeClass("blur");
-            } else if (!$("#search").hasClass("hidden")) {
-                ev.preventDefault();
-                $("#search").addClass("hidden");
-                $("#main").removeClass("hidden");
+                addClass(search, "hidden");
+                removeClass(document.getElementById("main"), "hidden");
             }
             break;
 
         case "s":
         case "S":
+            displayHelp(false, ev);
+            hideModal();
             ev.preventDefault();
             focusSearchBar();
             break;
 
         case "+":
+        case "-":
             ev.preventDefault();
             toggleAllDocs();
             break;
 
         case "?":
-            if (ev.shiftKey && $("#help").hasClass("hidden")) {
-                ev.preventDefault();
-                $("#help").removeClass("hidden");
-                $("body").addClass("blur");
+            if (ev.shiftKey) {
+                hideModal();
+                displayHelp(true, ev);
             }
             break;
         }
     }
 
-    $(document).on("keypress", handleShortcut);
-    $(document).on("keydown", handleShortcut);
-    $(document).on("click", function(ev) {
-        if (!$(ev.target).closest("#help > div").length) {
-            $("#help").addClass("hidden");
-            $("body").removeClass("blur");
-        }
-    });
+    document.onkeypress = handleShortcut;
+    document.onkeydown = handleShortcut;
+    document.onclick = function(ev) {
+        if (hasClass(ev.target, 'collapse-toggle')) {
+            collapseDocs(ev.target);
+        } else if (hasClass(ev.target.parentNode, 'collapse-toggle')) {
+            collapseDocs(ev.target.parentNode);
+        } else if (ev.target.tagName === 'SPAN' && hasClass(ev.target.parentNode, 'line-numbers')) {
+            var prev_id = 0;
 
-    $('.version-selector').on('change', function() {
-        var i, match,
-            url = document.location.href,
-            stripped = '',
-            len = rootPath.match(/\.\.\//g).length + 1;
+            var set_fragment = function (name) {
+                if (browserSupportsHistoryApi()) {
+                    history.replaceState(null, null, '#' + name);
+                    window.hashchange();
+                } else {
+                    location.replace('#' + name);
+                }
+            };
 
-        for (i = 0; i < len; ++i) {
-            match = url.match(/\/[^\/]*$/);
-            if (i < len - 1) {
-                stripped = match[0] + stripped;
+            var cur_id = parseInt(ev.target.id, 10);
+
+            if (ev.shiftKey && prev_id) {
+                if (prev_id > cur_id) {
+                    var tmp = prev_id;
+                    prev_id = cur_id;
+                    cur_id = tmp;
+                }
+
+                set_fragment(prev_id + '-' + cur_id);
+            } else {
+                prev_id = cur_id;
+
+                set_fragment(cur_id);
             }
-            url = url.substring(0, url.length - match[0].length);
+        } else if (!hasClass(document.getElementById("help"), "hidden")) {
+            addClass(document.getElementById("help"), "hidden");
+            removeClass(document.body, "blur");
         }
+    };
 
-        url += '/' + $('.version-selector').val() + stripped;
+    var x = document.getElementsByClassName('version-selector');
+    if (x.length > 0) {
+        x[0].onchange = function() {
+            var i, match,
+                url = document.location.href,
+                stripped = '',
+                len = rootPath.match(/\.\.\//g).length + 1;
 
-        document.location.href = url;
-    });
+            for (i = 0; i < len; ++i) {
+                match = url.match(/\/[^\/]*$/);
+                if (i < len - 1) {
+                    stripped = match[0] + stripped;
+                }
+                url = url.substring(0, url.length - match[0].length);
+            }
+
+            url += '/' + document.getElementsByClassName('version-selector')[0].value + stripped;
+
+            document.location.href = url;
+        };
+    }
 
     /**
      * A function to compute the Levenshtein distance between two strings
@@ -214,8 +358,8 @@
         // but only if the input bar is empty. This avoid the obnoxious issue
         // where you start trying to do a search, and the index loads, and
         // suddenly your search is gone!
-        if ($(".search-input")[0].value === "") {
-            $(".search-input")[0].value = params.search || '';
+        if (document.getElementsByClassName("search-input")[0].value === "") {
+            document.getElementsByClassName("search-input")[0].value = params.search || '';
         }
 
         /**
@@ -230,15 +374,202 @@
             var valLower = query.query.toLowerCase(),
                 val = valLower,
                 typeFilter = itemTypeFromName(query.type),
-                results = [],
+                results = {},
                 split = valLower.split("::");
 
-            // remove empty keywords
-            for (var j = 0; j < split.length; ++j) {
-                split[j].toLowerCase();
-                if (split[j] === "") {
-                    split.splice(j, 1);
+            for (var z = 0; z < split.length; ++z) {
+                if (split[z] === "") {
+                    split.splice(z, 1);
+                    z -= 1;
                 }
+            }
+
+            function extractGenerics(val) {
+                val = val.toLowerCase();
+                if (val.indexOf('<') !== -1) {
+                    var values = val.substring(val.indexOf('<') + 1, val.lastIndexOf('>'));
+                    return {
+                        name: val.substring(0, val.indexOf('<')),
+                        generics: values.split(/\s*,\s*/),
+                    };
+                }
+                return {
+                    name: val,
+                    generics: [],
+                };
+            }
+
+            function checkGenerics(obj, val) {
+                // The names match, but we need to be sure that all generics kinda
+                // match as well.
+                var lev_distance = MAX_LEV_DISTANCE + 1;
+                if (val.generics.length > 0) {
+                    if (obj.generics &&
+                        obj.generics.length >= val.generics.length) {
+                        var elems = obj.generics.slice(0);
+                        for (var y = 0; y < val.generics.length; ++y) {
+                            // The point here is to find the type that matches the most.
+                            var lev = { pos: -1, lev: MAX_LEV_DISTANCE + 1};
+                            for (var x = 0; x < elems.length; ++x) {
+                                var tmp_lev = levenshtein(elems[x], val.generics[y]);
+                                if (tmp_lev < lev.lev) {
+                                    lev.lev = tmp_lev;
+                                    lev.pos = x;
+                                }
+                            }
+                            if (lev.pos !== -1) {
+                                elems.splice(lev.pos, 1);
+                                lev_distance = Math.min(lev.lev, lev_distance);
+                            } else {
+                                return MAX_LEV_DISTANCE + 1;
+                            }
+                        }
+                        return lev_distance;
+                    }
+                } else {
+                    return 0;
+                }
+                return MAX_LEV_DISTANCE + 1;
+            }
+
+            // Check for type name and type generics (if any).
+            function checkType(obj, val, literalSearch) {
+                var lev_distance = MAX_LEV_DISTANCE + 1;
+                if (obj.name === val.name) {
+                    if (literalSearch === true) {
+                        if (val.generics.length !== 0) {
+                            if (obj.generics && obj.length >= val.generics.length) {
+                                var elems = obj.generics.slice(0);
+                                var allFound = true;
+                                var x;
+
+                                for (var y = 0; allFound === true && y < val.generics.length; ++y) {
+                                    allFound = false;
+                                    for (x = 0; allFound === false && x < elems.length; ++x) {
+                                        allFound = elems[x] === val.generics[y];
+                                    }
+                                    if (allFound === true) {
+                                        elems.splice(x - 1, 1);
+                                    }
+                                }
+                                if (allFound === true) {
+                                    return true;
+                                }
+                            } else {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                    // If the type has generics but don't match, then it won't return at this point.
+                    // Otherwise, `checkGenerics` will return 0 and it'll return.
+                    var tmp_lev = checkGenerics(obj, val);
+                    if (tmp_lev <= MAX_LEV_DISTANCE) {
+                        return tmp_lev;
+                    }
+                }
+                // Names didn't match so let's check if one of the generic types could.
+                if (literalSearch === true) {
+                     if (obj.generics.length > 0) {
+                        for (var x = 0; x < obj.generics.length; ++x) {
+                            if (obj.generics[x] === val.name) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+                var new_lev = levenshtein(obj.name, val.name);
+                if (new_lev < lev_distance) {
+                    if ((lev = checkGenerics(obj, val)) <= MAX_LEV_DISTANCE) {
+                        lev_distance = Math.min(Math.min(new_lev, lev), lev_distance);
+                    }
+                } else if (obj.generics && obj.generics.length > 0) {
+                    for (var x = 0; x < obj.generics.length; ++x) {
+                        lev_distance = Math.min(levenshtein(obj.generics[x], val.name),
+                                                lev_distance);
+                    }
+                }
+                // Now whatever happens, the returned distance is "less good" so we should mark it
+                // as such, and so we add 1 to the distance to make it "less good".
+                return lev_distance + 1;
+            }
+
+            function findArg(obj, val, literalSearch) {
+                var lev_distance = MAX_LEV_DISTANCE + 1;
+
+                if (obj && obj.type && obj.type.inputs.length > 0) {
+                    for (var i = 0; i < obj.type.inputs.length; i++) {
+                        var tmp = checkType(obj.type.inputs[i], val, literalSearch);
+                        if (literalSearch === true && tmp === true) {
+                            return true;
+                        }
+                        lev_distance = Math.min(tmp, lev_distance);
+                        if (lev_distance === 0) {
+                            return 0;
+                        }
+                    }
+                }
+                return literalSearch === true ? false : lev_distance;
+            }
+
+            function checkReturned(obj, val, literalSearch) {
+                var lev_distance = MAX_LEV_DISTANCE + 1;
+
+                if (obj && obj.type && obj.type.output) {
+                    var tmp = checkType(obj.type.output, val, literalSearch);
+                    if (literalSearch === true && tmp === true) {
+                        return true;
+                    }
+                    lev_distance = Math.min(tmp, lev_distance);
+                    if (lev_distance === 0) {
+                        return 0;
+                    }
+                }
+                return literalSearch === true ? false : lev_distance;
+            }
+
+            function checkPath(startsWith, lastElem, ty) {
+                var ret_lev = MAX_LEV_DISTANCE + 1;
+                var path = ty.path.split("::");
+
+                if (ty.parent && ty.parent.name) {
+                    path.push(ty.parent.name.toLowerCase());
+                }
+
+                if (startsWith.length > path.length) {
+                    return MAX_LEV_DISTANCE + 1;
+                }
+                for (var i = 0; i < path.length; ++i) {
+                    if (i + startsWith.length > path.length) {
+                        break;
+                    }
+                    var lev_total = 0;
+                    var aborted = false;
+                    for (var x = 0; x < startsWith.length; ++x) {
+                        var lev = levenshtein(path[i + x], startsWith[x]);
+                        if (lev > MAX_LEV_DISTANCE) {
+                            aborted = true;
+                            break;
+                        }
+                        lev_total += lev;
+                    }
+                    if (aborted === false) {
+                        var extra = MAX_LEV_DISTANCE + 1;
+                        if (i + startsWith.length < path.length) {
+                            extra = levenshtein(path[i + startsWith.length], lastElem);
+                        }
+                        if (extra > MAX_LEV_DISTANCE) {
+                            extra = levenshtein(ty.name, lastElem);
+                        }
+                        if (extra < MAX_LEV_DISTANCE + 1) {
+                            lev_total += extra;
+                            ret_lev = Math.min(ret_lev,
+                                               Math.round(lev_total / (startsWith.length + 1)));
+                        }
+                    }
+                }
+                return ret_lev;
             }
 
             function typePassesFilter(filter, type) {
@@ -268,82 +599,226 @@
             if ((val.charAt(0) === "\"" || val.charAt(0) === "'") &&
                 val.charAt(val.length - 1) === val.charAt(0))
             {
-                val = val.substr(1, val.length - 2);
+                var results_length = 0;
+                val = extractGenerics(val.substr(1, val.length - 2));
                 for (var i = 0; i < nSearchWords; ++i) {
-                    if (searchWords[i] === val) {
+                    var in_args = findArg(searchIndex[i], val, true);
+                    var returned = checkReturned(searchIndex[i], val, true);
+                    var ty = searchIndex[i];
+                    var fullId = itemTypes[ty.ty] + ty.path + ty.name;
+
+                    if (searchWords[i] === val.name) {
                         // filter type: ... queries
-                        if (typePassesFilter(typeFilter, searchIndex[i].ty)) {
-                            results.push({id: i, index: -1});
+                        if (typePassesFilter(typeFilter, searchIndex[i].ty) &&
+                            results[fullId] === undefined)
+                        {
+                            results[fullId] = {id: i, index: -1};
+                            results_length += 1;
+                        }
+                    } else if ((in_args === true || returned === true) &&
+                               typePassesFilter(typeFilter, searchIndex[i].ty)) {
+                        if (results[fullId] === undefined) {
+                            results[fullId] = {
+                                id: i,
+                                index: -1,
+                                dontValidate: true,
+                                in_args: in_args,
+                                returned: returned,
+                            };
+                            results_length += 1;
+                        } else {
+                            if (in_args === true) {
+                                results[fullId].in_args = true;
+                            }
+                            if (returned === true) {
+                                results[fullId].returned = true;
+                            }
                         }
                     }
-                    if (results.length === max) {
+                    if (results_length === max) {
                         break;
                     }
                 }
+                query.inputs = [val];
+                query.output = val;
+                query.search = val;
             // searching by type
             } else if (val.search("->") > -1) {
                 var trimmer = function (s) { return s.trim(); };
                 var parts = val.split("->").map(trimmer);
                 var input = parts[0];
                 // sort inputs so that order does not matter
-                var inputs = input.split(",").map(trimmer).sort().toString();
-                var output = parts[1];
+                var inputs = input.split(",").map(trimmer).sort();
+                for (var i = 0; i < inputs.length; ++i) {
+                    inputs[i] = extractGenerics(inputs[i]);
+                }
+                var output = extractGenerics(parts[1]);
 
                 for (var i = 0; i < nSearchWords; ++i) {
                     var type = searchIndex[i].type;
+                    var ty = searchIndex[i];
                     if (!type) {
                         continue;
                     }
-
-                    // sort index inputs so that order does not matter
-                    var typeInputs = type.inputs.map(function (input) {
-                        return input.name;
-                    }).sort();
+                    var fullId = itemTypes[ty.ty] + ty.path + ty.name;
 
                     // allow searching for void (no output) functions as well
                     var typeOutput = type.output ? type.output.name : "";
-                    if ((inputs === "*" || inputs === typeInputs.toString()) &&
-                        (output === "*" || output == typeOutput)) {
-                        results.push({id: i, index: -1, dontValidate: true});
+                    var returned = checkReturned(ty, output, true);
+                    if (output.name === "*" || returned === true) {
+                        var in_args = false;
+                        var module = false;
+
+                        if (input === "*") {
+                            module = true;
+                        } else {
+                            var allFound = true;
+                            for (var it = 0; allFound === true && it < inputs.length; it++) {
+                                allFound = checkType(type, inputs[it], true);
+                            }
+                            in_args = allFound;
+                        }
+                        if (in_args === true || returned === true || module === true) {
+                            if (results[fullId] !== undefined) {
+                                if (returned === true) {
+                                    results[fullId].returned = true;
+                                }
+                                if (in_args === true) {
+                                    results[fullId].in_args = true;
+                                }
+                            } else {
+                                results[fullId] = {
+                                    id: i,
+                                    index: -1,
+                                    dontValidate: true,
+                                    returned: returned,
+                                    in_args: in_args,
+                                };
+                            }
+                        }
                     }
                 }
+                query.inputs = inputs.map(function(input) {
+                    return input.name;
+                });
+                query.output = output.name;
             } else {
+                query.inputs = [val];
+                query.output = val;
+                query.search = val;
                 // gather matching search results up to a certain maximum
                 val = val.replace(/\_/g, "");
-                for (var i = 0; i < split.length; ++i) {
-                    for (var j = 0; j < nSearchWords; ++j) {
-                        var lev_distance;
-                        if (searchWords[j].indexOf(split[i]) > -1 ||
-                            searchWords[j].indexOf(val) > -1 ||
-                            searchWords[j].replace(/_/g, "").indexOf(val) > -1)
-                        {
-                            // filter type: ... queries
-                            if (typePassesFilter(typeFilter, searchIndex[j].ty)) {
-                                results.push({
-                                    id: j,
-                                    index: searchWords[j].replace(/_/g, "").indexOf(val),
-                                    lev: 0,
-                                });
+
+                var results_length = 0;
+                var valGenerics = extractGenerics(val);
+
+                var paths = valLower.split("::");
+                var j;
+                for (j = 0; j < paths.length; ++j) {
+                    if (paths[j] === "") {
+                        paths.splice(j, 1);
+                        j -= 1;
+                    }
+                }
+                val = paths[paths.length - 1];
+                var startsWith = paths.slice(0, paths.length > 1 ? paths.length - 1 : 1);
+
+                for (j = 0; j < nSearchWords; ++j) {
+                    var lev_distance;
+                    var ty = searchIndex[j];
+                    if (!ty) {
+                        continue;
+                    }
+                    var lev_add = 0;
+                    if (paths.length > 1) {
+                        var lev = checkPath(startsWith, paths[paths.length - 1], ty);
+                        if (lev > MAX_LEV_DISTANCE) {
+                            continue;
+                        } else if (lev > 0) {
+                            lev_add = 1;
+                        }
+                    }
+
+                    var returned = false;
+                    var in_args = false;
+                    var index = -1;
+                    // we want lev results to go lower than others
+                    var lev = MAX_LEV_DISTANCE + 1;
+                    var fullId = itemTypes[ty.ty] + ty.path + ty.name;
+
+                    if (searchWords[j].indexOf(val) > -1 ||
+                        searchWords[j].replace(/_/g, "").indexOf(val) > -1)
+                    {
+                        // filter type: ... queries
+                        if (typePassesFilter(typeFilter, ty) &&
+                            results[fullId] === undefined) {
+                            index = searchWords[j].replace(/_/g, "").indexOf(val);
+                        }
+                    }
+                    if ((lev_distance = levenshtein(searchWords[j], val)) <= MAX_LEV_DISTANCE) {
+                        if (typePassesFilter(typeFilter, ty) &&
+                            (results[fullId] === undefined ||
+                             results[fullId].lev > lev_distance)) {
+                            lev = Math.min(lev, lev_distance);
+                            index = Math.max(0, index);
+                        }
+                    }
+                    if ((lev_distance = findArg(searchIndex[j], valGenerics))
+                        <= MAX_LEV_DISTANCE) {
+                        if (typePassesFilter(typeFilter, ty) &&
+                            (results[fullId] === undefined ||
+                             results[fullId].lev > lev_distance)) {
+                            in_args = true;
+                            lev = Math.min(lev_distance, lev);
+                            index = Math.max(0, index);
+                        }
+                    }
+                    if ((lev_distance = checkReturned(searchIndex[j], valGenerics)) <=
+                        MAX_LEV_DISTANCE) {
+                        if (typePassesFilter(typeFilter, ty) &&
+                            (results[fullId] === undefined ||
+                             results[fullId].lev > lev_distance)) {
+                            returned = true;
+                            lev = Math.min(lev_distance, lev);
+                            index = Math.max(0, index);
+                        }
+                    }
+                    lev += lev_add;
+                    if (index !== -1) {
+                        if (results[fullId] === undefined) {
+                            results[fullId] = {
+                                id: j,
+                                index: index,
+                                lev: lev,
+                                in_args: in_args,
+                                returned: returned,
+                            };
+                            results_length += 1;
+                        } else {
+                            if (results[fullId].lev > lev) {
+                                results[fullId].lev = lev;
                             }
-                        } else if (
-                            (lev_distance = levenshtein(searchWords[j], val)) <=
-                                MAX_LEV_DISTANCE) {
-                            if (typePassesFilter(typeFilter, searchIndex[j].ty)) {
-                                results.push({
-                                    id: j,
-                                    index: 0,
-                                    // we want lev results to go lower than others
-                                    lev: lev_distance,
-                                });
+                            if (in_args === true) {
+                                results[fullId].in_args = true;
+                            }
+                            if (returned === true) {
+                                results[fullId].returned = true;
                             }
                         }
-                        if (results.length === max) {
-                            break;
-                        }
+                    }
+                    if (results_length === max) {
+                        break;
                     }
                 }
             }
 
+            var ar = [];
+            for (var entry in results) {
+                if (results.hasOwnProperty(entry)) {
+                    ar.push(results[entry]);
+                }
+            }
+            results = ar;
             var nresults = results.length;
             for (var i = 0; i < nresults; ++i) {
                 results[i].word = searchWords[results[i].id];
@@ -419,29 +894,18 @@
                 return 0;
             });
 
-            // remove duplicates, according to the data provided
-            for (var i = results.length - 1; i > 0; i -= 1) {
-                if (results[i].word === results[i - 1].word &&
-                    results[i].item.ty === results[i - 1].item.ty &&
-                    results[i].item.path === results[i - 1].item.path &&
-                    (results[i].item.parent || {}).name === (results[i - 1].item.parent || {}).name)
-                {
-                    results[i].id = -1;
-                }
-            }
             for (var i = 0; i < results.length; ++i) {
-                var result = results[i],
-                    name = result.item.name.toLowerCase(),
+                var result = results[i];
+
+                // this validation does not make sense when searching by types
+                if (result.dontValidate || result.returned === true && result.param === true) {
+                    continue;
+                }
+                var name = result.item.name.toLowerCase(),
                     path = result.item.path.toLowerCase(),
                     parent = result.item.parent;
 
-                // this validation does not make sense when searching by types
-                if (result.dontValidate) {
-                    continue;
-                }
-
-                var valid = validateResult(name, path, split, parent);
-                if (!valid) {
+                if (validateResult(name, path, split, parent) === false) {
                     result.id = -1;
                 }
             }
@@ -468,15 +932,14 @@
                 // each check is for validation so we negate the conditions and invalidate
                 if (!(
                     // check for an exact name match
-                    name.toLowerCase().indexOf(keys[i]) > -1 ||
+                    name.indexOf(keys[i]) > -1 ||
                     // then an exact path match
-                    path.toLowerCase().indexOf(keys[i]) > -1 ||
+                    path.indexOf(keys[i]) > -1 ||
                     // next if there is a parent, check for exact parent match
                     (parent !== undefined &&
                         parent.name.toLowerCase().indexOf(keys[i]) > -1) ||
                     // lastly check to see if the name was a levenshtein match
-                    levenshtein(name.toLowerCase(), keys[i]) <=
-                        MAX_LEV_DISTANCE)) {
+                    levenshtein(name, keys[i]) <= MAX_LEV_DISTANCE)) {
                     return false;
                 }
             }
@@ -484,7 +947,8 @@
         }
 
         function getQuery() {
-            var matches, type, query, raw = $('.search-input').val();
+            var matches, type, query, raw =
+                document.getElementsByClassName('search-input')[0].value;
             query = raw;
 
             matches = query.match(/^(fn|mod|struct|enum|trait|type|const|macro)\s*:\s*/i);
@@ -502,68 +966,121 @@
         }
 
         function initSearchNav() {
-            var hoverTimeout, $results = $('.search-results .result');
+            var hoverTimeout;
 
-            $results.on('click', function() {
-                var dst = $(this).find('a')[0];
+            var click_func = function(e) {
+                var el = e.target;
+                // to retrieve the real "owner" of the event.
+                while (el.tagName !== 'TR') {
+                    el = el.parentNode;
+                }
+                var dst = e.target.getElementsByTagName('a');
+                if (dst.length < 1) {
+                    return;
+                }
+                dst = dst[0];
                 if (window.location.pathname === dst.pathname) {
-                    $('#search').addClass('hidden');
-                    $('#main').removeClass('hidden');
+                    addClass(document.getElementById('search'), 'hidden');
+                    removeClass(document.getElementById('main'), 'hidden');
                     document.location.href = dst.href;
                 }
-            }).on('mouseover', function() {
-                var $el = $(this);
+            };
+            var mouseover_func = function(e) {
+                var el = e.target;
+                // to retrieve the real "owner" of the event.
+                while (el.tagName !== 'TR') {
+                    el = el.parentNode;
+                }
                 clearTimeout(hoverTimeout);
                 hoverTimeout = setTimeout(function() {
-                    $results.removeClass('highlighted');
-                    $el.addClass('highlighted');
+                    onEach(document.getElementsByClassName('search-results'), function(e) {
+                        onEach(e.getElementsByClassName('result'), function(i_e) {
+                            removeClass(i_e, 'highlighted');
+                        });
+                    });
+                    addClass(el, 'highlighted');
                 }, 20);
+            };
+            onEach(document.getElementsByClassName('search-results'), function(e) {
+                onEach(e.getElementsByClassName('result'), function(i_e) {
+                    i_e.onclick = click_func;
+                    i_e.onmouseover = mouseover_func;
+                });
             });
 
-            $(document).off('keydown.searchnav');
-            $(document).on('keydown.searchnav', function(e) {
-                var $active = $results.filter('.highlighted');
+            var search_input = document.getElementsByClassName('search-input')[0];
+            search_input.onkeydown = function(e) {
+                // "actives" references the currently highlighted item in each search tab.
+                // Each array in "actives" represents a tab.
+                var actives = [[], [], []];
+                // "current" is used to know which tab we're looking into.
+                var current = 0;
+                onEach(document.getElementsByClassName('search-results'), function(e) {
+                    onEach(e.getElementsByClassName('highlighted'), function(e) {
+                        actives[current].push(e);
+                    });
+                    current += 1;
+                });
 
                 if (e.which === 38) { // up
-                    if (!$active.length || !$active.prev()) {
+                    if (!actives[currentTab].length ||
+                        !actives[currentTab][0].previousElementSibling) {
                         return;
                     }
 
-                    $active.prev().addClass('highlighted');
-                    $active.removeClass('highlighted');
+                    addClass(actives[currentTab][0].previousElementSibling, 'highlighted');
+                    removeClass(actives[currentTab][0], 'highlighted');
                 } else if (e.which === 40) { // down
-                    if (!$active.length) {
-                        $results.first().addClass('highlighted');
-                    } else if ($active.next().length) {
-                        $active.next().addClass('highlighted');
-                        $active.removeClass('highlighted');
+                    if (!actives[currentTab].length) {
+                        var results = document.getElementsByClassName('search-results');
+                        if (results.length > 0) {
+                            var res = results[currentTab].getElementsByClassName('result');
+                            if (res.length > 0) {
+                                addClass(res[0], 'highlighted');
+                            }
+                        }
+                    } else if (actives[currentTab][0].nextElementSibling) {
+                        addClass(actives[currentTab][0].nextElementSibling, 'highlighted');
+                        removeClass(actives[currentTab][0], 'highlighted');
                     }
                 } else if (e.which === 13) { // return
-                    if ($active.length) {
-                        document.location.href = $active.find('a').prop('href');
+                    if (actives[currentTab].length) {
+                        document.location.href =
+                            actives[currentTab][0].getElementsByTagName('a')[0].href;
                     }
-                } else {
-                  $active.removeClass('highlighted');
+                } else if (e.which === 9) { // tab
+                    if (e.shiftKey) {
+                        printTab(currentTab > 0 ? currentTab - 1 : 2);
+                    } else {
+                        printTab(currentTab > 1 ? 0 : currentTab + 1);
+                    }
+                    e.preventDefault();
+                } else if (e.which === 16) { // shift
+                    // Does nothing, it's just to avoid losing "focus" on the highlighted element.
+                } else if (actives[currentTab].length > 0) {
+                    removeClass(actives[currentTab][0], 'highlighted');
                 }
-            });
+            };
         }
 
         function escape(content) {
-            return $('<h1/>').text(content).html();
+            var h1 = document.createElement('h1');
+            h1.textContent = content;
+            return h1.innerHTML;
         }
 
-        function showResults(results) {
-            var output, shown, query = getQuery();
+        function addTab(array, query, display) {
+            var extraStyle = '';
+            if (display === false) {
+                extraStyle = ' style="display: none;"';
+            }
 
-            currentResults = query.id;
-            output = '<h1>Results for ' + escape(query.query) +
-                (query.type ? ' (type: ' + escape(query.type) + ')' : '') + '</h1>';
-            output += '<table class="search-results">';
+            var output = '';
+            if (array.length > 0) {
+                output = '<table class="search-results"' + extraStyle + '>';
+                var shown = [];
 
-            if (results.length > 0) {
-                shown = [];
-
-                results.forEach(function(item) {
+                array.forEach(function(item) {
                     var name, type, href, displayPath;
 
                     if (shown.indexOf(item) !== -1) {
@@ -612,25 +1129,67 @@
                               '<span class="desc">' + escape(item.desc) +
                               '&nbsp;</span></a></td></tr>';
                 });
+                output += '</table>';
             } else {
-                output += 'No results :( <a href="https://duckduckgo.com/?q=' +
+                output = '<div class="search-failed"' + extraStyle + '>No results :(<br/>' +
+                    'Try on <a href="https://duckduckgo.com/?q=' +
                     encodeURIComponent('rust ' + query.query) +
-                    '">Try on DuckDuckGo?</a>';
+                    '">DuckDuckGo</a>?</div>';
             }
+            return output;
+        }
 
-            output += "</p>";
-            $('#main.content').addClass('hidden');
-            $('#search.content').removeClass('hidden').html(output);
-            $('#search .desc').width($('#search').width() - 40 -
-                $('#search td:first-child').first().width());
+        function makeTabHeader(tabNb, text, nbElems) {
+            if (currentTab === tabNb) {
+                return '<div class="selected">' + text +
+                       ' <div class="count">(' + nbElems + ')</div></div>';
+            }
+            return '<div>' + text + ' <div class="count">(' + nbElems + ')</div></div>';
+        }
+
+        function showResults(results) {
+            var output, query = getQuery();
+
+            currentResults = query.id;
+            output = '<h1>Results for ' + escape(query.query) +
+                (query.type ? ' (type: ' + escape(query.type) + ')' : '') + '</h1>' +
+                '<div id="titles">' +
+                makeTabHeader(0, "Types/modules", results['others'].length) +
+                makeTabHeader(1, "As parameters", results['in_args'].length) +
+                makeTabHeader(2, "As return value", results['returned'].length) +
+                '</div><div id="results">';
+
+            output += addTab(results['others'], query);
+            output += addTab(results['in_args'], query, false);
+            output += addTab(results['returned'], query, false);
+            output += '</div>';
+
+            addClass(document.getElementById('main'), 'hidden');
+            var search = document.getElementById('search');
+            removeClass(search, 'hidden');
+            search.innerHTML = output;
+            var tds = search.getElementsByTagName('td');
+            var td_width = 0;
+            if (tds.length > 0) {
+                td_width = tds[0].offsetWidth;
+            }
+            var width = search.offsetWidth - 40 - td_width;
+            onEach(search.getElementsByClassName('desc'), function(e) {
+                e.style.width = width + 'px';
+            });
             initSearchNav();
+            var elems = document.getElementById('titles').childNodes;
+            elems[0].onclick = function() { printTab(0); };
+            elems[1].onclick = function() { printTab(1); };
+            elems[2].onclick = function() { printTab(2); };
+            printTab(currentTab);
         }
 
         function search(e) {
             var query,
                 filterdata = [],
                 obj, i, len,
-                results = [],
+                results = {"in_args": [], "returned": [], "others": []},
                 maxResults = 200,
                 resultIndex;
             var params = getQueryStringParams();
@@ -645,17 +1204,15 @@
             }
 
             // Update document title to maintain a meaningful browser history
-            $(document).prop("title", "Results for " + query.query + " - Rust");
+            document.title = "Results for " + query.query + " - Rust";
 
             // Because searching is incremental by character, only the most
             // recent search query is added to the browser history.
             if (browserSupportsHistoryApi()) {
                 if (!history.state && !params.search) {
-                    history.pushState(query, "", "?search=" +
-                                                encodeURIComponent(query.raw));
+                    history.pushState(query, "", "?search=" + encodeURIComponent(query.raw));
                 } else {
-                    history.replaceState(query, "", "?search=" +
-                                                encodeURIComponent(query.raw));
+                    history.replaceState(query, "", "?search=" + encodeURIComponent(query.raw));
                 }
             }
 
@@ -663,11 +1220,32 @@
             len = resultIndex.length;
             for (i = 0; i < len; ++i) {
                 if (resultIndex[i].id > -1) {
+                    var added = false;
                     obj = searchIndex[resultIndex[i].id];
                     filterdata.push([obj.name, obj.ty, obj.path, obj.desc]);
-                    results.push(obj);
+                    if (obj.type) {
+                        if (results['returned'].length < maxResults &&
+                            resultIndex[i].returned === true)
+                        {
+                            results['returned'].push(obj);
+                            added = true;
+                        }
+                        if (results['in_args'].length < maxResults &&
+                            resultIndex[i].in_args === true)
+                        {
+                            results['in_args'].push(obj);
+                            added = true;
+                        }
+                    }
+                    if (results['others'].length < maxResults &&
+                        (added === false ||
+                         (query.search && obj.name.indexOf(query.search) !== -1))) {
+                        results['others'].push(obj);
+                    }
                 }
-                if (results.length >= maxResults) {
+                if (results['others'].length >= maxResults &&
+                    results['in_args'].length >= maxResults &&
+                    results['returned'].length >= maxResults) {
                     break;
                 }
             }
@@ -677,7 +1255,9 @@
 
         function itemTypeFromName(typename) {
             for (var i = 0; i < itemTypes.length; ++i) {
-                if (itemTypes[i] === typename) { return i; }
+                if (itemTypes[i] === typename) {
+                    return i;
+                }
             }
             return -1;
         }
@@ -744,49 +1324,68 @@
 
         function startSearch() {
             var searchTimeout;
-            $(".search-input").on("keyup input",function() {
+            var callback = function() {
+                var search_input = document.getElementsByClassName('search-input');
+                if (search_input.length < 1) { return; }
+                search_input = search_input[0];
                 clearTimeout(searchTimeout);
-                if ($(this).val().length === 0) {
+                if (search_input.value.length === 0) {
                     if (browserSupportsHistoryApi()) {
                         history.replaceState("", "std - Rust", "?search=");
                     }
-                    $('#main.content').removeClass('hidden');
-                    $('#search.content').addClass('hidden');
+                    var main = document.getElementById('main');
+                    if (hasClass(main, 'content')) {
+                        removeClass(main, 'hidden');
+                    }
+                    var search_c = document.getElementById('search');
+                    if (hasClass(search_c, 'content')) {
+                        addClass(search_c, 'hidden');
+                    }
                 } else {
                     searchTimeout = setTimeout(search, 500);
                 }
-            });
-            $('.search-form').on('submit', function(e){
+            };
+            var search_input = document.getElementsByClassName("search-input")[0];
+            search_input.onkeyup = callback;
+            search_input.oninput = callback;
+            document.getElementsByClassName("search-form")[0].onsubmit = function(e) {
                 e.preventDefault();
                 clearTimeout(searchTimeout);
                 search();
-            });
-            $('.search-input').on('change paste', function(e) {
+            };
+            search_input.onchange = function(e) {
                 // Do NOT e.preventDefault() here. It will prevent pasting.
                 clearTimeout(searchTimeout);
                 // zero-timeout necessary here because at the time of event handler execution the
                 // pasted content is not in the input field yet. Shouldn’t make any difference for
                 // change, though.
                 setTimeout(search, 0);
-            });
+            };
+            search_input.onpaste = search_input.onchange;
 
             // Push and pop states are used to add search results to the browser
             // history.
             if (browserSupportsHistoryApi()) {
                 // Store the previous <title> so we can revert back to it later.
-                var previousTitle = $(document).prop("title");
+                var previousTitle = document.title;
 
-                $(window).on('popstate', function(e) {
+                window.onpopstate = function(e) {
                     var params = getQueryStringParams();
                     // When browsing back from search results the main page
                     // visibility must be reset.
                     if (!params.search) {
-                        $('#main.content').removeClass('hidden');
-                        $('#search.content').addClass('hidden');
+                        var main = document.getElementById('main');
+                        if (hasClass(main, 'content')) {
+                            removeClass(main, 'hidden');
+                        }
+                        var search_c = document.getElementById('search');
+                        if (hasClass(search_c, 'content')) {
+                            addClass(search_c, 'hidden');
+                        }
                     }
                     // Revert to the previous title manually since the History
                     // API ignores the title parameter.
-                    $(document).prop("title", previousTitle);
+                    document.title = previousTitle;
                     // When browsing forward to search results the previous
                     // search will be repeated, so the currentResults are
                     // cleared to ensure the search is successful.
@@ -795,14 +1394,18 @@
                     // perform the search. This will empty the bar if there's
                     // nothing there, which lets you really go back to a
                     // previous state with nothing in the bar.
-                    $('.search-input').val(params.search);
+                    if (params.search) {
+                        document.getElementsByClassName('search-input')[0].value = params.search;
+                    } else {
+                        document.getElementsByClassName('search-input')[0].value = '';
+                    }
                     // Some browsers fire 'onpopstate' for every page load
                     // (Chrome), while others fire the event only when actually
                     // popping a state (Firefox), which is why search() is
                     // called both here and at the end of the startSearch()
                     // function.
                     search();
-                });
+                };
             }
             search();
         }
@@ -812,14 +1415,18 @@
 
         // Draw a convenient sidebar of known crates if we have a listing
         if (rootPath === '../') {
-            var sidebar = $('.sidebar');
-            var div = $('<div>').attr('class', 'block crate');
-            div.append($('<h3>').text('Crates'));
-            var ul = $('<ul>').appendTo(div);
+            var sidebar = document.getElementsByClassName('sidebar')[0];
+            var div = document.createElement('div');
+            div.className = 'block crate';
+            div.innerHTML = '<h3>Crates</h3>';
+            var ul = document.createElement('ul');
+            div.appendChild(ul);
 
             var crates = [];
             for (var crate in rawSearchIndex) {
-                if (!rawSearchIndex.hasOwnProperty(crate)) { continue; }
+                if (!rawSearchIndex.hasOwnProperty(crate)) {
+                    continue;
+                }
                 crates.push(crate);
             }
             crates.sort();
@@ -828,12 +1435,17 @@
                 if (crates[i] === window.currentCrate) {
                     klass += ' current';
                 }
-                var link = $('<a>', {'href': '../' + crates[i] + '/index.html',
-                                     'title': rawSearchIndex[crates[i]].doc,
-                                     'class': klass}).text(crates[i]);
-                ul.append($('<li>').append(link));
+                var link = document.createElement('a');
+                link.href = '../' + crates[i] + '/index.html';
+                link.title = rawSearchIndex[crates[i]].doc;
+                link.className = klass;
+                link.textContent = crates[i];
+
+                var li = document.createElement('li');
+                li.appendChild(link);
+                ul.appendChild(li);
             }
-            sidebar.append(div);
+            sidebar.appendChild(div);
         }
     }
 
@@ -841,16 +1453,19 @@
 
     // delayed sidebar rendering.
     function initSidebarItems(items) {
-        var sidebar = $('.sidebar');
+        var sidebar = document.getElementsByClassName('sidebar')[0];
         var current = window.sidebarCurrent;
 
         function block(shortty, longty) {
             var filtered = items[shortty];
             if (!filtered) { return; }
 
-            var div = $('<div>').attr('class', 'block ' + shortty);
-            div.append($('<h3>').text(longty));
-            var ul = $('<ul>').appendTo(div);
+            var div = document.createElement('div');
+            div.className = 'block ' + shortty;
+            var h3 = document.createElement('h3');
+            h3.textContent = longty;
+            div.appendChild(h3);
+            var ul = document.createElement('ul');
 
             for (var i = 0; i < filtered.length; ++i) {
                 var item = filtered[i];
@@ -867,12 +1482,17 @@
                 } else {
                     path = shortty + '.' + name + '.html';
                 }
-                var link = $('<a>', {'href': current.relpath + path,
-                                     'title': desc,
-                                     'class': klass}).text(name);
-                ul.append($('<li>').append(link));
+                var link = document.createElement('a');
+                link.href = current.relpath + path;
+                link.title = desc;
+                link.className = klass;
+                link.textContent = name;
+                var li = document.createElement('li');
+                li.appendChild(link);
+                ul.appendChild(li);
             }
-            sidebar.append(div);
+            div.appendChild(ul);
+            sidebar.appendChild(div);
         }
 
         block("primitive", "Primitive Types");
@@ -880,31 +1500,37 @@
         block("macro", "Macros");
         block("struct", "Structs");
         block("enum", "Enums");
+        block("union", "Unions");
         block("constant", "Constants");
         block("static", "Statics");
         block("trait", "Traits");
         block("fn", "Functions");
         block("type", "Type Definitions");
+        block("foreigntype", "Foreign Types");
     }
 
     window.initSidebarItems = initSidebarItems;
 
     window.register_implementors = function(imp) {
-        var list = $('#implementors-list');
+        var list = document.getElementById('implementors-list');
         var libs = Object.getOwnPropertyNames(imp);
         for (var i = 0; i < libs.length; ++i) {
             if (libs[i] === currentCrate) { continue; }
             var structs = imp[libs[i]];
             for (var j = 0; j < structs.length; ++j) {
-                var code = $('<code>').append(structs[j]);
-                $.each(code.find('a'), function(idx, a) {
-                    var href = $(a).attr('href');
+                var code = document.createElement('code');
+                code.innerHTML = structs[j];
+
+                var x = code.getElementsByTagName('a');
+                for (var k = 0; k < x.length; k++) {
+                    var href = x[k].getAttribute('href');
                     if (href && href.indexOf('http') !== 0) {
-                        $(a).attr('href', rootPath + href);
+                        x[k].setAttribute('href', rootPath + href);
                     }
-                });
-                var li = $('<li>').append(code);
-                list.append(li);
+                }
+                var li = document.createElement('li');
+                li.appendChild(code);
+                list.appendChild(li);
             }
         }
     };
@@ -922,139 +1548,276 @@
         return "\u2212"; // "\u2212" is '−' minus sign
     }
 
-    function toggleAllDocs() {
-        var toggle = $("#toggle-all-docs");
-        if (toggle.hasClass("will-expand")) {
-            toggle.removeClass("will-expand");
-            toggle.children(".inner").text(labelForToggleButton(false));
-            toggle.attr("title", "collapse all docs");
-            $(".docblock").show();
-            $(".toggle-label").hide();
-            $(".toggle-wrapper").removeClass("collapsed");
-            $(".collapse-toggle").children(".inner").text(labelForToggleButton(false));
-        } else {
-            toggle.addClass("will-expand");
-            toggle.children(".inner").text(labelForToggleButton(true));
-            toggle.attr("title", "expand all docs");
-            $(".docblock").hide();
-            $(".toggle-label").show();
-            $(".toggle-wrapper").addClass("collapsed");
-            $(".collapse-toggle").children(".inner").text(labelForToggleButton(true));
-        }
-    }
-
-    function collapseDocs(toggle, animate) {
-        var relatedDoc = toggle.parent().next();
-        if (relatedDoc.is(".stability")) {
-            relatedDoc = relatedDoc.next();
-        }
-        if (relatedDoc.is(".docblock")) {
-            if (relatedDoc.is(":visible")) {
-                if (animate === true) {
-                    relatedDoc.slideUp({duration: 'fast', easing: 'linear'});
-                    toggle.children(".toggle-label").fadeIn();
+    function onEveryMatchingChild(elem, className, func) {
+        if (elem && className && func) {
+            for (var i = 0; i < elem.childNodes.length; i++) {
+                if (hasClass(elem.childNodes[i], className)) {
+                    func(elem.childNodes[i]);
                 } else {
-                    relatedDoc.hide();
-                    toggle.children(".toggle-label").show();
+                    onEveryMatchingChild(elem.childNodes[i], className, func);
                 }
-                toggle.parent(".toggle-wrapper").addClass("collapsed");
-                toggle.children(".inner").text(labelForToggleButton(true));
-            } else {
-                relatedDoc.slideDown({duration: 'fast', easing: 'linear'});
-                toggle.parent(".toggle-wrapper").removeClass("collapsed");
-                toggle.children(".inner").text(labelForToggleButton(false));
-                toggle.children(".toggle-label").hide();
             }
         }
     }
 
-    $("#toggle-all-docs").on("click", toggleAllDocs);
+    function toggleAllDocs() {
+        var toggle = document.getElementById("toggle-all-docs");
+        if (hasClass(toggle, "will-expand")) {
+            removeClass(toggle, "will-expand");
+            onEveryMatchingChild(toggle, "inner", function(e) {
+                e.innerHTML = labelForToggleButton(false);
+            });
+            toggle.title = "collapse all docs";
+            onEach(document.getElementsByClassName("docblock"), function(e) {
+                e.style.display = 'block';
+            });
+            onEach(document.getElementsByClassName("toggle-label"), function(e) {
+                e.style.display = 'none';
+            });
+            onEach(document.getElementsByClassName("toggle-wrapper"), function(e) {
+                removeClass(e, "collapsed");
+            });
+            onEach(document.getElementsByClassName("collapse-toggle"), function(e) {
+                onEveryMatchingChild(e, "inner", function(i_e) {
+                    i_e.innerHTML = labelForToggleButton(false);
+                });
+            });
+        } else {
+            addClass(toggle, "will-expand");
+            onEveryMatchingChild(toggle, "inner", function(e) {
+                e.innerHTML = labelForToggleButton(true);
+            });
+            toggle.title = "expand all docs";
+            onEach(document.getElementsByClassName("docblock"), function(e) {
+                e.style.display = 'none';
+            });
+            onEach(document.getElementsByClassName("toggle-label"), function(e) {
+                e.style.display = 'inline-block';
+            });
+            onEach(document.getElementsByClassName("toggle-wrapper"), function(e) {
+                addClass(e, "collapsed");
+            });
+            onEach(document.getElementsByClassName("collapse-toggle"), function(e) {
+                onEveryMatchingChild(e, "inner", function(i_e) {
+                    i_e.innerHTML = labelForToggleButton(true);
+                });
+            });
+        }
+    }
 
-    $(document).on("click", ".collapse-toggle", function() {
-        collapseDocs($(this), true)
-    });
-
-    $(function() {
-        var toggle = $("<a/>", {'href': 'javascript:void(0)', 'class': 'collapse-toggle'})
-            .html("[<span class='inner'></span>]");
-        toggle.children(".inner").text(labelForToggleButton(false));
-
-        $(".method").each(function() {
-            if ($(this).next().is(".docblock") ||
-                ($(this).next().is(".stability") && $(this).next().next().is(".docblock"))) {
-                    $(this).children().last().after(toggle.clone());
-            }
-        });
-
-        var mainToggle =
-            $(toggle.clone()).append(
-                $('<span/>', {'class': 'toggle-label'})
-                    .css('display', 'none')
-                    .html('&nbsp;Expand&nbsp;description'));
-        var wrapper = $("<div class='toggle-wrapper'>").append(mainToggle);
-        $("#main > .docblock").before(wrapper);
-
-        $(".docblock.autohide").each(function() {
-            var wrap = $(this).prev();
-            if (wrap.is(".toggle-wrapper")) {
-                var toggle = wrap.children().first();
-                if ($(this).children().first().is("h3")) {
-                    toggle.children(".toggle-label")
-                          .text(" Show " + $(this).children().first().text());
-                }
-                $(this).hide();
-                wrap.addClass("collapsed");
-                toggle.children(".inner").text(labelForToggleButton(true));
-                toggle.children(".toggle-label").show();
-            }
-        });
-
-        var mainToggle =
-            $(toggle).append(
-                $('<span/>', {'class': 'toggle-label'})
-                    .css('display', 'none')
-                    .html('&nbsp;Expand&nbsp;attributes'));
-        var wrapper = $("<div class='toggle-wrapper toggle-attributes'>").append(mainToggle);
-        $("#main > pre > .attributes").each(function() {
-            $(this).before(wrapper);
-            collapseDocs($($(this).prev().children()[0]), false);
-        });
-    });
-
-    $('pre.line-numbers').on('click', 'span', function() {
-        var prev_id = 0;
-
-        function set_fragment(name) {
-            if (browserSupportsHistoryApi()) {
-                history.replaceState(null, null, '#' + name);
-                $(window).trigger('hashchange');
+    function collapseDocs(toggle) {
+        if (!toggle || !toggle.parentNode) {
+            return;
+        }
+        var relatedDoc = toggle.parentNode.nextElementSibling;
+        if (hasClass(relatedDoc, "stability")) {
+            relatedDoc = relatedDoc.nextElementSibling;
+        }
+        if (hasClass(relatedDoc, "docblock")) {
+            if (!isHidden(relatedDoc)) {
+                relatedDoc.style.display = 'none';
+                onEach(toggle.childNodes, function(e) {
+                    if (hasClass(e, 'toggle-label')) {
+                        e.style.display = 'inline-block';
+                    }
+                    if (hasClass(e, 'inner')) {
+                        e.innerHTML = labelForToggleButton(true);
+                    }
+                });
+                addClass(toggle.parentNode, 'collapsed');
             } else {
-                location.replace('#' + name);
+                relatedDoc.style.display = 'block';
+                removeClass(toggle.parentNode, 'collapsed');
+                onEach(toggle.childNodes, function(e) {
+                    if (hasClass(e, 'toggle-label')) {
+                        e.style.display = 'none';
+                    }
+                    if (hasClass(e, 'inner')) {
+                        e.innerHTML = labelForToggleButton(false);
+                    }
+                });
             }
         }
+    }
 
-        return function(ev) {
-            var cur_id = parseInt(ev.target.id, 10);
+    var x = document.getElementById('toggle-all-docs');
+    if (x) {
+        x.onclick = toggleAllDocs;
+    }
 
-            if (ev.shiftKey && prev_id) {
-                if (prev_id > cur_id) {
-                    var tmp = prev_id;
-                    prev_id = cur_id;
-                    cur_id = tmp;
+    function insertAfter(newNode, referenceNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
+
+    var toggle = document.createElement('a');
+    toggle.href = 'javascript:void(0)';
+    toggle.className = 'collapse-toggle';
+    toggle.innerHTML = "[<span class='inner'>"+labelForToggleButton(false)+"</span>]";
+
+    var func = function(e) {
+        var next = e.nextElementSibling;
+        if (!next) {
+            return;
+        }
+        if (hasClass(next, 'docblock') ||
+            (hasClass(next, 'stability') &&
+             hasClass(next.nextElementSibling, 'docblock'))) {
+            insertAfter(toggle.cloneNode(true), e.childNodes[e.childNodes.length - 1]);
+        }
+    }
+    onEach(document.getElementsByClassName('method'), func);
+    onEach(document.getElementsByClassName('impl-items'), function(e) {
+        onEach(e.getElementsByClassName('associatedconstant'), func);
+    });
+
+    function createToggle() {
+        var span = document.createElement('span');
+        span.className = 'toggle-label';
+        span.style.display = 'none';
+        span.innerHTML = '&nbsp;Expand&nbsp;description';
+
+        var mainToggle = toggle.cloneNode(true);
+        mainToggle.appendChild(span);
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'toggle-wrapper';
+        wrapper.appendChild(mainToggle);
+        return wrapper;
+    }
+
+    onEach(document.getElementById('main').getElementsByClassName('docblock'), function(e) {
+        if (e.parentNode.id === "main") {
+            e.parentNode.insertBefore(createToggle(), e);
+        }
+    });
+
+    onEach(document.getElementsByClassName('docblock'), function(e) {
+        if (hasClass(e, 'autohide')) {
+            var wrap = e.previousElementSibling;
+            if (wrap && hasClass(wrap, 'toggle-wrapper')) {
+                var toggle = wrap.childNodes[0];
+                if (e.childNodes[0].tagName === 'H3') {
+                    onEach(toggle.getElementsByClassName('toggle-label'), function(i_e) {
+                        i_e.innerHTML = " Show " + e.childNodes[0].innerHTML;
+                    });
                 }
+                e.style.display = 'none';
+                addClass(wrap, 'collapsed');
+                onEach(toggle.getElementsByClassName('inner'), function(e) {
+                    e.innerHTML = labelForToggleButton(true);
+                });
+                onEach(toggle.getElementsByClassName('toggle-label'), function(e) {
+                    e.style.display = 'inline-block';
+                });
+            }
+        }
+    })
 
-                set_fragment(prev_id + '-' + cur_id);
+    function createToggleWrapper() {
+        var span = document.createElement('span');
+        span.className = 'toggle-label';
+        span.style.display = 'none';
+        span.innerHTML = '&nbsp;Expand&nbsp;attributes';
+        toggle.appendChild(span);
+
+        var wrapper = document.createElement('div');
+        wrapper.className = 'toggle-wrapper toggle-attributes';
+        wrapper.appendChild(toggle);
+        return wrapper;
+    }
+
+    // In the search display, allows to switch between tabs.
+    function printTab(nb) {
+        if (nb === 0 || nb === 1 || nb === 2) {
+            currentTab = nb;
+        }
+        var nb_copy = nb;
+        onEach(document.getElementById('titles').childNodes, function(elem) {
+            if (nb_copy === 0) {
+                addClass(elem, 'selected');
             } else {
-                prev_id = cur_id;
+                removeClass(elem, 'selected');
+            }
+            nb_copy -= 1;
+        });
+        onEach(document.getElementById('results').childNodes, function(elem) {
+            if (nb === 0) {
+                elem.style.display = '';
+            } else {
+                elem.style.display = 'none';
+            }
+            nb -= 1;
+        });
+    }
 
-                set_fragment(cur_id);
+    onEach(document.getElementById('main').getElementsByTagName('pre'), function(e) {
+        onEach(e.getElementsByClassName('attributes'), function(i_e) {
+            i_e.parentNode.insertBefore(createToggleWrapper(), i_e);
+            collapseDocs(i_e.previousSibling.childNodes[0]);
+        });
+    });
+
+    onEach(document.getElementsByClassName('rust-example-rendered'), function(e) {
+        if (hasClass(e, 'compile_fail')) {
+            e.addEventListener("mouseover", function(event) {
+                e.previousElementSibling.childNodes[0].style.color = '#f00';
+            });
+            e.addEventListener("mouseout", function(event) {
+                e.previousElementSibling.childNodes[0].style.color = '';
+            });
+        } else if (hasClass(e, 'ignore')) {
+            e.addEventListener("mouseover", function(event) {
+                e.previousElementSibling.childNodes[0].style.color = '#ff9200';
+            });
+            e.addEventListener("mouseout", function(event) {
+                e.previousElementSibling.childNodes[0].style.color = '';
+            });
+        }
+    });
+
+    function showModal(content) {
+        var modal = document.createElement('div');
+        modal.id = "important";
+        addClass(modal, 'modal');
+        modal.innerHTML = '<div class="modal-content"><div class="close" id="modal-close">✕</div>' +
+                          '<div class="whiter"></div><span class="docblock">' + content +
+                          '</span></div>';
+        document.getElementsByTagName('body')[0].appendChild(modal);
+        document.getElementById('modal-close').onclick = hideModal;
+        modal.onclick = hideModal;
+    }
+
+    function hideModal() {
+        var modal = document.getElementById("important");
+        if (modal) {
+            modal.parentNode.removeChild(modal);
+        }
+    }
+
+    onEach(document.getElementsByClassName('important-traits'), function(e) {
+        e.onclick = function() {
+            showModal(e.lastElementChild.innerHTML);
+        };
+    });
+
+    var search_input = document.getElementsByClassName("search-input")[0];
+
+    if (search_input) {
+        search_input.onfocus = function() {
+            if (search_input.value !== "") {
+                addClass(document.getElementById("main"), "hidden");
+                removeClass(document.getElementById("search"), "hidden");
+                if (browserSupportsHistoryApi()) {
+                    history.replaceState(search_input.value,
+                                         "",
+                                         "?search=" + encodeURIComponent(search_input.value));
+                }
             }
         };
-    }());
-
+    }
 }());
 
 // Sets the focus on the search bar at the top of the page
 function focusSearchBar() {
-    $('.search-input').focus();
+    document.getElementsByClassName('search-input')[0].focus();
 }

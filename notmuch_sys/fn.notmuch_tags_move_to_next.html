@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc fn">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,13 +43,13 @@
         </form>
     </nav>
 
-    <section id='main' class="content fn">
-<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>notmuch_sys</a>::<wbr><a class='fn' href=''>notmuch_tags_move_to_next</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>notmuch_sys</a>::<wbr><a class="fn" href=''>notmuch_tags_move_to_next</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../src/notmuch_sys/lib.rs.html#1467' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_tags_move_to_next(tags: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../notmuch_sys/enum.notmuch_tags_t.html' title='notmuch_sys::notmuch_tags_t'>notmuch_tags_t</a>)</pre><div class='docblock'><p>Move the &#39;tags&#39; iterator to the next tag.</p>
+<pre class='rust fn'>pub unsafe extern &quot;C&quot; fn notmuch_tags_move_to_next(tags: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="../notmuch_sys/enum.notmuch_tags_t.html" title="enum notmuch_sys::notmuch_tags_t">notmuch_tags_t</a>)</pre><div class='docblock'><p>Move the &#39;tags&#39; iterator to the next tag.</p>
 
 <p>If &#39;tags&#39; is already pointing at the last tag then the iterator
 will be moved to a point just beyond that last tag, (where
@@ -75,13 +75,15 @@ showing how to iterate over a <code>notmuch_tags_t</code> object.</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
@@ -115,7 +117,6 @@ showing how to iterate over a <code>notmuch_tags_t</code> object.</p>
         window.rootPath = "../";
         window.currentCrate = "notmuch_sys";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     <script defer src="../search-index.js"></script>
 </body>

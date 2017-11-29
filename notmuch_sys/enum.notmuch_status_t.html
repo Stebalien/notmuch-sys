@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc enum">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='index.html'>notmuch_sys</a></p><script>window.sidebarCurrent = {name: 'notmuch_status_t', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Enum notmuch_status_t</p><div class="block items"><a class="sidebar-title" href="#variants">Variants</a><div class="sidebar-links"><a href="#variant.SUCCESS">SUCCESS</a><a href="#variant.OUT_OF_MEMORY">OUT_OF_MEMORY</a><a href="#variant.READ_ONLY_DATABASE">READ_ONLY_DATABASE</a><a href="#variant.XAPIAN_EXCEPTION">XAPIAN_EXCEPTION</a><a href="#variant.FILE_ERROR">FILE_ERROR</a><a href="#variant.FILE_NOT_EMAIL">FILE_NOT_EMAIL</a><a href="#variant.DUPLICATE_MESSAGE_ID">DUPLICATE_MESSAGE_ID</a><a href="#variant.NULL_POINTER">NULL_POINTER</a><a href="#variant.TAG_TOO_LONG">TAG_TOO_LONG</a><a href="#variant.UNBALANCED_FREEZE_THAW">UNBALANCED_FREEZE_THAW</a><a href="#variant.UNBALANCED_ATOMIC">UNBALANCED_ATOMIC</a><a href="#variant.UNSUPPORTED_OPERATION">UNSUPPORTED_OPERATION</a><a href="#variant.UPGRADE_REQUIRED">UPGRADE_REQUIRED</a><a href="#variant.PATH_ERROR">PATH_ERROR</a><a href="#variant.NOTMUCH_STATUS_ILLEGAL_ARGUMENT">NOTMUCH_STATUS_ILLEGAL_ARGUMENT</a></div><a class="sidebar-title" href="#implementations">Trait Implementations</a><div class="sidebar-links"><a href="#impl-Debug">Debug</a><a href="#impl-Eq">Eq</a><a href="#impl-PartialEq">PartialEq</a><a href="#impl-Clone">Clone</a><a href="#impl-Copy">Copy</a></div></div><p class='location'><a href='index.html'>notmuch_sys</a></p><script>window.sidebarCurrent = {name: 'notmuch_status_t', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,8 +43,8 @@
         </form>
     </nav>
 
-    <section id='main' class="content enum">
-<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>notmuch_sys</a>::<wbr><a class='enum' href=''>notmuch_status_t</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>notmuch_sys</a>::<wbr><a class="enum" href=''>notmuch_status_t</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
@@ -70,45 +70,56 @@
 
 <p>A zero value (SUCCESS) indicates that the function completed without error. Any other value
 indicates an error.</p>
-</div><h2 class='variants'>Variants</h2>
-<span id='variant.SUCCESS' class='variant'><span id='SUCCESS.v' class='invisible'><code>SUCCESS</code></span></span><div class='docblock'><p>No error occurred.</p>
-</div><span id='variant.OUT_OF_MEMORY' class='variant'><span id='OUT_OF_MEMORY.v' class='invisible'><code>OUT_OF_MEMORY</code></span></span><div class='docblock'><p>Out of memory.</p>
-</div><span id='variant.READ_ONLY_DATABASE' class='variant'><span id='READ_ONLY_DATABASE.v' class='invisible'><code>READ_ONLY_DATABASE</code></span></span><div class='docblock'><p>An attempt was made to write to a database opened in read-only
+</div><h2 id='variants' class='variants small-section-header'>
+                   Variants<a href='#variants' class='anchor'></a></h2>
+<span id="variant.SUCCESS" class="variant small-section-header"><a href="#variant.SUCCESS" class="anchor field"></a><span id='SUCCESS.v' class='invisible'><code>SUCCESS</code></span></span><div class='docblock'><p>No error occurred.</p>
+</div><span id="variant.OUT_OF_MEMORY" class="variant small-section-header"><a href="#variant.OUT_OF_MEMORY" class="anchor field"></a><span id='OUT_OF_MEMORY.v' class='invisible'><code>OUT_OF_MEMORY</code></span></span><div class='docblock'><p>Out of memory.</p>
+</div><span id="variant.READ_ONLY_DATABASE" class="variant small-section-header"><a href="#variant.READ_ONLY_DATABASE" class="anchor field"></a><span id='READ_ONLY_DATABASE.v' class='invisible'><code>READ_ONLY_DATABASE</code></span></span><div class='docblock'><p>An attempt was made to write to a database opened in read-only
 mode.</p>
-</div><span id='variant.XAPIAN_EXCEPTION' class='variant'><span id='XAPIAN_EXCEPTION.v' class='invisible'><code>XAPIAN_EXCEPTION</code></span></span><div class='docblock'><p>A Xapian exception occurred.</p>
+</div><span id="variant.XAPIAN_EXCEPTION" class="variant small-section-header"><a href="#variant.XAPIAN_EXCEPTION" class="anchor field"></a><span id='XAPIAN_EXCEPTION.v' class='invisible'><code>XAPIAN_EXCEPTION</code></span></span><div class='docblock'><p>A Xapian exception occurred.</p>
 
 <p>@todo We don&#39;t really want to expose this lame XAPIAN_EXCEPTION
 value. Instead we should map to things like DATABASE_LOCKED or
 whatever.</p>
-</div><span id='variant.FILE_ERROR' class='variant'><span id='FILE_ERROR.v' class='invisible'><code>FILE_ERROR</code></span></span><div class='docblock'><p>An error occurred trying to read or write to a file (this could
+</div><span id="variant.FILE_ERROR" class="variant small-section-header"><a href="#variant.FILE_ERROR" class="anchor field"></a><span id='FILE_ERROR.v' class='invisible'><code>FILE_ERROR</code></span></span><div class='docblock'><p>An error occurred trying to read or write to a file (this could
 be file not found, permission denied, etc.)</p>
-</div><span id='variant.FILE_NOT_EMAIL' class='variant'><span id='FILE_NOT_EMAIL.v' class='invisible'><code>FILE_NOT_EMAIL</code></span></span><div class='docblock'><p>A file was presented that doesn&#39;t appear to be an email
+</div><span id="variant.FILE_NOT_EMAIL" class="variant small-section-header"><a href="#variant.FILE_NOT_EMAIL" class="anchor field"></a><span id='FILE_NOT_EMAIL.v' class='invisible'><code>FILE_NOT_EMAIL</code></span></span><div class='docblock'><p>A file was presented that doesn&#39;t appear to be an email
 message.</p>
-</div><span id='variant.DUPLICATE_MESSAGE_ID' class='variant'><span id='DUPLICATE_MESSAGE_ID.v' class='invisible'><code>DUPLICATE_MESSAGE_ID</code></span></span><div class='docblock'><p>A file contains a message ID that is identical to a message
+</div><span id="variant.DUPLICATE_MESSAGE_ID" class="variant small-section-header"><a href="#variant.DUPLICATE_MESSAGE_ID" class="anchor field"></a><span id='DUPLICATE_MESSAGE_ID.v' class='invisible'><code>DUPLICATE_MESSAGE_ID</code></span></span><div class='docblock'><p>A file contains a message ID that is identical to a message
 already in the database.</p>
-</div><span id='variant.NULL_POINTER' class='variant'><span id='NULL_POINTER.v' class='invisible'><code>NULL_POINTER</code></span></span><div class='docblock'><p>The user erroneously passed a NULL pointer to a notmuch
+</div><span id="variant.NULL_POINTER" class="variant small-section-header"><a href="#variant.NULL_POINTER" class="anchor field"></a><span id='NULL_POINTER.v' class='invisible'><code>NULL_POINTER</code></span></span><div class='docblock'><p>The user erroneously passed a NULL pointer to a notmuch
 function.</p>
-</div><span id='variant.TAG_TOO_LONG' class='variant'><span id='TAG_TOO_LONG.v' class='invisible'><code>TAG_TOO_LONG</code></span></span><div class='docblock'><p>A tag value is too long (exceeds TAG_MAX).</p>
-</div><span id='variant.UNBALANCED_FREEZE_THAW' class='variant'><span id='UNBALANCED_FREEZE_THAW.v' class='invisible'><code>UNBALANCED_FREEZE_THAW</code></span></span><div class='docblock'><p>The <code>notmuch_message_thaw</code> function has been called more times
+</div><span id="variant.TAG_TOO_LONG" class="variant small-section-header"><a href="#variant.TAG_TOO_LONG" class="anchor field"></a><span id='TAG_TOO_LONG.v' class='invisible'><code>TAG_TOO_LONG</code></span></span><div class='docblock'><p>A tag value is too long (exceeds TAG_MAX).</p>
+</div><span id="variant.UNBALANCED_FREEZE_THAW" class="variant small-section-header"><a href="#variant.UNBALANCED_FREEZE_THAW" class="anchor field"></a><span id='UNBALANCED_FREEZE_THAW.v' class='invisible'><code>UNBALANCED_FREEZE_THAW</code></span></span><div class='docblock'><p>The <code>notmuch_message_thaw</code> function has been called more times
 than <code>notmuch_message_freeze</code>.</p>
-</div><span id='variant.UNBALANCED_ATOMIC' class='variant'><span id='UNBALANCED_ATOMIC.v' class='invisible'><code>UNBALANCED_ATOMIC</code></span></span><div class='docblock'><p><code>notmuch_database_end_atomic</code> has been called more times than
+</div><span id="variant.UNBALANCED_ATOMIC" class="variant small-section-header"><a href="#variant.UNBALANCED_ATOMIC" class="anchor field"></a><span id='UNBALANCED_ATOMIC.v' class='invisible'><code>UNBALANCED_ATOMIC</code></span></span><div class='docblock'><p><code>notmuch_database_end_atomic</code> has been called more times than
 <code>notmuch_database_begin_atomic</code>.</p>
-</div><span id='variant.UNSUPPORTED_OPERATION' class='variant'><span id='UNSUPPORTED_OPERATION.v' class='invisible'><code>UNSUPPORTED_OPERATION</code></span></span><div class='docblock'><p>The operation is not supported.</p>
-</div><span id='variant.UPGRADE_REQUIRED' class='variant'><span id='UPGRADE_REQUIRED.v' class='invisible'><code>UPGRADE_REQUIRED</code></span></span><div class='docblock'><p>The operation requires a database upgrade.</p>
-</div><span id='variant.PATH_ERROR' class='variant'><span id='PATH_ERROR.v' class='invisible'><code>PATH_ERROR</code></span></span><div class='docblock'><p>There is a problem with the proposed path, e.g. a relative path
+</div><span id="variant.UNSUPPORTED_OPERATION" class="variant small-section-header"><a href="#variant.UNSUPPORTED_OPERATION" class="anchor field"></a><span id='UNSUPPORTED_OPERATION.v' class='invisible'><code>UNSUPPORTED_OPERATION</code></span></span><div class='docblock'><p>The operation is not supported.</p>
+</div><span id="variant.UPGRADE_REQUIRED" class="variant small-section-header"><a href="#variant.UPGRADE_REQUIRED" class="anchor field"></a><span id='UPGRADE_REQUIRED.v' class='invisible'><code>UPGRADE_REQUIRED</code></span></span><div class='docblock'><p>The operation requires a database upgrade.</p>
+</div><span id="variant.PATH_ERROR" class="variant small-section-header"><a href="#variant.PATH_ERROR" class="anchor field"></a><span id='PATH_ERROR.v' class='invisible'><code>PATH_ERROR</code></span></span><div class='docblock'><p>There is a problem with the proposed path, e.g. a relative path
 passed to a function expecting an absolute path.</p>
-</div><span id='variant.NOTMUCH_STATUS_ILLEGAL_ARGUMENT' class='variant'><span id='NOTMUCH_STATUS_ILLEGAL_ARGUMENT.v' class='invisible'><code>NOTMUCH_STATUS_ILLEGAL_ARGUMENT</code></span></span><div class='docblock'><p>One of the arguments violates the preconditions for the
+</div><span id="variant.NOTMUCH_STATUS_ILLEGAL_ARGUMENT" class="variant small-section-header"><a href="#variant.NOTMUCH_STATUS_ILLEGAL_ARGUMENT" class="anchor field"></a><span id='NOTMUCH_STATUS_ILLEGAL_ARGUMENT.v' class='invisible'><code>NOTMUCH_STATUS_ILLEGAL_ARGUMENT</code></span></span><div class='docblock'><p>One of the arguments violates the preconditions for the
 function, in a way not covered by a more specific argument.</p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
-<div class='docblock'><p>Formats the value using the given formatter.</p>
-</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.eq' class='method'><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../notmuch_sys/enum.notmuch_status_t.html' title='notmuch_sys::notmuch_status_t'>notmuch_status_t</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></span></h4>
+</div>
+            <h2 id='implementations' class='small-section-header'>
+              Trait Implementations<a href='#implementations' class='anchor'></a>
+            </h2>
+        <h3 id='impl-Debug' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../notmuch_sys/enum.notmuch_status_t.html" title="enum notmuch_sys::notmuch_status_t">notmuch_status_t</a></code><a href='#impl-Debug' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt">Read more</a></p>
+</div></div><h3 id='impl-Eq' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html" title="trait core::cmp::Eq">Eq</a> for <a class="enum" href="../notmuch_sys/enum.notmuch_status_t.html" title="enum notmuch_sys::notmuch_status_t">notmuch_status_t</a></code><a href='#impl-Eq' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 id='impl-PartialEq' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> for <a class="enum" href="../notmuch_sys/enum.notmuch_status_t.html" title="enum notmuch_sys::notmuch_status_t">notmuch_status_t</a></code><a href='#impl-PartialEq' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class="method"><span id='eq.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class="enum" href="../notmuch_sys/enum.notmuch_status_t.html" title="enum notmuch_sys::notmuch_status_t">notmuch_status_t</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
-</div><h4 id='method.ne' class='method'><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: &amp;Rhs) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+</div><h4 id='method.ne' class="method"><span id='ne.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, other: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Rhs) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/cmp.rs.html#121' title='goto source code'>[src]</a></span></h4>
 <div class='docblock'><p>This method tests for <code>!=</code>.</p>
-</div></div></section>
+</div></div><h3 id='impl-Clone' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="enum" href="../notmuch_sys/enum.notmuch_status_t.html" title="enum notmuch_sys::notmuch_status_t">notmuch_status_t</a></code><a href='#impl-Clone' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="enum" href="../notmuch_sys/enum.notmuch_status_t.html" title="enum notmuch_sys::notmuch_status_t">notmuch_status_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.reference.html">&amp;</a>Self)</code></span><span class='out-of-band'><div class='ghost'></div><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div><a class='srclink' href='https://doc.rust-lang.org/nightly/src/core/clone.rs.html#112-114' title='goto source code'>[src]</a></span></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 id='impl-Copy' class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="enum" href="../notmuch_sys/enum.notmuch_status_t.html" title="enum notmuch_sys::notmuch_status_t">notmuch_status_t</a></code><a href='#impl-Copy' class='anchor'></a></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../src/notmuch_sys/lib.rs.html#32' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
@@ -125,13 +136,15 @@ function, in a way not covered by a more specific argument.</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
@@ -165,7 +178,6 @@ function, in a way not covered by a more specific argument.</p>
         window.rootPath = "../";
         window.currentCrate = "notmuch_sys";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     <script defer src="../search-index.js"></script>
 </body>

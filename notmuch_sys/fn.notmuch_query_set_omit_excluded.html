@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc fn">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,13 +43,13 @@
         </form>
     </nav>
 
-    <section id='main' class="content fn">
-<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>notmuch_sys</a>::<wbr><a class='fn' href=''>notmuch_query_set_omit_excluded</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Function <a href='index.html'>notmuch_sys</a>::<wbr><a class="fn" href=''>notmuch_query_set_omit_excluded</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../src/notmuch_sys/lib.rs.html#615-616' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe extern fn notmuch_query_set_omit_excluded(query: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../notmuch_sys/enum.notmuch_query_t.html' title='notmuch_sys::notmuch_query_t'>notmuch_query_t</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; omit_excluded: <a class='enum' href='../notmuch_sys/enum.notmuch_exclude_t.html' title='notmuch_sys::notmuch_exclude_t'>notmuch_exclude_t</a>)</pre><div class='docblock'><p>Specify whether to omit excluded results or simply flag them.  By
+<pre class='rust fn'>pub unsafe extern &quot;C&quot; fn notmuch_query_set_omit_excluded(<br>&nbsp;&nbsp;&nbsp;&nbsp;query: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="enum" href="../notmuch_sys/enum.notmuch_query_t.html" title="enum notmuch_sys::notmuch_query_t">notmuch_query_t</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;omit_excluded: <a class="enum" href="../notmuch_sys/enum.notmuch_exclude_t.html" title="enum notmuch_sys::notmuch_exclude_t">notmuch_exclude_t</a><br>)</pre><div class='docblock'><p>Specify whether to omit excluded results or simply flag them.  By
 default, this is set to TRUE.</p>
 
 <p>If set to TRUE or ALL, <code>notmuch_query_search_messages</code> will omit excluded
@@ -91,13 +91,15 @@ only match in excluded messages.</p>
                     <dd>Show this help dialog</dd>
                     <dt>S</dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt>↑</dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt>↓</dt>
                     <dd>Move down in search results</dd>
+                    <dt>↹</dt>
+                    <dd>Switch tab</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
+                    <dt style="width:31px;">+ / -</dt>
                     <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
@@ -131,7 +133,6 @@ only match in excluded messages.</p>
         window.rootPath = "../";
         window.currentCrate = "notmuch_sys";
     </script>
-    <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     <script defer src="../search-index.js"></script>
 </body>
