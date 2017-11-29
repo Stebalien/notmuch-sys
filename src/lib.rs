@@ -1005,8 +1005,8 @@ extern "C" {
     ///
     /// Note: This call only makes sense if 'message' was ultimately
     /// obtained from a `notmuch_thread_t` object, (such as by coming
-    /// directly from the result of calling `notmuch_thread_get_`
-    /// toplevel_messages or by any number of subsequent
+    /// directly from the result of calling
+    /// `notmuch_thread_get_toplevel_messages` or by any number of subsequent
     /// calls to `notmuch_message_get_replies`).
     ///
     /// If 'message' was obtained through some non-thread means, (such as
